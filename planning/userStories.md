@@ -11,6 +11,7 @@
 * as a user I can categorize the stocks I am watching to keep my dashboard organized (ie. energy, agriculture, tech, etc.)
 * ? as a user I can create custom categories for grouping the stocks I am watching, so I can stay organized
 * as a user I can select a stock and view an analysis (including intrinsic value) on the dashboard, so that the data is presented clearly and organized
+* ? as a user I can see my ROE and it can be adjusted for an inflation rate that I expect/set, so that I can be sure my investment is worthwhile
 
 # Developer/Admin Stories
 * ? as a developer I have protections in place that prevent users from uploading wrong pdfs or unreliable information
