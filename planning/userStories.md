@@ -1,31 +1,31 @@
-# User Stories
+# User Stories 
 
-* = discussion. Add them anywhere.
+* = discussion. Add them anywhere. 
 
-As a user I have the ability to create an account.
-As a user I must log in and out to use the app.
+As a user I have the ability to create an account. 
+As a user I must log in and out to use the app. 
 As a user I can search for any stock that is listed publicly and retrieve an analysis of: 
 *  -  Intrinsic value 
 *  -  Market value 
 *  -  P/E ratio 
 *  -  EPS 
 *  -  Dividend yield 
-As a user I can set how long the future value should be in the analysis retrieval that I requested.
-As a user I can add a stock to my watchlist so that I can obtain data in a timely manner.
-As a user I can delete a stock from my watchlist.
-As a user I can create a custom category within my watchlist to assist in organization and timing.
-As a user I can add a stock to a custom category.
-As a user I can delete a created category.
+As a user I can set how long the future value should be in the analysis retrieval that I requested. 
+As a user I can add a stock to my watchlist so that I can obtain data in a timely manner. 
+As a user I can delete a stock from my watchlist. 
+As a user I can create a custom category within my watchlist to assist in organization and timing. 
+As a user I can add a stock to a custom category. 
+As a user I can delete a created category. 
 As a user I can select a watchlist/categorized stock and view an analysis of: 
 *  - Intrinsic value 
-*  - Market value
+*  - Market value 
 *  -  P/E ratio 
 *  -  EPS 
 *  -  Dividend yield 
-As a user I can manage an active list so that I can reflect on my investment(s) in a timely manner.
-As a user I can create categories for my active list to assist in organization and timing.
-As a user I can add active stocks to a custom category.
-As a user I can select an active/categorized stock and view an analysis of:
+As a user I can manage an active list so that I can reflect on my investment(s) in a timely manner. 
+As a user I can create categories for my active list to assist in organization and timing. 
+As a user I can add active stocks to a custom category. 
+As a user I can select an active/categorized stock and view an analysis of: 
 *  - Intrinsic value
 *  - Market value 
 *  - Return on Equity – inflation rate can be adjusted and accounted for 
@@ -33,25 +33,25 @@ As a user I can select an active/categorized stock and view an analysis of:
 *  - Historical performance 
 
 
-# Developer/Admin Stories 
+# Developer/Admin Stories  
 
-As a developer I must ensure that the users information is secure.
-As a developer I must include clear disclaimers to limit liability.
-As a developer I must optimize the app for mobile and desktop. (STRETCH EXAMPLE)
+As a developer I must ensure that the users information is secure. 
+As a developer I must include clear disclaimers to limit liability. 
+As a developer I must optimize the app for mobile and desktop. (STRETCH EXAMPLE)   
 
 
-# User Stories Acceptance Criteria 
+# User Stories Acceptance Criteria  
 
-As a user, I have the ability to create an accoun
+As a user, I have the ability to create an account 
   - The user can access the registration page. 
   - The user can enter their email address and password to create an account. 
-  - The system verifies that the email address is unique.
+  - The system verifies that the email address is unique. 
 As a user, I must log in and out to use the app: 
-  - The user can access the login page
+  - The user can access the login page 
   - The user can enter their email address and password to log in. 
   - Upon successful login, the user is redirected to the dashboard. 
-  - The user can log out from any page within the app.
-  - The system securely stores user credentials and authenticates users during login.
+  - The user can log out from any page within the app. 
+  - The system securely stores user credentials and authenticates users during login. 
 As a user, I can search for any stock that is listed publicly and retrieve an analysis of:
 * - The user can enter a stock symbol in the search bar. 
   - The system retrieves data for publicly listed stocks matching the entered symbol. 
@@ -89,17 +89,15 @@ As a user, I can add active stocks to a custom category:
   - The system updates the stock's category accordingly. 
 As a user, I can select an active/categorized stock and view an analysis of: 
   - The user can select an active stock or category from the active list. 
-  - The system displays comprehensive analysis metrics, including intrinsic value, market value, return on equity, P/E ratio, and historical performance. 
+  - The system displays comprehensive analysis metrics, including intrinsic value, market value, return on equity, P/E ratio, and historical performance.  
 
-# Developer/Admin Stories Acceptance Criteria 
+# Developer/Admin Stories Acceptance Criteria  
 
-As a developer, I must ensure that the user's information is secure:
+As a developer, I must ensure that the user's information is secure: 
   - The system follows best practices for authentication and authorization, including password hashing and secure session management. 
-
 As a developer, I must include clear disclaimers to limit liability: 
   - The app displays clear disclaimers regarding the nature of financial advice provided and the risks associated with investing. 
-* - The disclaimers are prominently displayed during account creation, login, and on data analysis
-
-As a developer, I must optimize the app for mobile and desktop: (STRETCH EXAMPLE)
+* - The disclaimers are prominently displayed during account creation, login, and on data analysis 
+As a developer, I must optimize the app for mobile and desktop: (STRETCH EXAMPLE) 
   - The app's interface is responsive and optimized for various screen sizes, including mobile devices and desktop computers. 
   - The app's performance is optimized for fast loading times and smooth navigation on both mobile and desktop platforms. 
