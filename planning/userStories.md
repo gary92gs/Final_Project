@@ -78,8 +78,6 @@
   - The user can remove a stock from the watchlist by clicking the "Delete" or "Remove" button next to the stock.
   - The system removes the selected stock from the user's watchlist.
 
-## STRETCH
-
 - As a user, I can create a custom category within my watchlist to assist in organization and timing:
   - The user can create a custom category by entering a name for the category and clicking the "Create" button.
   - The system adds the newly created category to the user's watchlist.
@@ -120,8 +118,6 @@
 - As a developer, I must include clear disclaimers to limit liability:
   - The app displays clear disclaimers regarding the nature of financial advice provided and the risks associated with investing.
   - The disclaimers are prominently displayed during account creation, login, and on data analysis pages.
-
-## STRETCH
 
 - As a developer, I must optimize the app for mobile and desktop:
   - The app's interface is responsive and optimized for various screen sizes, including mobile devices and desktop computers.
