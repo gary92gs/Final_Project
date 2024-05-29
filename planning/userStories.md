@@ -1,7 +1,5 @@
 # User Stories
 
-* = discussion. Add them anywhere.
-
 - As a user, I have the ability to create an account.
 - As a user, I must log in and out to use the app.
 - As a user, I can search for any stock that is listed publicly and retrieve an analysis of:
