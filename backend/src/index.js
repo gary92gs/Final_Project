@@ -17,21 +17,18 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 //IMPORT ROUTES
-const usersRoutes = require('./routes/users');
-// const searchRoutes = require('./routes/search');
-// const saveStockRoutes = require('./routes/saveStock');
-// const stockOverviewRoutes = require('./routes/stockOverview');
-// const dashboardAnalysisRoutes = require('./routes/dashboardAnalysis');
-// const favouritesRoutes = require('./routes/favourites');
+const usersRouter = require('./routes/users');
+const sessionsRouter = require('./routes/sessions');
+const searchRouter = require('./routes/search');
+const dashboardAnalysisRouter = require('./routes/dashboardAnalysis');
+const favouritesRouter = require('./routes/favourites');
 
 //MOUNT ROUTES
-// app.use('/api/users', usersRoutes);
-// app.use('/api/search', searchRoutes);
-// app.use('/api/save-stock', saveStockRoutes);
-// app.use('/api/stock-overview', stockOverviewRoutes);
-// app.use('/api/dashboard-analysis', dashboardAnalysisRoutes);
-// app.use('/api/favourites', favouritesRoutes);
-app.use('/', usersRoutes);
+app.use('/api/search', searchRouter);
+app.use('/api/dashboard-analysis', dashboardAnalysisRouter);
+app.use('/api/favourites', favouritesRouter);
+app.use('/api/sessions', sessionsRouter);
+app.use('/api/users', usersRouter);
 
 //START SERVER
 app.listen(PORT, () => {
