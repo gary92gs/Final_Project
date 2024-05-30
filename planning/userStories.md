@@ -13,17 +13,7 @@
 
 - As a user, I can add a stock to my watchlist so that I can obtain data in a timely manner.
 - As a user, I can delete a stock from my watchlist.
-
-- As a user, I can add a stock to a custom category.
-- As a user, I can delete a created category.
-- As a user, I can select a watchlist/categorized stock and view an analysis of:
-  * Intrinsic value
-  * Market value
-  * P/E ratio
-  * EPS
-  * Dividend yield
-  * Dividend per share
-  * Dynamic Graphs (option to see data table)
+- As a user, I can select a watchlist stock and view an analysis.
 
 
 # CORE Developer/Admin Stories
@@ -81,6 +71,8 @@
 
 - As a user, I can set how long the future value should be in the analysis retrieval that I requested.
 - As a user, I can create a custom category within my watchlist to assist in organization and timing.
+- As a user, I can add a stock to a custom category.
+- As a user, I can delete a created category.
 - As a user, I can manage a portfolio list so that I can reflect on my investment(s) in a timely manner.
 - As a user, I can create categories for my portfolio list to assist in organization and timing.
 - As a user, I can add portfolio stocks to a custom category.
@@ -127,4 +119,4 @@
 
 - As a user, I can select a portfolio/categorized stock and view an analysis of:
   - The user can select a portfolio stock or category from the portfoloi list.
-  - The system displays comprehensive analysis metrics, including intrinsic value, market value, return on equity, P/E ratio, and historical performance.
+  - The system displays comprehensive analysis metrics.
