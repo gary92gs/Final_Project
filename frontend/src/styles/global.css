@@ -1,0 +1,12 @@
+html, body, p {
+
+  padding: 0;
+  
+  margin: 0;
+  font-family: 'Karla';
+  color: #212A31;
+  }
+  
+  h1, h2 {
+    font-family: 'Montserrat';
+  }

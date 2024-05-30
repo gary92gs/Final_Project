@@ -1,19 +1,30 @@
 import React, {useState} from 'react';
-
+import { ReactComponent as LogoLongDark} from '../../src/assets/logo_long_dark.svg'
+import "../styles/SignUp.css";
 function SignUp() {
 
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-  });
+  // const [formData, setFormData] = useState({
+  //   username: '',
+  //   email: '',
+  //   password: '',
+  // });
+
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value,
+  //   });
+  // };
 
   return (
-    <div className="SignUp">
-      <h1 className='title'> Portfolio Prophet </h1>
-        <div className='signup_container'>
+    <div className="signup">
+        <div className='signup-container'>
+        <h1 className='title'> 
+        
+         </h1>
           <h2>Create an Account now!</h2>
-          <form>
+          <form className='signup-container__form'>
             <label htmlFor='username'>Username:</label>
             <input
             type="text"
@@ -28,7 +39,7 @@ function SignUp() {
 
             <label htmlFor='password'>Password:</label>
             <input
-            type="password"
+            type="text"
             id="password"
             />
 
@@ -37,9 +48,9 @@ function SignUp() {
             type="text"
             id="password-confirmation"
             />
-          </form>
           <button type='submit'>Sign Up</button>
           <p>Already have an account? Login Here(link)</p>
+          </form>
         </div>
     </div>
   );
