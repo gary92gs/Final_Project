@@ -17,7 +17,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 //IMPORT ROUTES
-// const usersRoutes = require('./routes/users');
+const usersRoutes = require('./routes/users');
 // const searchRoutes = require('./routes/search');
 // const saveStockRoutes = require('./routes/saveStock');
 // const stockOverviewRoutes = require('./routes/stockOverview');
@@ -31,6 +31,7 @@ app.use(express.json());
 // app.use('/api/stock-overview', stockOverviewRoutes);
 // app.use('/api/dashboard-analysis', dashboardAnalysisRoutes);
 // app.use('/api/favourites', favouritesRoutes);
+app.use('/', usersRoutes);
 
 //START SERVER
 app.listen(PORT, () => {
