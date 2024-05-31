@@ -7,6 +7,7 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const cors = require("cors");
+const cookieSession = require('cookie-session');
 
 //INITIALIZE SERVER OBJ
 const app = express();
@@ -15,6 +16,10 @@ const app = express();
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
+app.use(cookieSession({
+  name: 'PP-session',
+  keys: [process.env.SESSION_KEY || 'development'],
+}));
 
 //IMPORT ROUTES
 const usersRouter = require('./routes/users');

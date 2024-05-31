@@ -1,41 +1,44 @@
 const express = require('express');
 const router = express.Router();
 
-let login = [{
-  homepage: "homepage",
-}]
+const { getUserByUsernameOrEmail } = require('./../db/queries/usersQueries');
+const { isHashSame, setUserSessionCookie, deleteUserSessionCookie, } = require('./../helpers/userSessionHelpers');
 
-router.get('/', (req, res) => {
-  res.json(login);
-});
+// LOGIN (CREATE SESSION COOKIE)
+router.post('/', async (req, res) => {
 
-router.post('/', (req, res) => {
   // extract and store username and password from form request(rec.boy)
-  // username = req.body.username
-  // password = req.body.password
+  const { usernameOrEmail, password } = req.body;
 
-  // fetch user object from database and match username
+  if (!usernameOrEmail || !password) {
+    return res.status(400).json({ message: 'Cannot submit form with incomplete field(s)' });
+  }
 
-  // if username does not exist send relevant alert "invalid username or password"
+  try {
+    const foundUser = await getUserByUsernameOrEmail(usernameOrEmail);
+    const isSamePassword = await isHashSame(password, foundUser.password);
+    if (isSamePassword) {
+      setUserSessionCookie(req, foundUser.id);
+      return res.status(201).json({ message: 'User Login Successful' });
+    }
+    return res.status(401).json({ message: 'Invalid Login Credentials' });
+  } catch (error) {
+    if (error.message === 'User not found') {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    console.log(`Error during login: ${error}`);
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
 
-  // if username exists:
-  // compare hashed passwords
-
-  // if passwords match:
-    // set session data
-    // send server success response
-    
-  // render dashboard
-
-  // else send relevant alert "invalid username or password"
 });
 
+// LOGOUT (DELETE SESSION COOKIE)
 router.delete('/', (req, res) => {
-  // extract session ID from the session cookie
 
-  // clear the cookies from the browser
-  // send server success message
-  // render login page
-})
+  deleteUserSessionCookie(req);
+
+  return res.status(200).json({ message: 'Logged Out Successfully' });
+  
+});
 
 module.exports = router;

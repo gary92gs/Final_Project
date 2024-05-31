@@ -1,41 +1,37 @@
 const express = require('express');
 const router = express.Router();
 
-let db = [
-  {
-    id: 1,
-    username: "test",
-    email: "@email.com",
-    password: "test",
-}, {
-  id: 2,
-  username: "test1",
-  email: "1@email.com",
-  password: "test1",
-}
-]
+const { hashString, setUserSessionCookie } = require('./../helpers/userSessionHelpers');
+const { postNewUser } = require('./../db/queries/usersQueries');
 
-router.get('/', (req, res) => {
-  res.json(db);
+// CREATE NEW USER
+router.post('/', async (req, res) => {
+
+  // grab newUser information from registration form (req.body)
+  const { username, email, password } = req.body;
+
+  // check req.body to have form filled out
+  if (!username || !email || !password) {
+    return res.status(400).json({ message: 'Cannot submit form with incomplete field(s)' });
+  }
+
+  try {
+    // hash the user's password entry
+    const hashedPassword = await hashString(password);
+    // insert the new user into the database with hashed password
+    const postedUser = await postNewUser(username, email, hashedPassword);
+    // set session cookie
+    setUserSessionCookie(req, postedUser.id);
+    return res.status(201).json({ message: 'Form submission successful' });
+  } catch (error) {
+    console.log(`Error adding new user to database: ${error}`);
+    // check for unique_violation error code for PostgreSQL
+    if (error.code === '23505') {
+      return res.status(409).json({ message: 'Username or email already exists' });
+    }
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+
 });
-
-router.get('/:id', (req, res) => {
-  const userObject = db.filter(element => element.id === Number(req.params.id));
-  res.json(userObject);
-})
-
-router.post('/:id', (req, res) => {
-  // grab newUser information from registration form (rec.body)
-
-  // check rec.body to have form filled out
-
-  // check if the email and username is unique
-
-  // if not unique, display alert
-
-  // if unique, add to the db
-
-  // render dashboard
-})
 
 module.exports = router;
