@@ -44,7 +44,10 @@ function SignUp() {
             <input
             type="text"
             id="email"
-            />
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+          />
 
             <label htmlFor='password'>Password:</label>
             <input
