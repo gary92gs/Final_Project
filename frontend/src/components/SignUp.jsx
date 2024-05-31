@@ -9,13 +9,13 @@ function SignUp() {
   //   password: '',
   // });
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   });
-  // };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,12 +30,15 @@ function SignUp() {
         <LogoLongDark/>
          </h1>
           <h2>Create an Account now!</h2>
-          <form className='signup-container__form'>
-            <label htmlFor='username'>Username:</label>
-            <input
+          <form className='signup-container__form' onSubmit={handleSubmit}>
+          <label htmlFor='username'>Username:</label>
+          <input
             type="text"
             id="username"
-            />
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+          />
 
             <label htmlFor='email'>Email:</label>
             <input
