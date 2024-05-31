@@ -51,7 +51,7 @@ const getUserByUsernameOrEmail = async (usernameOrEmail) => {
     } else {
       usersArr = await getUserByUsername(usernameOrEmail);
     }
-    return foundUser;
+    return usersArr;
   } catch (error) {
     throw error;
   }

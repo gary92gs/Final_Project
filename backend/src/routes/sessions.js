@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
     return res.status(401).json({ message: 'Invalid Login Credentials' });
   } catch (error) {
     if (error.message === 'User not found') {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: 'Invalid Login Credentials' });
     }
     console.log(`Error during login: ${error}`);
     return res.status(500).json({ message: 'Internal Server Error' });
