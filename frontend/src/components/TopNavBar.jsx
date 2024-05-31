@@ -9,7 +9,7 @@ return (
   <div className="top-nav-bar-span">
     <span className="top-nav-bar">
         <div className="top-nav-bar__logo" >
-         <jscode/> <LogoBrickLight/>
+        <LogoBrickLight/>
         </div>
       
         <div>
