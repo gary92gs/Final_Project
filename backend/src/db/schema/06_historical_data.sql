@@ -33,7 +33,7 @@ CREATE TABLE historical_data (
   m3_high DECIMAL(10,4) NOT NULL,
   m3_low DECIMAL(10,4) NOT NULL,
   m3_open DECIMAL(10,4) NOT NULL,
-  m3_close DECIMAL(10,4) NOT NULL
+  m3_close DECIMAL(10,4) NOT NULL 
 );
 
 

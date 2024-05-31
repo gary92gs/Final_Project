@@ -14,7 +14,7 @@ const getUserByEmail = async (email) => {
     if (usersArr === 0) {
       throw new Error('User not found');
     }
-    return usersArr[0];
+    return usersArr.rows[0];
   } catch (error) {
     throw error;
   }
@@ -22,7 +22,7 @@ const getUserByEmail = async (email) => {
 };
 
 const getUserByUsername = async (username) => {
-  
+
   const queryStr = `
     SELECT * 
     FROM USERS
@@ -35,7 +35,7 @@ const getUserByUsername = async (username) => {
     if (usersArr === 0) {
       throw new Error('User not found');
     }
-    return usersArr[0];
+    return usersArr.rows[0];
   } catch (error) {
     throw error;
   }
@@ -43,7 +43,7 @@ const getUserByUsername = async (username) => {
 };
 
 const getUserByUsernameOrEmail = async (usernameOrEmail) => {
-  
+
   try {
     let usersArr;
     if (usernameOrEmail.includes('@')) {
@@ -68,7 +68,7 @@ const postNewUser = async (username, email, hashedPassword) => {
 
   try {
     const insertedUser = await db.query(queryStr, [username, email, hashedPassword]);
-    return insertedUser[0];
+    return insertedUser.rows[0];
   } catch (error) {
     throw error;
   }

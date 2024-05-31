@@ -3,6 +3,7 @@ import SignUp from './components/SignUp';
 import TopNavBar from './components/TopNavBar';
 import "./styles/global.css"
 
+import Login from './components/Login';
 
 function App() {
 
@@ -10,6 +11,7 @@ function App() {
     <div className="App">
       <TopNavBar/>
       <SignUp/>
+      <Login />
     </div>
   );
 }
