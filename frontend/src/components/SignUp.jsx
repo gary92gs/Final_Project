@@ -3,11 +3,11 @@ import "../styles/SignUp.css";
 import LogoLongDark from './icons/LogoLongDark';
 function SignUp() {
 
-  // const [formData, setFormData] = useState({
-  //   username: '',
-  //   email: '',
-  //   password: '',
-  // });
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -49,17 +49,23 @@ function SignUp() {
             onChange={handleChange}
           />
 
-            <label htmlFor='password'>Password:</label>
-            <input
-            type="text"
+          <label htmlFor='password'>Password:</label>
+          <input
+            type="password"
             id="password"
-            />
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+          />
 
-            <label htmlFor='password-confirmation'>Password Confirmation:</label>
-            <input
-            type="text"
-            id="password-confirmation"
-            />
+          <label htmlFor='passwordConfirmation'>Password Confirmation:</label>
+          <input
+            type="password"
+            id="passwordConfirmation"
+            name="passwordConfirmation"
+            value={formData.passwordConfirmation}
+            onChange={handleChange}
+          />
           <button type='submit'>Sign Up</button>
           <p>Already have an account? Login Here(link)</p>
           </form>
