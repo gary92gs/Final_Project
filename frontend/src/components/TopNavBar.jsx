@@ -1,14 +1,15 @@
 import React, {useState} from 'react';
 import SearchBar from './SearchBar';
 import "../styles/TopNavBar.css";
-
+import "../styles/SignUp.css";
+import LogoBrickLight from './icons/LogoBrickLight';
 function TopNavBar() {
 
 return (
   <div className="top-nav-bar-span">
     <span className="top-nav-bar">
         <div className="top-nav-bar__logo" >
-         <jscode/>
+         <jscode/> <LogoBrickLight/>
         </div>
       
         <div>

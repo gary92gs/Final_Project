@@ -13,7 +13,13 @@
   display: flex;
   flex-direction: column;
   width: 500px;
+  align-items: center;
+  padding: 50px;
+}
 
+.signup-container__form button {
+width: 100px;
+margin: 20px;
 }
 
 

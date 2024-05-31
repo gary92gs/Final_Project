@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import { ReactComponent as LogoLongDark} from '../../src/assets/logo_long_dark.svg'
 import "../styles/SignUp.css";
+import LogoLongDark from './icons/LogoLongDark';
 function SignUp() {
 
   // const [formData, setFormData] = useState({
@@ -21,7 +21,7 @@ function SignUp() {
     <div className="signup">
         <div className='signup-container'>
         <h1 className='title'> 
-        
+        <LogoLongDark/>
          </h1>
           <h2>Create an Account now!</h2>
           <form className='signup-container__form'>
