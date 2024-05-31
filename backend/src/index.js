@@ -32,6 +32,10 @@ app.use(express.json());
 // app.use('/api/dashboard-analysis', dashboardAnalysisRoutes);
 // app.use('/api/favourites', favouritesRoutes);
 
+app.get('/', (req, res) => {
+  res.json({ message: "Home Route!" });
+});
+
 //START SERVER
 app.listen(PORT, () => {
   console.log(`API Server is listening on port ${PORT}`);
