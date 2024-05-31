@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import "../styles/SignUp.css";
 import LogoLongDark from './icons/LogoLongDark';
+import axios from 'axios';
+
 function SignUp() {
 
   const [formData, setFormData] = useState({
@@ -17,10 +19,23 @@ function SignUp() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // test data coming in from form
-    console.log(formData);
+
+    try {
+      const response = await axios.post('http://localhost:3001/backend/src/routes/users', formData);
+      console.log(response.data);
+    }
+    catch (error) {
+      console.error('Error sending data:', error)
+    }
+    // clear the form fields
+    setFormData({
+      username: '',
+      email: '',
+      password: '',
+    });
+
   };
 
   return (
