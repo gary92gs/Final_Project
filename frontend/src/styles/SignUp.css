@@ -23,7 +23,9 @@ margin: 20px;
 }
 
 
-.signup-container__form input[type=text], select {
+.signup-container__form input[type="text"],
+.signup-container__form input[type="password"],
+.signup-container__form select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
