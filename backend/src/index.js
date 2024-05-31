@@ -30,6 +30,10 @@ app.use('/api/favourites', favouritesRouter);
 app.use('/api/sessions', sessionsRouter);
 app.use('/api/users', usersRouter);
 
+app.get('/', (req, res) => {
+  res.json({ message: "Home Route!" });
+});
+
 //START SERVER
 app.listen(PORT, () => {
   console.log(`API Server is listening on port ${PORT}`);
