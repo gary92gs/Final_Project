@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import "../styles/SignUp.css";
 import LogoLongDark from './icons/LogoLongDark';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function SignUp() {
 
@@ -82,7 +83,7 @@ function SignUp() {
             onChange={handleChange}
           />
           <button type='submit'>Sign Up</button>
-          <p>Already have an account? Login Here(link)</p>
+          <p>Already have an account? <Link to='/login'>Login here!</Link></p>
           </form>
         </div>
     </div>

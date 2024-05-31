@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Link} from 'react-router-dom'
 import LogoLongDark from './icons/LogoLongDark';
 import "../styles/Login.css";
 function Login() {
@@ -50,7 +51,9 @@ function Login() {
             />
 
           <button type='submit'>Login</button>
-          <p>Don't have an account? Sign up here(link)</p>
+          <p>
+            Don't have an account? <Link to='/signup'>Sign up here!</Link>
+          </p>
           </form>
       </div>
     </div>

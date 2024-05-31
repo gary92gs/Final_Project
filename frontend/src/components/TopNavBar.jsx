@@ -3,6 +3,7 @@ import SearchBar from './SearchBar';
 import "../styles/TopNavBar.css";
 import "../styles/SignUp.css";
 import LogoBrickLight from './icons/LogoBrickLight';
+import { Link } from 'react-router-dom';
 function TopNavBar() {
 
 return (
@@ -17,8 +18,8 @@ return (
         </div>
         <div className="top-nav-bar__icons">
           <div> Login </div>
-          <div> Logout </div>
-          <div> About Us </div>
+          <div><Link to='/signup'> Logout </Link> </div>
+          <div><Link to='/aboutus'> About Us </Link> </div>
         </div>
 
     </span>
