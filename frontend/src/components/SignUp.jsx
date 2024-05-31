@@ -17,6 +17,12 @@ function SignUp() {
   //   });
   // };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // test data coming in from form
+    console.log(formData);
+  };
+
   return (
     <div className="signup">
         <div className='signup-container'>
