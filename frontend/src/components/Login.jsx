@@ -1,57 +1,60 @@
 import React, {useState} from 'react';
-
+import LogoLongDark from './icons/LogoLongDark';
+import "../styles/Login.css";
 function Login() {
 
-  // const [formData, setFormData] = useState({
-  //   username: '',
-  //   email: '',
-  //   password: '',
-  // });
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   });
-  // };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // test data coming in from form
+    console.log(formData);
+  };
 
   return (
     <div className="login">
-      <h1 className='title'> Portfolio Prophet </h1>
-        <div className='signup_container'>
-          <h2>Create an Account now!</h2>
-          <form>
-            <label htmlFor='username'>Username:</label>
+      <div className='login-container'>
+        <h1 className='title'>
+        <LogoLongDark/>
+        </h1>
+          <h2>Login now!</h2>
+          <form className='login-container__form' onSubmit={handleSubmit}>
+            <label htmlFor='username'>Username/Email:</label>
             <input
             type="text"
             id="username"
-            />
-
-            <label htmlFor='email'>Email:</label>
-            <input
-            type="text"
-            id="email"
-            name="email"
+            name='username'
+            value={formData.username || formData.email}
+            onChange={handleChange}
             />
 
             <label htmlFor='password'>Password:</label>
             <input
             type="password"
             id="password"
+            name='password'
+            value={formData.password}
+            onChange={handleChange}
             />
 
-            <label htmlFor='password-confirmation'>Password Confirmation:</label>
-            <input
-            type="text"
-            id="password-confirmation"
-            />
+          <button type='submit'>Login</button>
+          <p>Don't have an account? Sign up here(link)</p>
           </form>
-          <button type='submit'>Sign Up</button>
-          <p>Already have an account? Login Here(link)</p>
-        </div>
+      </div>
     </div>
   );
 }
 
-export default SignUp;
+export default Login;
