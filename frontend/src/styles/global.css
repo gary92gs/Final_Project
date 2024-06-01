@@ -10,3 +10,7 @@ html, body, p {
   h1, h2 {
     font-family: 'Montserrat';
   }
+
+  html {
+    background-color: #FAF7F2;
+  }
