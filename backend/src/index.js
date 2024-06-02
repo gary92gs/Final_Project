@@ -9,6 +9,7 @@ const morgan = require('morgan');
 const cors = require("cors");
 const cookieSession = require('cookie-session');
 
+
 //INITIALIZE SERVER OBJ
 const app = express();
 
@@ -22,11 +23,11 @@ app.use(cookieSession({
 }));
 
 //IMPORT ROUTES
+const usersRouter = require('./routes/users');
+const sessionsRouter = require('./routes/sessions');
 const searchRouter = require('./routes/search');
 const dashboardAnalysisRouter = require('./routes/dashboardAnalysis');
 const favouritesRouter = require('./routes/favourites');
-const sessionsRouter = require('./routes/sessions');
-const usersRouter = require('./routes/users');
 
 //MOUNT ROUTES
 app.use('/api/search', searchRouter);

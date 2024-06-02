@@ -15,8 +15,9 @@ function SearchBar() {
     e.preventDefault();
 
     try {
-      const searchResults = await axios.get('/api/search', { params: {searchTerm: searchValue} });
-      console.log('searchResults:', searchResults.data);
+      const searchResult = await axios.get('/api/search', { params: { searchTerm: searchValue } });
+      console.log('searchResults:', searchResult.data.data);
+      //set state for search results
     } catch (error) {
       console.log(`Error Fetching Data: ${error}`);
     }
