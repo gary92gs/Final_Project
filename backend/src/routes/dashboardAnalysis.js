@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const { buildApiQueryString } = require('./../helpers/apiRequestHelpers');
+const { requestAllStockDataByTickerSymbol } = require('./../helpers/apiRequestHelpers');
 const { 
   getStockInfoAndCurrentDataByTickerSymbol,
   getHistoricalDataByTickerSymbol,
-  getAllStockDataByTickerSymbol,
   postNewStocksInfo,
   postNewCurrentDataByStockId,
   postNewHistoricalDataByStockId,
@@ -67,7 +66,7 @@ router.post('/', async (req, res) => {
   const { tickerSymbol } = req.body; //NEED TO TEST
 
   try {
-    const allStockData = getAllStockDataByTickerSymbol(tickerSymbol);
+    const allStockData = requestAllStockDataByTickerSymbol(tickerSymbol);
     console.log('allStockData:', allStockData);
     
     // res.status(200).json({allStockData});
