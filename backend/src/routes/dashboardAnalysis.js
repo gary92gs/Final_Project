@@ -2,6 +2,14 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 const { buildApiQueryString } = require('./../helpers/apiRequestHelpers');
+const { 
+  getStockInfoAndCurrentDataByTickerSymbol,
+  getHistoricalDataByTickerSymbol,
+  postNewStocksInfo,
+  postNewCurrentDataByStockId,
+  postNewHistoricalDataByStockId,
+  updateNewCurrentStockDataByStockId,
+ } = require('./../db/queries/dashboardQueries');
 
 // CHECK DATABASE FOR EXISTING
   // grab ticker symbol from req object [ front-end: axios.get('/api/dashboard-analysis, {params: {tickerSymbol: <value>}}) ]
@@ -15,6 +23,22 @@ router.get('/', async (req, res) => {
 
   const { tickerSymbol } = req.query;
   console.log('tickerSymbol:', tickerSymbol);
+
+  const allStockData = {
+    stockInfo: '',
+    currentData: '',
+    historicalData:'',
+  }
+
+  try {
+    let existingStock = await getStockInfoAndCurrentDataByTickerSymbol(tickerSymbol);
+    if (!existingStock){
+      existingStock = await axios.post('/api/dashboard-analysis', {tickerSymbol}) 
+    }
+  } catch (error) {
+    console.log(`Error: ${error}`)
+    res.status(500).json({message: "Internal Server Error"})
+  }
 
 
   res.status(200).json({ message: "working" });

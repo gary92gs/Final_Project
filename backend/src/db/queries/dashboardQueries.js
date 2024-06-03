@@ -145,7 +145,7 @@ const postNewHistoricalDataByStockId = async (stockId, newHistoricalDataArr) => 
   const parameterizedArgumentsArr = [];
 
   newHistoricalDataArr.forEach((tableRow, i) => {
-    const start = i * tableRow.length;
+    const start = i * 19;
     queryStr = queryStr + `(
       $${1 + start},
       $${2 + start},
@@ -181,6 +181,7 @@ const postNewHistoricalDataByStockId = async (stockId, newHistoricalDataArr) => 
   } catch (error) {
     throw error;
   }
+
 };
 
 // updates row of data to current_data table
