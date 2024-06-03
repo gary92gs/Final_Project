@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import SignUp from './components/SignUp';
 import TopNavBar from './components/TopNavBar';
 import Login from './components/Login'
@@ -27,67 +27,22 @@ const favStocks = [
     id: 4,
     company_name: 'Litecoin',
     industry_sector: 'Finance'
-  },{
-    id: 1,
-    company_name: 'Samsung',
-    industry_sector: 'Digital Technologies'
   },
   {
-    id: 2,
-    company_name: 'Sketchers',
-    industry_sector: 'Apparel'
+    id: 5,
+    company_name: 'Apple',
+    industry_sector: 'Technology'
   },
   {
-    id: 3,
-    company_name: 'Bitcoin',
-    industry_sector: 'Finance'
-  },
-  {
-    id: 4,
-    company_name: 'Litecoin',
-    industry_sector: 'Finance'
-  },{
-    id: 1,
-    company_name: 'Samsung',
-    industry_sector: 'Digital Technologies'
-  },
-  {
-    id: 2,
-    company_name: 'Sketchers',
-    industry_sector: 'Apparel'
-  },
-  {
-    id: 3,
-    company_name: 'Bitcoin',
-    industry_sector: 'Finance'
-  },
-  {
-    id: 4,
-    company_name: 'Litecoin',
-    industry_sector: 'Finance'
-  },{
-    id: 1,
-    company_name: 'Samsung',
-    industry_sector: 'Digital Technologies'
-  },
-  {
-    id: 2,
-    company_name: 'Sketchers',
-    industry_sector: 'Apparel'
-  },
-  {
-    id: 3,
-    company_name: 'Bitcoin',
-    industry_sector: 'Finance'
-  },
-  {
-    id: 4,
-    company_name: 'Litecoin',
-    industry_sector: 'Finance'
-  },
-]
+    id: 6,
+    company_name: 'Google',
+    industry_sector: 'Technology'
+  }
+];
+
 
 function App() {
+const [searchResults, setSearchResults] = useState([])
 
   return (
     <Router>
@@ -97,8 +52,8 @@ function App() {
         <Route path='/aboutus' element={<AboutUs/>} />
         <Route path="/" element={
           <div className="App">
-            <TopNavBar />
-            <HomePage favStocks={favStocks}/>
+            <TopNavBar setSearchResults={setSearchResults} />
+            <HomePage favStocks={favStocks} searchResults={searchResults} />
             {/* Add other components you want in the home page layout here */}
           </div>
         } />

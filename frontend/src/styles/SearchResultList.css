@@ -1,0 +1,24 @@
+.search-results {
+  margin: 20px;
+  width: 90%;
+}
+
+.search-result-item {
+  height: 50px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-result-symbol {
+  font-weight: bold;
+}
+
+.search-result-name {
+  color: #555;
+}

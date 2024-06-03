@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import SearchBar from './SearchBar';
 import "../styles/TopNavBar.css";
 import "../styles/SignUp.css";
 import LogoBrickLight from './icons/LogoBrickLight';
 import { Link } from 'react-router-dom';
-function TopNavBar() {
+
+function TopNavBar ({ setSearchResults}) {
 
 return (
   <div className="top-nav-bar-span">
@@ -14,7 +15,7 @@ return (
         </div>
       
         <div>
-          <SearchBar/>
+          <SearchBar setSearchResults={setSearchResults} />
         </div>
         <div className="top-nav-bar__icons">
           <div> Login </div>

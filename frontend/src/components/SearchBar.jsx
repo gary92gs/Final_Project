@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, } from 'react';
 import "../styles/SearchBar.css";
 import axios from 'axios';
 
-function SearchBar() {
+function SearchBar({ setSearchResults}) {
 
   const [searchValue, setSearchValue] = useState('');
+  
 
   const updateSearchBarValue = (e) => {
     setSearchValue(e.target.value);
@@ -15,14 +16,30 @@ function SearchBar() {
     e.preventDefault();
 
     try {
-      const searchResult = await axios.get('/api/search', { params: { searchTerm: searchValue } });
-      console.log('searchResults:', searchResult.data.data);
-      //set state for search results
+      const response = await axios.get('/api/search', { params: { searchTerm: searchValue } });
+      console.log('Raw search results', response.data.data)
+      const response1 = response.data.data
+      // const searchResult = preprocessData(response.data.data)
+      const searchResult = response1.map(element => {
+        const values = Object.values(element)
+        return{
+          symbol: values[0],
+          name: values[1],
+        }
+      })
+
+      console.log('searchResult',searchResult)
+     
+
+          
+      // console.log('searchResults:', searchResult);
+      setSearchResults(searchResult)
     } catch (error) {
       console.log(`Error Fetching Data: ${error}`);
     }
 
   };
+
 
   return (
     <div className='searchbar'>
