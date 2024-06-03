@@ -5,6 +5,7 @@ const { buildApiQueryString } = require('./../helpers/apiRequestHelpers');
 const { 
   getStockInfoAndCurrentDataByTickerSymbol,
   getHistoricalDataByTickerSymbol,
+  getAllStockDataByTickerSymbol,
   postNewStocksInfo,
   postNewCurrentDataByStockId,
   postNewHistoricalDataByStockId,
@@ -14,27 +15,34 @@ const {
 // CHECK DATABASE FOR EXISTING
   // grab ticker symbol from req object [ front-end: axios.get('/api/dashboard-analysis, {params: {tickerSymbol: <value>}}) ]
   // query db for existing stock data
-  // if stock present, 
-    // send data to user
   // if stock not-present, 
     // make POST request to self to retrieve data (and insert it into db)
-  // return it to user/front-end
+  // send stockdata to user/front-end
 router.get('/', async (req, res) => {
 
   const { tickerSymbol } = req.query;
   console.log('tickerSymbol:', tickerSymbol);
 
   const allStockData = {
-    stockInfo: '',
-    currentData: '',
+    stockInfoAndCurrentData: '',
     historicalData:'',
   }
 
   try {
-    let existingStock = await getStockInfoAndCurrentDataByTickerSymbol(tickerSymbol);
+    const existingStock = await getStockInfoAndCurrentDataByTickerSymbol(tickerSymbol);
+
+    
+    // NEED TO VERIFY OBJECT IS COMING IN CORRECTLY
     if (!existingStock){
       existingStock = await axios.post('/api/dashboard-analysis', {tickerSymbol}) 
     }
+
+
+    allStockData.stockInfoAndCurrentData = existingStock;
+    allStockData.historicalData = await getHistoricalDataByTickerSymbol(tickerSymbol);
+
+    res.status(200).json({allStockData});
+
   } catch (error) {
     console.log(`Error: ${error}`)
     res.status(500).json({message: "Internal Server Error"})
@@ -46,28 +54,27 @@ router.get('/', async (req, res) => {
 
 // MASS API CALLS + INSERT QUERIES FOR NEW STOCKS (stocks that do not exist in our db)
   // grab ticker symbol from req object
-  // generate all api-request-strings
-  // make multple api-requests
-  // gather all stock data
+  // retrive all stock data from multiple api endpoints
+
+  // format retrieved data into appropriate structure for db insert queries
   // make queries to db to insert and return all data on new stock 
-    // stocks table
-    // current_data table
-    // historical_data table
+    // stocks table (return)
+    // current_data table (return)
+    // historical_data table (don't return)
   // send data back to GET route (which called this route)
 router.post('/', async (req, res) => {
 
   const { tickerSymbol } = req.body; //NEED TO TEST
 
-  const apiCallsArr = [
-    '',
-  ]
-
-  const apiQueryString = buildApiQueryString(
-    process.env.AV_BASE_URL,
-    'SYMBOL_SEARCH',
-    tickerSymbol,
-    process.env.AV_API_KEY
-  );
+  try {
+    const allStockData = getAllStockDataByTickerSymbol(tickerSymbol);
+    console.log('allStockData:', allStockData);
+    
+    // res.status(200).json({allStockData});
+  } catch (error) {
+    console.log(`Error: ${error}`)
+    res.status(500).json({message: "Internal Server Error"})
+  }
 
 });
 
