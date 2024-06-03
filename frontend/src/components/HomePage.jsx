@@ -5,14 +5,8 @@ import '../styles/HomePage.css'
 function HomePage({favStocks}) {
   return (
     <div className='home-page-container'>
-    <div className='home-page'>
-      <div className='watchlist-sidebar'>
-        <WatchlistSidebar favStocks={favStocks} />
-      </div>
-      <div className='watchlist-main'>
-        <WatchlistMain favStocks={favStocks}/>
-      </div>
-    </div>
+          <WatchlistSidebar favStocks={favStocks} />
+          <WatchlistMain favStocks={favStocks}/>
     </div>
   )
 }

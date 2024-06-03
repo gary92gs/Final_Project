@@ -1,10 +1,10 @@
-
+import '../styles/WatchlistSidebarItem.css'
 
 const WatchlistSidebarItem = ({ favStock }) => {
   return (
-    <div>
-      <div>{favStock.company_name}</div>
-      <div>{favStock.industry_sector}</div>
+    <div className="watchlist-sidebar-item">
+      <div className="watchlist-sidebar-item__name">{favStock.company_name}</div>
+      <div className="watchlist-sidebar-item__sector">{favStock.industry_sector}</div>
     </div>
   )
 }

@@ -1,0 +1,33 @@
+.watchlist-sidebar-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  width: 90%;
+}
+
+.watchlist-sidebar-item:hover {
+  background-color: #f0f0f0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.watchlist-sidebar-item__name, .watchlist-sidebar-item__sector {
+  flex: 1;
+  padding: 0 10px;
+}
+
+.watchlist-sidebar-item__name {
+  font-weight: bold;
+}
+
+.watchlist-sidebar-item__sector {
+  text-align: right;
+  color: #666;
+}

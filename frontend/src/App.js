@@ -23,6 +23,68 @@ const favStocks = [
     company_name: 'Bitcoin',
     industry_sector: 'Finance'
   },
+  {
+    id: 4,
+    company_name: 'Litecoin',
+    industry_sector: 'Finance'
+  },{
+    id: 1,
+    company_name: 'Samsung',
+    industry_sector: 'Digital Technologies'
+  },
+  {
+    id: 2,
+    company_name: 'Sketchers',
+    industry_sector: 'Apparel'
+  },
+  {
+    id: 3,
+    company_name: 'Bitcoin',
+    industry_sector: 'Finance'
+  },
+  {
+    id: 4,
+    company_name: 'Litecoin',
+    industry_sector: 'Finance'
+  },{
+    id: 1,
+    company_name: 'Samsung',
+    industry_sector: 'Digital Technologies'
+  },
+  {
+    id: 2,
+    company_name: 'Sketchers',
+    industry_sector: 'Apparel'
+  },
+  {
+    id: 3,
+    company_name: 'Bitcoin',
+    industry_sector: 'Finance'
+  },
+  {
+    id: 4,
+    company_name: 'Litecoin',
+    industry_sector: 'Finance'
+  },{
+    id: 1,
+    company_name: 'Samsung',
+    industry_sector: 'Digital Technologies'
+  },
+  {
+    id: 2,
+    company_name: 'Sketchers',
+    industry_sector: 'Apparel'
+  },
+  {
+    id: 3,
+    company_name: 'Bitcoin',
+    industry_sector: 'Finance'
+  },
+  {
+    id: 4,
+    company_name: 'Litecoin',
+    industry_sector: 'Finance'
+  },
 ]
 
 function App() {

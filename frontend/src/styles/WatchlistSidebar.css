@@ -1,0 +1,21 @@
+.watchlist-sidebar{
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin: 20px;
+  padding: 20px;
+  width: 25%;
+}
+.watchlist-main-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.watchlist-sidebar ul {
+  width: 100%;
+}
