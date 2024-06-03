@@ -26,7 +26,7 @@ function SearchBar() {
 
   return (
     <div className='searchbar'>
-      <form onSubmit={(e) => submitStockSearch(e, searchValue)}>
+      <form onSubmit={(e) => submitStockSearch(e, searchValue)} >
         <input
           className='searchbar'
           type="text"
@@ -34,10 +34,10 @@ function SearchBar() {
           value={searchValue}
           onChange={updateSearchBarValue}
         />
+          <button className='searchbar__btn' type='submit'>
+            <div className='searchbar__btn__text'>Search</div>
+          </button>
       </form>
-      <button className='searchbar__btn' type='submit'>
-        <div className='searchbar__btn__text'>Search</div>
-      </button>
     </div>
   );
 
