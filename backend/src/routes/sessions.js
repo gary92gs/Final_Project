@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
 
 // LOGOUT (DELETE SESSION COOKIE)
 router.delete('/', (req, res) => {
-
+  console.log('inside delete /api/sessions')
   deleteUserSessionCookie(req);
 
   return res.status(200).json({ message: 'Logged Out Successfully' });

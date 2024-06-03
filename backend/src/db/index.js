@@ -1,4 +1,5 @@
 // DB CONNECTION OBJECT INITIALIZE/EXPORT GOES HERE
+require('dotenv').config();
 const pg = require('pg');
 
 const { Pool } = pg;

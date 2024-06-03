@@ -10,6 +10,7 @@ function SignUp() {
     username: '',
     email: '',
     password: '',
+    passwordConfirmation: '',
   });
 
   const handleChange = (e) => {
@@ -23,8 +24,9 @@ function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // CHECK IF PASSWORD === PASSWORD-CONFIRMATION HERE
     try {
-      const response = await axios.post('http://localhost:3001/backend/src/routes/users', formData);
+      const response = await axios.post('/api/users', formData);
       console.log(response.data);
     }
     catch (error) {

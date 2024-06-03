@@ -2,11 +2,12 @@ import React, {useState} from 'react';
 import {Link} from 'react-router-dom'
 import LogoLongDark from './icons/LogoLongDark';
 import "../styles/Login.css";
+import axios from 'axios';
+
 function Login() {
 
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
+    usernameOrEmail: '',
     password: '',
   });
 
@@ -18,10 +19,15 @@ function Login() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit =  async (e) => {
     e.preventDefault();
-    // test data coming in from form
-    console.log(formData);
+    try {
+      const response = await axios.post('/api/sessions', formData);
+      console.log(response.data);
+    }
+    catch (error) {
+      console.error('Error sending data:', error)
+    }
   };
 
   return (
@@ -32,12 +38,12 @@ function Login() {
         </h1>
           <h2>Login now!</h2>
           <form className='login-container__form' onSubmit={handleSubmit}>
-            <label htmlFor='username'>Username/Email:</label>
+            <label htmlFor='usernameOrEmail'>Username/Email:</label>
             <input
             type="text"
-            id="username"
-            name='username'
-            value={formData.username || formData.email}
+            id="usernameOrEmail"
+            name='usernameOrEmail'
+            value={formData.usernameOrEmail || formData.email}
             onChange={handleChange}
             />
 

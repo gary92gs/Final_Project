@@ -25,7 +25,6 @@ const favStocks = [
   },
 ]
 
-
 function App() {
 
   return (
