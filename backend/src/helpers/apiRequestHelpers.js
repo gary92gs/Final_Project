@@ -1,4 +1,3 @@
-const axios = require('axios');
 
 const buildApiQueryString = (baseURL, apiFunction, apiParameter, apiKey) => {
 
