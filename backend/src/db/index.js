@@ -15,7 +15,7 @@ const dbParams = {
 const db = new Pool(dbParams);
 
 db.connect()
-  .then(() => console.log(`Successfully connected to database: ${dbParams.database}`))
-  .catch(error => console.log(`UNABLE TO CONNECT TO DATABASE. ERROR: ${error}`));
+  .then(() => console.log(`POSTGRES: Successfully connected to database: ${dbParams.database}`))
+  .catch(error => console.log(`POSTGRES: UNABLE TO CONNECT TO DATABASE. ERROR: ${error}`));
 
 module.exports = db; // to be imported in: /queries/files

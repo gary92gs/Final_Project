@@ -42,5 +42,5 @@ app.get('/', (req, res) => {
 
 //START SERVER
 app.listen(PORT, () => {
-  console.log(`API Server is listening on port ${PORT}`);
+  console.log(`EXPRESS: API Server is listening on port ${PORT}`);
 });
