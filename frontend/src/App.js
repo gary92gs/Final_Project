@@ -50,6 +50,7 @@ const [searchResults, setSearchResults] = useState([])
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path='/aboutus' element={<AboutUs/>} />
+        {/* <Route path='/home' element={<HomePage/>} /> */}
         <Route path="/" element={
           <div className="App">
             <TopNavBar setSearchResults={setSearchResults} />

@@ -19,7 +19,6 @@ function SearchBar({ setSearchResults}) {
       const response = await axios.get('/api/search', { params: { searchTerm: searchValue } });
       console.log('Raw search results', response.data.data)
       const response1 = response.data.data
-      // const searchResult = preprocessData(response.data.data)
       const searchResult = response1.map(element => {
         const values = Object.values(element)
         return{

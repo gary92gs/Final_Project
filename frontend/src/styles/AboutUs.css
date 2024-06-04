@@ -1,0 +1,10 @@
+.about-us-container{
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+.admin article{
+  justify-content: center;
+  display: flex;
+}
