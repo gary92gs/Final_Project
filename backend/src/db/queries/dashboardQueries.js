@@ -226,7 +226,6 @@ const updateNewCurrentStockDataByStockId = async (stockId, newCurrentData) => {
 module.exports = {
   getStockInfoAndCurrentDataByTickerSymbol,
   getHistoricalDataByTickerSymbol,
-  getAllStockDataByTickerSymbol,
   postNewStocksInfo,
   postNewCurrentDataByStockId,
   postNewHistoricalDataByStockId,

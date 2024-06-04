@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const { requestAllStockDataByTickerSymbol } = require('./../helpers/apiRequestHelpers');
+const { 
+  requestAllStockDataByTickerSymbol, 
+  formatAllStockData, 
+} = require('./../helpers/apiRequestHelpers');
 const { 
   getStockInfoAndCurrentDataByTickerSymbol,
   getHistoricalDataByTickerSymbol,
@@ -20,7 +23,6 @@ const {
 router.get('/', async (req, res) => {
 
   const { tickerSymbol } = req.query;
-  console.log('tickerSymbol:', tickerSymbol);
 
   const allStockData = {
     stockInfoAndCurrentData: '',
@@ -28,19 +30,21 @@ router.get('/', async (req, res) => {
   }
 
   try {
-    const existingStock = await getStockInfoAndCurrentDataByTickerSymbol(tickerSymbol);
-
+    let existingStock = await getStockInfoAndCurrentDataByTickerSymbol(tickerSymbol);
+    console.log('existingStock:', existingStock);
     
     // NEED TO VERIFY OBJECT IS COMING IN CORRECTLY
     if (!existingStock){
-      existingStock = await axios.post('/api/dashboard-analysis', {tickerSymbol}) 
+      const postResponse = await axios.post(`http://${process.env.HOST}:${process.env.PORT}/api/dashboard-analysis`, {tickerSymbol})
+      // console.log('postResponse', postResponse);
+      // console.log('existingStock2:', existingStock); 
     }
 
+    return res.status(200).json({message: 'get message'})
 
-    allStockData.stockInfoAndCurrentData = existingStock;
-    allStockData.historicalData = await getHistoricalDataByTickerSymbol(tickerSymbol);
-
-    res.status(200).json({allStockData});
+    // allStockData.stockInfoAndCurrentData = existingStock;
+    // allStockData.historicalData = await getHistoricalDataByTickerSymbol(tickerSymbol);
+    // res.status(200).json({allStockData});
 
   } catch (error) {
     console.log(`Error: ${error}`)
@@ -63,12 +67,14 @@ router.get('/', async (req, res) => {
   // send data back to GET route (which called this route)
 router.post('/', async (req, res) => {
 
-  const { tickerSymbol } = req.body; //NEED TO TEST
+  const { tickerSymbol } = req.body;
 
   try {
-    const allStockData = requestAllStockDataByTickerSymbol(tickerSymbol);
-    console.log('allStockData:', allStockData);
-    
+    const allStockData = await requestAllStockDataByTickerSymbol(tickerSymbol);
+    //FORMAT DATA
+    formatAllStockData(allStockData);
+    //QUERY DB THRICE (INSERTS)
+    return res.status(200).json({message: 'post message'});
     // res.status(200).json({allStockData});
   } catch (error) {
     console.log(`Error: ${error}`)
