@@ -1,4 +1,6 @@
-const SearchResultItem = ({symbol, name, id}) => {
+import '../styles/SearchResultList.css'
+
+function SearchResultItem ({symbol, name, id}) {
 
   return (
     <div className='search-result-item'>
