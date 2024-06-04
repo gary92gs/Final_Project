@@ -3,9 +3,10 @@ import React from "react";
 import "../styles/WatchlistMain.css";
 import WatchlistMainItem from "../components/WatchlistMainItem";
 
-function WatchlistMain() {
+function WatchlistMain({ setCurrentItemId }) {
 
   const stockData = {
+    id: 1,
     tickerSymbol: 'GME',
     companyName: 'GameStop Corp.',
     stockImage: 'https://styles.redditmedia.com/t5_3nimn/styles/communityIcon_cho9chd8ug431.jpg?format=pjpg&s=e4500f8195a317b675dabd11d245047ac400aa8b',
@@ -24,6 +25,8 @@ function WatchlistMain() {
     <div className="watchlist-container">
 
         <WatchlistMainItem
+          setCurrentItemId={setCurrentItemId}
+          id={stockData.id}
           tickerSymbol={stockData.tickerSymbol}
           companyName={stockData.companyName}
           stockImage={stockData.stockImage}

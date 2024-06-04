@@ -3,6 +3,7 @@ import SignUp from './components/SignUp';
 import TopNavBar from './components/TopNavBar';
 import Login from './components/Login'
 import HomePage from './components/HomePage';
+import SelectedStock from './components/SelectedStock'
 import "./styles/global.css"
 import {BrowserRouter as Router, Route, Routes,} from 'react-router-dom';
 import AboutUs from './components/AboutUs';
@@ -42,19 +43,22 @@ const favStocks = [
 
 
 function App() {
-const [searchResults, setSearchResults] = useState([])
+
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
+  const [currentItemId, setCurrentItemId] = useState(0);
 
   return (
     <Router>
       <Routes>
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path='/aboutus' element={<AboutUs/>} />
-        {/* <Route path='/home' element={<HomePage/>} /> */}
+        <Route path='/aboutus' element={<AboutUs />} />
+        <Route path='/selectedstock' element={<SelectedStock />} />
         <Route path="/" element={
           <div className="App">
-            <TopNavBar setSearchResults={setSearchResults} />
-            <HomePage favStocks={favStocks} searchResults={searchResults} />
+            <TopNavBar setSearchResults={setSearchResults} searchValue={searchValue} setSearchValue={setSearchValue} />
+            <HomePage favStocks={favStocks} searchResults={searchResults} currentItemId={currentItemId} setCurrentItemId={setCurrentItemId}/>
             {/* Add other components you want in the home page layout here */}
           </div>
         } />

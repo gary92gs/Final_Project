@@ -3,6 +3,7 @@ import React from "react";
 import "../styles/WatchlistMainItem.css";
 
 const WatchlistMainItem = ({
+  setCurrentItemId,
   tickerSymbol,
   companyName,
   stockImage,
@@ -14,10 +15,15 @@ const WatchlistMainItem = ({
   returnOnEquity,
   peRatio,
   historicalPerformance,
-  profit
+  profit,
+  id
 }) => {
+ const handleClick = () => {
+  setCurrentItemId(id)
+ }
+
   return (
-    <div className="watchlist-main-item">
+    <div className="watchlist-main-item" onClick={handleClick}>
       <img src={stockImage} alt={`${companyName} logo`} className="stock-image" />
       <div className="stock-details">
         <h2> {tickerSymbol} </h2>

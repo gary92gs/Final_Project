@@ -7,7 +7,8 @@
   align-items: center;
   height: 72px;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1500px;
+  min-width: 1000px;
 
 }
 

@@ -2,10 +2,7 @@ import React, { useState, } from 'react';
 import "../styles/SearchBar.css";
 import axios from 'axios';
 
-function SearchBar({ setSearchResults}) {
-
-  const [searchValue, setSearchValue] = useState('');
-  
+function SearchBar({ setSearchResults, setSearchValue, searchValue}) {
 
   const updateSearchBarValue = (e) => {
     setSearchValue(e.target.value);

@@ -1,6 +1,9 @@
 .search-results {
   margin: 20px;
   width: 90%;
+  min-width: 400px;
+  display: flex; 
+  flex-direction: column;
 }
 
 .search-result-item {

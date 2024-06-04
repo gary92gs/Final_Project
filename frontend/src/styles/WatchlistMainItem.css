@@ -10,8 +10,11 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
   width: 95%;
-  height: 200px;
+  height:min-content;
+  min-height: 200px;
   cursor: pointer;
+  min-width: 700px;
+  flex-grow: 1;
 }
 
 .watchlist-main-item:hover {
