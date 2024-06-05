@@ -13,6 +13,7 @@
 .stock-info{
   display: flex;
   flex-direction: column;
+  max-width: 1400px;
 }
 
 .stock-article{

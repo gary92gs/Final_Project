@@ -1,0 +1,7 @@
+.graph-container canvas{
+    width: 90% !important;
+    max-width: 1400px;
+    height: 90% !important;
+    max-height: 800px;
+    margin: auto;
+}
