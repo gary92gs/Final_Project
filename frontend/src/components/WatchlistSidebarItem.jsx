@@ -1,6 +1,8 @@
 import '../styles/WatchlistSidebarItem.css'
 
-const WatchlistSidebarItem = ({ favStock }) => {
+const WatchlistSidebarItem = ({ favStock, currentItemId, setCurrentItemId, }) => {
+  
+
   return (
     <div className="watchlist-sidebar-item">
       <div className="watchlist-sidebar-item__name">{favStock.company_name}</div>

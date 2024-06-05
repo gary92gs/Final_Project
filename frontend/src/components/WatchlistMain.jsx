@@ -3,7 +3,14 @@ import React from "react";
 import "../styles/WatchlistMain.css";
 import WatchlistMainItem from "../components/WatchlistMainItem";
 
-function WatchlistMain({ setCurrentItemId }) {
+function WatchlistMain({ setCurrentItemId, currentItemId }) {
+
+  
+  const handleClick = (id) => { //WORKING HANDLER FOR SETTING STATE FOR GETTIGN SELECTED STOCK
+    setCurrentItemId(id);
+    console.log("Current Item Id " , currentItemId)
+  }
+
 
   const stockData = {
     id: 1,
@@ -25,8 +32,9 @@ function WatchlistMain({ setCurrentItemId }) {
     <div className="watchlist-container">
 
         <WatchlistMainItem
-          setCurrentItemId={setCurrentItemId}
-          id={stockData.id}
+          onClick={() => handleClick(stockData.id)}
+          // setCurrentItemId={setCurrentItemId}
+          // id={stockData.id}
           tickerSymbol={stockData.tickerSymbol}
           companyName={stockData.companyName}
           stockImage={stockData.stockImage}

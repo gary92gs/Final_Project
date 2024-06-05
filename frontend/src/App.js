@@ -46,7 +46,8 @@ function App() {
 
   const [searchResults, setSearchResults] = useState([]);
   const [searchValue, setSearchValue] = useState('');
-  const [currentItemId, setCurrentItemId] = useState(0);
+  const [currentItemId, setCurrentItemId] = useState(null); //FOR SETTING SELECTED STOCK ONLY WORKING FOR WATCHLISTMAINITEM CURRENTLY
+ 
 
   return (
     <Router>
@@ -58,7 +59,7 @@ function App() {
         <Route path="/" element={
           <div className="App">
             <TopNavBar setSearchResults={setSearchResults} searchValue={searchValue} setSearchValue={setSearchValue} />
-            <HomePage favStocks={favStocks} searchResults={searchResults} currentItemId={currentItemId} setCurrentItemId={setCurrentItemId}/>
+            <HomePage favStocks={favStocks} searchResults={searchResults} currentItemId={currentItemId} setCurrentItemId={setCurrentItemId} />
             {/* Add other components you want in the home page layout here */}
           </div>
         } />

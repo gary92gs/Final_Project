@@ -3,7 +3,7 @@ import React from "react";
 import "../styles/WatchlistMainItem.css";
 
 const WatchlistMainItem = ({
-  setCurrentItemId,
+  onClick, //PASSED DOWN HANDLER
   tickerSymbol,
   companyName,
   stockImage,
@@ -18,12 +18,14 @@ const WatchlistMainItem = ({
   profit,
   id
 }) => {
- const handleClick = () => {
-  setCurrentItemId(id)
- }
+
+  // const handleClick = (id) => {
+  //   setCurrentItemId(id);
+  //   console.log(id)
+  // }
 
   return (
-    <div className="watchlist-main-item" onClick={handleClick}>
+    <div className="watchlist-main-item" onClick={onClick}>
       <img src={stockImage} alt={`${companyName} logo`} className="stock-image" />
       <div className="stock-details">
         <h2> {tickerSymbol} </h2>

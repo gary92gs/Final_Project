@@ -6,7 +6,7 @@ import { useState } from 'react'
 import WatchlistSidebar from './WatchlistSidebar'
 import { Graph } from './Graph'
 
-function SelectedStock() {
+function SelectedStock({ currentItemId }) {
 
   const favStocks = [
     {
@@ -40,16 +40,14 @@ function SelectedStock() {
       industry_sector: 'Technology'
     }
   ];
-const {selectedStock, setSelectedStock} = useState()
 
   return(
     <div>
-      <TopNavBar/>
+      {/* <TopNavBar/> */}
       <div className='selected-page'>
       <div className='selected-container'>
-      <WatchlistSidebar favStocks={favStocks}/>
+      {/* <WatchlistSidebar favStocks={favStocks}/> */}
       <article className='stock-article'> 
-        {/* <h1>{stock.name} {stock.current} - {stock.past} Hello </h1> */}
         <div className='close-button'>
           <div>X</div>
           </div>
