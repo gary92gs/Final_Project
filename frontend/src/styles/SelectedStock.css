@@ -1,5 +1,13 @@
-.stock-article h1,h2{
+.stock-article h1{
   font-size: 36px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.stock-article h2{
+  font-size: 28px;
+  text-transform: uppercase;
+  font-weight: 500;
 }
 
 .stock-title-card{
@@ -27,7 +35,7 @@
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
-  width: 95%;
+  width: min-content;
   height:min-content;
   min-height: 200px;
   min-width: 700px;
@@ -36,4 +44,11 @@
 
 .selected-container{
   display: flex;
+  width: 100%;
+  max-width: 1700px;
+}
+
+.selected-page{
+  display: flex;
+  justify-content: center;
 }

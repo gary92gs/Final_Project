@@ -2,7 +2,7 @@
 .styled-table {
   border-collapse: collapse;
   margin: 25px 0;
-  font-size: 18px;
+  font-size: 12px;
   min-width: 400px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   color: #212a31; /* Text color */
