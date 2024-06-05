@@ -14,7 +14,7 @@
   align-items: center;
   justify-content: center;
   color: #FAF7F2;
-
+  margin-top: 25px;
 }
 .fav-button:hover {
   transition: all 150ms linear;
