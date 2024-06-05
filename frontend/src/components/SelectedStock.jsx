@@ -50,6 +50,9 @@ const {selectedStock, setSelectedStock} = useState()
       <WatchlistSidebar favStocks={favStocks}/>
       <article className='stock-article'> 
         {/* <h1>{stock.name} {stock.current} - {stock.past} Hello </h1> */}
+        <div className='close-button'>
+          <div>X</div>
+          </div>
         <div className='stock-title-card'>
           <h1> Stock Title </h1>
           <span>2009 - 2024 </span>

@@ -3,6 +3,7 @@
   text-transform: uppercase;
   font-weight: 700;
   margin-bottom: 10px;
+  margin-top: 10px;
 }
 .stock-article h2{
   font-size: 28px;
@@ -51,4 +52,10 @@
 .selected-page{
   display: flex;
   justify-content: center;
+}
+
+.close-button{
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
 }
