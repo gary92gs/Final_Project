@@ -1,3 +1,4 @@
+import '../styles/ItemFavButton.css'
 import React, { useState } from 'react';
 
 function ItemFavButton() {
@@ -8,7 +9,7 @@ function ItemFavButton() {
   };
 
   return (
-    <button onClick={toggleFavorite}>
+    <button className='fav-button' onClick={toggleFavorite}>
       {isFavorited ? 'Remove from Watchlist' : 'Add to Watchlist'}
     </button>
   );

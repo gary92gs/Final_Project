@@ -1,13 +1,14 @@
 import React from 'react';
+import '../styles/DataTable.css'
 import "../styles/global.css"
 
 function DataTable() {
   return (
     <div className='data-table'>
       <h2>Stock Stats</h2>
-      <table border="1">
+      <table className='styled-table'>
         <thead>
-          <tr>
+          <tr className='active-row'>
             <th>Header 1</th>
             <th>Header 2</th>
             <th>Header 3</th>
@@ -20,7 +21,7 @@ function DataTable() {
           </tr>
         </thead>
         <tbody>
-          <tr>
+        <tr className='active-row'>
             <td>Row 1, Cell 1</td>
             <td>Row 1, Cell 2</td>
             <td>Row 1, Cell 3</td>
@@ -31,7 +32,7 @@ function DataTable() {
             <td>Row 1, Cell 8</td>
             <td>Row 1, Cell 9</td>
           </tr>
-          <tr>
+          <tr className='active-row'>
             <td>Row 2, Cell 1</td>
             <td>Row 2, Cell 2</td>
             <td>Row 2, Cell 3</td>
@@ -42,7 +43,7 @@ function DataTable() {
             <td>Row 2, Cell 8</td>
             <td>Row 2, Cell 9</td>
           </tr>
-          <tr>
+          <tr className='active-row'>
             <td>Row 3, Cell 1</td>
             <td>Row 3, Cell 2</td>
             <td>Row 3, Cell 3</td>
