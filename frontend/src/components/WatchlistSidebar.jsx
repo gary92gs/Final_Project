@@ -10,6 +10,7 @@ return (
         <WatchlistSidebarItem
         key={favStock.id}
         favStock={favStock}
+        setCurrentItemId={setCurrentItemId}
         />
     ))}
     </ul>
