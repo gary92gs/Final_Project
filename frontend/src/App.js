@@ -47,6 +47,10 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [currentItemId, setCurrentItemId] = useState(null); //FOR SETTING SELECTED STOCK ONLY WORKING FOR WATCHLISTMAINITEM CURRENTLY
+  function isMobile() {
+    const regex = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+    return regex.test(navigator.userAgent);
+  }
  
 
   return (
@@ -58,8 +62,21 @@ function App() {
         <Route path='/selectedstock' element={<SelectedStock />} />
         <Route path="/" element={
           <div className="App">
-            <TopNavBar setSearchResults={setSearchResults} searchValue={searchValue} setSearchValue={setSearchValue} currentItemId={currentItemId} setCurrentItemId={setCurrentItemId}/>
-            <HomePage favStocks={favStocks} searchResults={searchResults} currentItemId={currentItemId} setCurrentItemId={setCurrentItemId} />
+            <TopNavBar 
+            setSearchResults={setSearchResults} 
+            searchValue={searchValue} 
+            setSearchValue={setSearchValue} 
+            currentItemId={currentItemId} 
+            setCurrentItemId={setCurrentItemId}
+            isMobile={isMobile}
+            />
+            <HomePage 
+            favStocks={favStocks} 
+            searchResults={searchResults} 
+            currentItemId={currentItemId} 
+            setCurrentItemId={setCurrentItemId} 
+            isMobile={isMobile}
+            />
             {/* Add other components you want in the home page layout here */}
           </div>
         } />
