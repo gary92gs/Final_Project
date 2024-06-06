@@ -16,25 +16,28 @@ const removeEntriesUntilAfterGivenDate = (minDate, dataEntries) => {
 };
 
 const removeExtraMonthlyEntries = (BALANCE_SHEET, timeSeriesDateKeys) => {
-
+  console.log('Removing Extra Dates From timeSeriesDateKeys');
   while (BALANCE_SHEET.quarterlyReports[0].fiscalDateEnding.slice(0, -3) !== timeSeriesDateKeys[0].slice(0, -3)) {
-    console.log('inside 2nd while loop');
-    console.log('BALANCE_SHEET.quarterlyReports[0].fiscalDateEnding', BALANCE_SHEET.quarterlyReports[0].fiscalDateEnding.slice(0, -3));
-    console.log('TIME_SERIES_MONTHLSY["Monthly Time Series"][0]', timeSeriesDateKeys[0].slice(0, -3));
     timeSeriesDateKeys.shift();
   }
-
+  console.log('Finished Removing Dates from timeSeriesDateKeys');
+  console.log(`Balance Sheet Date vs Time Series Date Key: ${BALANCE_SHEET.quarterlyReports[0].fiscalDateEnding.slice(0, -3)} = ${timeSeriesDateKeys[0].slice(0, -3)}`);
 };
 
-const confirmHistoricalDataAlignment = (balanceSheetDate, cashFlowDate, earningsDate, BALANCE_SHEET, CASH_FLOW, EARNINGS) => {
+const confirmHistoricalDataAlignment = (BALANCE_SHEET, CASH_FLOW, EARNINGS) => {
+  
+  const balanceSheetDate = new Date(BALANCE_SHEET.quarterlyReports[0].fiscalDateEnding);
+  const cashFlowDate = new Date(CASH_FLOW.quarterlyReports[0].fiscalDateEnding);
+  const earningsDate = new Date(EARNINGS.quarterlyEarnings[0].fiscalDateEnding);
+  
   if (
     balanceSheetDate.toDateString() !== cashFlowDate.toDateString() || 
     balanceSheetDate.toDateString() !== earningsDate.toDateString()
   ) {
     console.log('DATES DO NOT MATCH!!');
-    console.log('BALANCE_SHEET:', BALANCE_SHEET.quarterlyReports[0].fiscalDateEnding);
-    console.log('CASH_FLOW:', CASH_FLOW.quarterlyReports[0].fiscalDateEnding);
-    console.log('EARNINGS:', EARNINGS.quarterlyEarnings[0].fiscalDateEnding);
+    console.log('BALANCE_SHEET:', balanceSheetDate.toDateString());
+    console.log('CASH_FLOW:', cashFlowDate.toDateString());
+    console.log('EARNINGS:', earningsDate.toDateString());
 
     // find min date
     let minDate = balanceSheetDate;
@@ -63,6 +66,7 @@ const confirmHistoricalDataAlignment = (balanceSheetDate, cashFlowDate, earnings
 
   }
 };
+
 
 module.exports = {
   confirmHistoricalDataAlignment,
