@@ -27,9 +27,9 @@ return (
         <Link to='/' className='custom-link'><LogoBrickLight/></Link>
         </div>
       
-        <div>
+        
           <MobileSearchBar setSearchResults={setSearchResults} searchValue={searchValue} setSearchValue={setSearchValue} setCurrentItemId={setCurrentItemId} />
-        </div>
+        
 
 
     </span>

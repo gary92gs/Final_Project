@@ -1,4 +1,5 @@
 import { useState } from "react";
+import '../styles/SearchBar.css'
 
 function MobileSearchBar () {
 
@@ -8,17 +9,16 @@ function MobileSearchBar () {
     setIsOpen(!isOpen);
   };
 
-return (
-    <div className="app">
-      <div className={`search-bar ${isOpen ? 'open' : ''}`}>
-        <input type="text" className="search-input" placeholder="Search..." />
-        <button className="search-icon" onClick={toggleSearch}>
-          <i className="fa fa-search"></i>
-        </button>
-      </div>
-    </div>
-)
-
+  return (
+    <div className="search-container">
+      <form action="/search" method="get">
+      <input className="search expandright" id="searchright" type="search" name="q" placeholder="Search"/>
+      <label className="searchbutton" for="searchright">
+        <span className="mglass"><i class="fa-solid fa-magnifying-glass fa-lg"></i></span>
+      </label>
+    </form>
+  </div>
+  );
 };
 
 export default MobileSearchBar;

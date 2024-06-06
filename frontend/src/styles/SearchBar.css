@@ -46,3 +46,62 @@
     font-size: 18px;
     padding-inline: 10px;
 }
+
+@media only screen and (max-width: 800px) {
+  .search-container {
+    position: relative;
+    display: flex;
+    margin: 4px 2px;
+    height: 50px;
+    width: 50px;
+    vertical-align: bottom;
+    background-color: #144E66;
+    color: #FAF7F2;
+    border-radius: 5px;
+    margin-right: 15px;
+  }
+
+  .searchbutton {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+
+  .search {
+    position: absolute;
+    left: 49px; 
+    background-color: white;
+    outline: none;
+    border: none;
+    padding: 0;
+    width: 0;
+    height: 100%;
+    z-index: 10;
+    transition-duration: 0.4s;
+    -moz-transition-duration: 0.4s;
+    -webkit-transition-duration: 0.4s;
+    -o-transition-duration: 0.4s;
+  }
+  
+  .search:focus {
+    width: 78vw; /* Bar width+1px */
+    padding: 0 16px 0 0;
+    border-radius:  5px 0 0 5px ;
+  }
+  
+  .mglass {
+    padding-left: 15px;
+    padding-top:15px;
+  }
+
+.expandright {
+	left: auto;
+	right: 49px; /* Button width-1px */
+}
+
+.expandright:focus {
+	padding: 0 0 0 16px;
+}
+}
