@@ -58,7 +58,7 @@ function App() {
         <Route path='/selectedstock' element={<SelectedStock />} />
         <Route path="/" element={
           <div className="App">
-            <TopNavBar setSearchResults={setSearchResults} searchValue={searchValue} setSearchValue={setSearchValue} />
+            <TopNavBar setSearchResults={setSearchResults} searchValue={searchValue} setSearchValue={setSearchValue} currentItemId={currentItemId} setCurrentItemId={setCurrentItemId}/>
             <HomePage favStocks={favStocks} searchResults={searchResults} currentItemId={currentItemId} setCurrentItemId={setCurrentItemId} />
             {/* Add other components you want in the home page layout here */}
           </div>

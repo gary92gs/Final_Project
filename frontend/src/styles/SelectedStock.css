@@ -39,23 +39,15 @@
   width: min-content;
   height:min-content;
   min-height: 200px;
-  min-width: 700px;
+  width:95%;
   flex-grow: 1;
-}
-
-.selected-container{
-  display: flex;
-  width: 100%;
-  max-width: 1700px;
-}
-
-.selected-page{
-  display: flex;
-  justify-content: center;
 }
 
 .close-button{
   display: flex;
   width: 100%;
   justify-content: flex-end;
+  font-size: 24px;
+  font-weight: 600;
+  cursor: pointer;
 }

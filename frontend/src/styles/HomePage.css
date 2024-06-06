@@ -10,4 +10,5 @@
   display: flex;
   width: 100%;
   max-width: 1700px;
+  justify-content: center;
 }

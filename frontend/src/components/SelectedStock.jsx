@@ -6,50 +6,17 @@ import { useState } from 'react'
 import WatchlistSidebar from './WatchlistSidebar'
 import { Graph } from './Graph'
 
-function SelectedStock({ currentItemId }) {
+function SelectedStock({ currentItemId, setCurrentItemId }) {
 
-  const favStocks = [
-    {
-      id: 1,
-      company_name: 'Samsung',
-      industry_sector: 'Digital Technologies'
-    },
-    {
-      id: 2,
-      company_name: 'Sketchers',
-      industry_sector: 'Apparel'
-    },
-    {
-      id: 3,
-      company_name: 'Bitcoin',
-      industry_sector: 'Finance'
-    },
-    {
-      id: 4,
-      company_name: 'Litecoin',
-      industry_sector: 'Finance'
-    },
-    {
-      id: 5,
-      company_name: 'Apple',
-      industry_sector: 'Technology'
-    },
-    {
-      id: 6,
-      company_name: 'Google',
-      industry_sector: 'Technology'
-    }
-  ];
+  const handleClick = () => {
+    setCurrentItemId(null)
+  }
 
   return(
     <div>
-      {/* <TopNavBar/> */}
-      <div className='selected-page'>
-      <div className='selected-container'>
-      {/* <WatchlistSidebar favStocks={favStocks}/> */}
       <article className='stock-article'> 
         <div className='close-button'>
-          <div>X</div>
+          <div onClick={handleClick}>X</div>
           </div>
         <div className='stock-title-card'>
           <h1> Stock Title </h1>
@@ -64,8 +31,6 @@ function SelectedStock({ currentItemId }) {
           <Graph />
         </div>
       </article>
-      </div>
-      </div>
     </div>
 
 

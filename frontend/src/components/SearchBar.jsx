@@ -2,7 +2,7 @@ import React from 'react';
 import "../styles/SearchBar.css";
 import axios from 'axios';
 
-function SearchBar({ setSearchResults, setSearchValue, searchValue}) {
+function SearchBar({ setSearchResults, setSearchValue, searchValue, setCurrentItemId}) {
 
   const updateSearchBarValue = (e) => {
     setSearchValue(e.target.value);
@@ -16,6 +16,7 @@ function SearchBar({ setSearchResults, setSearchValue, searchValue}) {
       const response = await axios.get('/api/search', { params: { searchTerm: searchValue } });
       console.log('Raw search results', response.data.data)
       const response1 = response.data.data
+      setCurrentItemId(null);
       const searchResult = response1.map(element => {
         const values = Object.values(element)
         return{
