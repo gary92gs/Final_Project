@@ -47,6 +47,7 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [currentItemId, setCurrentItemId] = useState(null); //FOR SETTING SELECTED STOCK ONLY WORKING FOR WATCHLISTMAINITEM CURRENTLY
+  
   function isMobile() {
     const regex = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
     return regex.test(navigator.userAgent);
