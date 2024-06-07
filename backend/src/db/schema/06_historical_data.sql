@@ -13,7 +13,8 @@ DROP TABLE IF EXISTS historical_data CASCADE;
 CREATE TABLE historical_data (
   id SERIAL PRIMARY KEY NOT NULL,
   stock_id INTEGER REFERENCES stocks(id) NOT NULL,
-  report_date DATE NOT NULL,
+  report_year INTEGER NOT NULL CHECK (report_year >= 1900 AND report_year <= 2500),
+  report_quarter INTEGER NOT NULL CHECK (report_quarter >= 1 AND report_quarter <= 4),
   quarterly_price_median DECIMAL(14, 6),
   book_value DECIMAL(14, 6),
   net_income BIGINT NOT NULL,
@@ -22,14 +23,17 @@ CREATE TABLE historical_data (
   quarterly_dividend DECIMAL(10, 6),
   total_dividend_payout BIGINT NOT NULL,
   reported_eps DECIMAL(6, 2),
+  m1 DATE NOT NULL,
   m1_high DECIMAL(10,4) NOT NULL,
   m1_low DECIMAL(10,4) NOT NULL,
   m1_open DECIMAL(10,4) NOT NULL,
   m1_close DECIMAL(10,4) NOT NULL,
+  m2 DATE NOT NULL,
   m2_high DECIMAL(10,4) NOT NULL,
   m2_low DECIMAL(10,4) NOT NULL,
   m2_open DECIMAL(10,4) NOT NULL,
   m2_close DECIMAL(10,4) NOT NULL,
+  m3 DATE NOT NULL,
   m3_high DECIMAL(10,4) NOT NULL,
   m3_low DECIMAL(10,4) NOT NULL,
   m3_open DECIMAL(10,4) NOT NULL,
@@ -42,7 +46,7 @@ CREATE TABLE historical_data (
 CREATE OR REPLACE FUNCTION calculate_book_value()
 RETURNS TRIGGER AS $$
 BEGIN
-  NEW.book_value := NEW.shareholders_equity / NULLIF(NEW.outstanding_shares, 0);
+  NEW.book_value := NEW.shareholders_equity::DECIMAL / NULLIF(NEW.outstanding_shares, 0)::DECIMAL;
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
@@ -51,7 +55,7 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER set_book_value
 BEFORE INSERT OR UPDATE ON historical_data
 FOR EACH ROW
-EXECUTE FUNCTION calculate_book_value();
+EXECUTE PROCEDURE calculate_book_value();
 
 
 -- CALCULATES QUARTERLY PRICE MEDIAN FOR EVERY NEW ROW/DATAPOINT INSERTED
@@ -84,7 +88,7 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER set_quarterly_price_median
 BEFORE INSERT OR UPDATE ON historical_data
 FOR EACH ROW
-EXECUTE FUNCTION calculate_quarterly_price_median();
+EXECUTE PROCEDURE calculate_quarterly_price_median();
 
 
 -- CALCULATES QUARTERLY DIVIDEND FOR EVERY NEW ROW/DATAPOINT INSERTED
@@ -92,8 +96,8 @@ EXECUTE FUNCTION calculate_quarterly_price_median();
 CREATE OR REPLACE FUNCTION calculate_quarterly_dividend()
 RETURNS TRIGGER AS $$
 BEGIN
-    NEW.quarterly_dividend := NEW.total_dividend_payout / NULLIF(NEW.outstanding_shares, 0);
-    RETURN NEW;
+  NEW.quarterly_dividend := NEW.total_dividend_payout::DECIMAL / NULLIF(NEW.outstanding_shares, 0)::DECIMAL;
+  RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -101,4 +105,4 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER set_quarterly_dividend
 BEFORE INSERT OR UPDATE ON historical_data
 FOR EACH ROW
-EXECUTE FUNCTION calculate_quarterly_dividend();
+EXECUTE PROCEDURE calculate_quarterly_dividend();

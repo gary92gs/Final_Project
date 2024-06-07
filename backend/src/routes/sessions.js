@@ -16,16 +16,16 @@ router.post('/', async (req, res) => {
 
   try {
     const foundUser = await getUserByUsernameOrEmail(usernameOrEmail);
-    const isSamePassword = await isHashSame(password, foundUser.password);
-    if (isSamePassword) {
-      setUserSessionCookie(req, foundUser.id);
-      return res.status(201).json({ message: 'User Login Successful' });
-    }
-    return res.status(401).json({ message: 'Invalid Login Credentials' });
-  } catch (error) {
-    if (error.message === 'User not found') {
+    if (!foundUser){
       return res.status(404).json({ message: 'Invalid Login Credentials' });
     }
+    const isSamePassword = await isHashSame(password, foundUser.password);
+    if (!isSamePassword) {
+      return res.status(401).json({ message: 'Invalid Login Credentials' });
+    }
+    setUserSessionCookie(req, foundUser.id);
+    return res.status(201).json({ message: 'User Login Successful' });
+  } catch (error) {
     console.log(`Error during login: ${error}`);
     return res.status(500).json({ message: 'Internal Server Error' });
   }

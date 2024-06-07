@@ -9,12 +9,12 @@ const getUserByEmail = async (email) => {
   `;
 
   try {
-    const usersArr = await db.query(queryStr, [email]);
+    const result = await db.query(queryStr, [email]);
     //if user does not exist, propagate new error message
-    if (usersArr === 0) {
-      throw new Error('User not found');
+    if (!result.rows.length) {
+      return false;
     }
-    return usersArr.rows[0];
+    return result.rows[0];
   } catch (error) {
     throw error;
   }
@@ -30,12 +30,12 @@ const getUserByUsername = async (username) => {
   `;
 
   try {
-    const usersArr = await db.query(queryStr, [username]);
+    const result = await db.query(queryStr, [username]);
     //if user does not exist, propagate new error message
-    if (usersArr === 0) {
-      throw new Error('User not found');
+    if (!result.rows.length) {
+      return false;
     }
-    return usersArr.rows[0];
+    return result.rows[0];
   } catch (error) {
     throw error;
   }
@@ -45,13 +45,13 @@ const getUserByUsername = async (username) => {
 const getUserByUsernameOrEmail = async (usernameOrEmail) => {
 
   try {
-    let usersArr;
+    let user;
     if (usernameOrEmail.includes('@')) {
-      usersArr = await getUserByEmail(usernameOrEmail);
+      user = await getUserByEmail(usernameOrEmail);
     } else {
-      usersArr = await getUserByUsername(usernameOrEmail);
+      user = await getUserByUsername(usernameOrEmail);
     }
-    return usersArr;
+    return user;
   } catch (error) {
     throw error;
   }
@@ -67,8 +67,8 @@ const postNewUser = async (username, email, hashedPassword) => {
   `;
 
   try {
-    const insertedUser = await db.query(queryStr, [username, email, hashedPassword]);
-    return insertedUser.rows[0];
+    const result = await db.query(queryStr, [username, email, hashedPassword]);
+    return result.rows[0];
   } catch (error) {
     throw error;
   }
