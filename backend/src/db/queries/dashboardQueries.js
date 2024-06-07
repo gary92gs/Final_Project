@@ -44,17 +44,15 @@ const getHistoricalDataByTickerSymbol = async (tickerSymbol) => {
 
 };
 
-
-
 // posts to stocks
 const postNewStocksInfo = async (newStockInfo) => {
 
   const {
-    tickerSymbol,
-    companyName,
-    imageURL,
+    ticker_symbol,
+    company_name,
+    image_url,
     description,
-    industrySector,
+    industry_sector,
     country,
     currency,
   } = newStockInfo;
@@ -67,11 +65,11 @@ const postNewStocksInfo = async (newStockInfo) => {
 
   try {
     const result = await db.query(queryStr, [
-      tickerSymbol,
-      companyName,
-      imageURL,
+      ticker_symbol,
+      company_name,
+      image_url,
       description,
-      industrySector,
+      industry_sector,
       country,
       currency,
     ]);
@@ -89,10 +87,10 @@ const postNewCurrentDataByStockId = async (stockId, newStockCurrentData) => {
 
   const {
     eps,
-    peRatio,
-    dividendPerShare,
-    dividendYield,
-    investmentBeta,
+    pe_ratio,
+    dividend_per_share,
+    dividend_yield,
+    investment_beta,
   } = newStockCurrentData;
 
   const queryStr = `
@@ -105,10 +103,10 @@ const postNewCurrentDataByStockId = async (stockId, newStockCurrentData) => {
     const result = await db.query(queryStr, [
       stockId,
       eps,
-      peRatio,
-      dividendPerShare,
-      dividendYield,
-      investmentBeta,
+      pe_ratio,
+      dividend_per_share,
+      dividend_yield,
+      investment_beta,
     ]);
     if (!result.rows.length) {
       return false;
@@ -121,33 +119,37 @@ const postNewCurrentDataByStockId = async (stockId, newStockCurrentData) => {
 
 // posts to historical_data
 const postNewHistoricalDataByStockId = async (stockId, newHistoricalDataArr) => {
-
+  console.log('inside postNewHistoricalData Query');
   let queryStr = `INSERT INTO historical_data (
     stock_id,
-    report_date,
+    report_year,
+    report_quarter,
     net_income,
     outstanding_shares,
     shareholders_equity,
     total_dividend_payout,
     reported_eps,
+    m1,
     m1_high,
     m1_low,
     m1_open,
     m1_close,
+    m2,
     m2_high,
     m2_low,
     m2_open,
     m2_close,
+    m3,
     m3_high,
     m3_low,
     m3_open,
-    m3_close,
+    m3_close
   ) VALUES `;
 
   const parameterizedArgumentsArr = [];
 
   newHistoricalDataArr.forEach((tableRow, i) => {
-    const start = i * 19;
+    const start = i * 23;
     queryStr = queryStr + `(
       $${1 + start},
       $${2 + start},
@@ -167,15 +169,24 @@ const postNewHistoricalDataByStockId = async (stockId, newHistoricalDataArr) => 
       $${16 + start},
       $${17 + start},
       $${18 + start},
-      $${19 + start}
+      $${19 + start},
+      $${20 + start},
+      $${21 + start},
+      $${22 + start},
+      $${23 + start}
     ),`;
-    parameterizedArgumentsArr.push(...Object.values(tableRow));
+    parameterizedArgumentsArr.push(stockId, ...Object.values(tableRow));
   });
 
-  queryStr = queryStr.slice(0, -1) + `RETURNING *;`;
+  queryStr = queryStr.slice(0, -1) + ` RETURNING *;`;
+
+  console.log('queryString:', queryStr);
+
+  console.log('about to send query');
 
   try {
     const result = await db.query(queryStr, parameterizedArgumentsArr);
+    console.log('queryResult:', result);
     if (!result.rows.length) {
       return false;
     }

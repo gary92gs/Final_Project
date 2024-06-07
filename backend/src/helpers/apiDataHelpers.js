@@ -1,3 +1,4 @@
+const { all } = require('axios');
 const {
   getQuarterFromDateObject,
   removeExtraMonthlyEntries,
@@ -152,11 +153,11 @@ const checkApiData = (responseData) => {
   } = responseData;
 
   // console.log('profile:', profile);
-  // console.log('OVERVIEW:', OVERVIEW);
+  console.log('OVERVIEW:', OVERVIEW);
   // console.log('BALANCE_SHEET:', BALANCE_SHEET);
   // console.log('CASH_FLOW:', CASH_FLOW.quarterlyReports);
   // console.log('EARNINGS:', EARNINGS);
-  console.log('TIME_SERIES_MONTHLY:', TIME_SERIES_MONTHLY);
+  // console.log('TIME_SERIES_MONTHLY:', TIME_SERIES_MONTHLY);
 
   const dataReport = buildDataReport(responseData);
 
@@ -224,7 +225,7 @@ const formatStockInfoAndCurrentData = (responseData) => {
       pe_ratio: OVERVIEW.PERatio === 'None' ? 0 : Number(OVERVIEW.PERatio),
       dividend_per_share: OVERVIEW.DividendPerShare === 'None' ? 0 : Number(OVERVIEW.DividendPerShare),
       dividend_yield: OVERVIEW.DividendYield === 'None' ? 0 : Number(OVERVIEW.DividendYield),
-      investment_beta: OVERVIEW.Beta === Number(OVERVIEW.Beta),
+      investment_beta: OVERVIEW.Beta === 'None' ? 0 : Number(OVERVIEW.Beta),
     },
   };
 
@@ -292,7 +293,6 @@ const formatHistoricalData = (responseData) => {
     // collect data for each row
     const dataRow = {
       // remember to grab stockid after insert
-      report_date: BALANCE_SHEET.quarterlyReports[0].fiscalDateEnding,
       report_year: balanceSheetDate.getFullYear(),
       report_quarter: currentQuarter,
       net_income: parseInt(CASH_FLOW.quarterlyReports[0].netIncome),
@@ -321,7 +321,6 @@ const formatHistoricalData = (responseData) => {
     };
 
     console.log('finished building dataRow');
-    console.log('dataRow:', dataRow);
 
     // shift used data row from each array for balance_sheet, cash_flow, and earnings
     BALANCE_SHEET.quarterlyReports.shift();
@@ -355,10 +354,7 @@ const formatAllStockData = (responseData) => {
 
   allStockData['historical_data'] = formatHistoricalData(responseData);
 
-  // console.log('allStockData.stocks', allStockData.stocks);
-  // console.log('allStockData.current_data', allStockData.current_data);
-  // console.log('allStockData.historical_data', allStockData.historical_data);
-  // console.log('allStockData:', allStockData);
+  return allStockData;
 };
 
 module.exports = {

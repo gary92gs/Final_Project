@@ -7,5 +7,6 @@ CREATE TABLE stocks (
   image_url TEXT NOT NULL,
   description TEXT NOT NULL,
   industry_sector TEXT NOT NULL,
-  country TEXT NOT NULL
+  country TEXT NOT NULL,
+  currency TEXT NOT NULL
 );

@@ -37,9 +37,9 @@ router.get('/', async (req, res) => {
     // NEED TO VERIFY OBJECT IS COMING IN CORRECTLY
     if (!existingStock) {
       console.log('Making API Requests');
-      const postResponse = await axios.post(`http://${process.env.HOST}:${process.env.PORT}/api/dashboard-analysis`, { tickerSymbol });
-      console.log('GET: postResponse.data', postResponse.data);
-      // console.log('existingStock2:', existingStock); 
+      const isPosted = await axios.post(`http://${process.env.HOST}:${process.env.PORT}/api/dashboard-analysis`, { tickerSymbol });
+      console.log('GET: postResponse.message', isPosted.message);
+
     }
 
     return res.status(200).json({ message: 'get message' });
@@ -59,8 +59,8 @@ router.get('/', async (req, res) => {
 
 // MASS API CALLS + INSERT QUERIES FOR NEW STOCKS (stocks that do not exist in our db)
 // grab ticker symbol from req object
-// retrive all stock data from multiple api endpoints
-
+// retrieve all stock data from multiple api endpoints
+// check api data (and generate report for easy viewing) and return without data if unsuitable
 // format retrieved data into appropriate structure for db insert queries
 // make queries to db to insert and return all data on new stock 
 // stocks table (return)
@@ -79,23 +79,46 @@ router.post('/', async (req, res) => {
     console.log('dataReport:', dataReport);
     if (dataReport.isNotPresent) {
       return res.status(204).json({
+        isPosted: false,
         message: `This Ticker Symbol does not exist in our records.`
       });
     }
     if (dataReport.isNotStock) {
       return res.status(206).json({
+        isPosted: false,
         message: `This Ticker Symbol pertains to an ETF, Mutual Fund, or ADR (American Depository Receipt).`
       });
     }
     if (dataReport.hasIncompleteData) {
       return res.status(206).json({
+        isPosted: false,
         message: `This Ticker Symbol pertains to a Stock, but does not contain the information necessary for analysis.`
       });
     }
     //FORMAT DATA
-    formatAllStockData(rawStockData);
+    const {
+      stocks,
+      current_data,
+      historical_data,
+    } = formatAllStockData(rawStockData);
+
+    console.log('current_data:', current_data);
+
     //QUERY DB THRICE (INSERTS)
-    return res.status(200).json({ message: 'post message' });
+    // insert stocks info
+    const postedStockInfo = await postNewStocksInfo(stocks);
+    console.log('postedStockInfo:', postedStockInfo);
+    // insert current_data
+    const postedCurrentData = await postNewCurrentDataByStockId(postedStockInfo.id, current_data);
+    console.log('postedCurrentData:', postedCurrentData);
+    // insert historical_data
+    const postedHistoricalData = await postNewHistoricalDataByStockId(postedStockInfo.id, historical_data);
+    console.log('postedHistoricalData:', postedHistoricalData);
+
+    return res.status(200).json({
+      isPosted: true,
+      message: `Stock Data, Current Data, and Historical Data Have Been Inserted Into The Database Successfully.`
+    });
     // res.status(200).json({allStockData});
   } catch (error) {
     console.log(`Error: ${error}`);
