@@ -46,7 +46,7 @@ CREATE TABLE historical_data (
 CREATE OR REPLACE FUNCTION calculate_book_value()
 RETURNS TRIGGER AS $$
 BEGIN
-  NEW.book_value := NEW.shareholders_equity / NULLIF(NEW.outstanding_shares, 0);
+  NEW.book_value := NEW.shareholders_equity::DECIMAL / NULLIF(NEW.outstanding_shares, 0)::DECIMAL;
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
@@ -96,8 +96,8 @@ EXECUTE PROCEDURE calculate_quarterly_price_median();
 CREATE OR REPLACE FUNCTION calculate_quarterly_dividend()
 RETURNS TRIGGER AS $$
 BEGIN
-    NEW.quarterly_dividend := NEW.total_dividend_payout / NULLIF(NEW.outstanding_shares, 0);
-    RETURN NEW;
+  NEW.quarterly_dividend := NEW.total_dividend_payout::DECIMAL / NULLIF(NEW.outstanding_shares, 0)::DECIMAL;
+  RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
