@@ -6,12 +6,28 @@ import LogoBrickLight from './icons/LogoBrickLight';
 import { Link } from 'react-router-dom';
 import MobileDropdown from './MobileDropdown'
 import MobileSearchBar from './MobileSearchBar'
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom'
 
 function TopNavBar ({ setSearchResults, searchValue, setSearchValue, currentItemId, setCurrentItemId, isMobile}) {
+
 const handleClick = () => {
   setCurrentItemId(null);
   setSearchResults([]);
 }
+
+const navigate = useNavigate(); //Redirects
+
+const handleLogout = async () => {
+  try {
+    await axios.delete('/api/sessions');
+    // Optionally, clear any client-side cookies if needed
+    // deleteAllCookies(); 
+    navigate('/login');
+  } catch (error) {
+    console.error('Logout error:');
+  }
+};
 
 if (isMobile()){
 
@@ -49,7 +65,7 @@ return (
             <SearchBar setSearchResults={setSearchResults} searchValue={searchValue} setSearchValue={setSearchValue} setCurrentItemId={setCurrentItemId} />
           </div>
           <div className="top-nav-bar__icons">
-            <div><Link to='/signup' className="custom-link"> Logout </Link> </div>
+            <div onClick={handleLogout} > Logout </div>
             <div><Link to='/aboutus' className="custom-link"> About Us </Link> </div>
           </div>
   

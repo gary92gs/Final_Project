@@ -3,8 +3,10 @@ import {Link} from 'react-router-dom'
 import LogoLongDark from './icons/LogoLongDark';
 import "../styles/Login.css";
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom'
 
 function Login() {
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     usernameOrEmail: '',
@@ -24,6 +26,7 @@ function Login() {
     try {
       const response = await axios.post('/api/sessions', formData);
       console.log(response.data);
+      navigate('/') //redirects after login
     }
     catch (error) {
       console.error('Error sending data:', error)
