@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getUsersFavouriteStocks }  = require('../db/queries/favouritesQueries')
+const { getUsersFavouriteStocks, addStocktoUserFavourites }  = require('../db/queries/favouritesQueries')
 
 router.get('/', async (req, res) => {
   // get user ID from session
@@ -23,8 +23,22 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   // get user ID from session
+  try {
+    const userID = req.session.userID;
+    if (!userID) {
+      return res.status(401).json({ message: 'Unauthorized, please leave' });
+    }
   // stock ID extraction from request body, frontend reference
+  const stockID = req.body.stockID;
+
+  await addStocktoUserFavourites(userID, stockID);
   // send server success message
+  res.json({ message: 'Stonk has been added to your favourites' });
+  }
+  catch (error) {
+    console.log(`Error: ${error}`);
+    res.status(500).json({ message: 'Internal Server Error' })
+  }
 })
 
 router.delete('/', () => {
