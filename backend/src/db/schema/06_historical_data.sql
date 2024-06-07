@@ -13,7 +13,8 @@ DROP TABLE IF EXISTS historical_data CASCADE;
 CREATE TABLE historical_data (
   id SERIAL PRIMARY KEY NOT NULL,
   stock_id INTEGER REFERENCES stocks(id) NOT NULL,
-  report_date DATE NOT NULL,
+  report_year INTEGER NOT NULL CHECK (report_year >= 1900 AND report_year <= 2500),
+  report_quarter DATE NOT NULL CHECK (report_quarter >= 1 AND report_quarter <= 4),
   quarterly_price_median DECIMAL(14, 6),
   book_value DECIMAL(14, 6),
   net_income BIGINT NOT NULL,

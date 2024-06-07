@@ -1,11 +1,12 @@
 const {
-  confirmHistoricalDataAlignment,
+  getQuarterFromDateObject,
   removeExtraMonthlyEntries,
+  confirmHistoricalDataAlignment,
 } = require('./miscHelpers');
 
 const isNotStock = (responseData) => {
 
-  console.log('inside isNotStock()')
+  console.log('inside isNotStock()');
 
   const { profile } = responseData;
 
@@ -21,7 +22,7 @@ const isNotStock = (responseData) => {
 };
 
 const checkProfile = (responseData) => {
-  console.log('inside checkProfile()')
+  console.log('inside checkProfile()');
   const { profile } = responseData;
 
   try {
@@ -39,7 +40,7 @@ const checkProfile = (responseData) => {
 };
 
 const checkOverview = (responseData) => {
-  console.log('inside checkOverview()')
+  console.log('inside checkOverview()');
   const { OVERVIEW } = responseData;
 
   try {
@@ -60,7 +61,7 @@ const checkOverview = (responseData) => {
 };
 
 const checkBalanceSheet = (responseData) => {
-  console.log('inside checkBalanceSheet()')
+  console.log('inside checkBalanceSheet()');
   const { BALANCE_SHEET } = responseData;
 
   try {
@@ -69,7 +70,7 @@ const checkBalanceSheet = (responseData) => {
       mostRecentReportDate: BALANCE_SHEET.quarterlyReports[0].fiscalDateEnding,
       mostRecentOutstandingShares: BALANCE_SHEET.quarterlyReports[0].commonStockSharesOutstanding,
       mostRecentShareholdersEquity: BALANCE_SHEET.quarterlyReports[0].totalShareholderEquity,
-    }
+    };
   } catch (error) {
     return false;
   }
@@ -77,7 +78,7 @@ const checkBalanceSheet = (responseData) => {
 };
 
 const checkCashFlow = (responseData) => {
-  console.log('inside checkCashFlow()')
+  console.log('inside checkCashFlow()');
   const { CASH_FLOW } = responseData;
 
   try {
@@ -85,7 +86,7 @@ const checkCashFlow = (responseData) => {
       numberOfRows: CASH_FLOW.quarterlyReports.length,
       mostRecentNetIncome: CASH_FLOW.quarterlyReports[0].netIncome,
       mostRecentTotalDividendPayout: CASH_FLOW.quarterlyReports[0].dividendPayoutCommonStock,
-    }
+    };
   } catch (error) {
     return false;
   }
@@ -93,23 +94,23 @@ const checkCashFlow = (responseData) => {
 };
 
 const checkEarnings = (responseData) => {
-  console.log('inside checkEarnings()')
-  const {EARNINGS} = responseData;
+  console.log('inside checkEarnings()');
+  const { EARNINGS } = responseData;
 
   try {
     return {
       numberOfRows: EARNINGS.quarterlyEarnings.length,
       mostRecentReportedEPS: EARNINGS.quarterlyEarnings[0].reportedEPS,
-    }
+    };
   } catch (error) {
     return false;
   }
-  
+
 };
 
 const checkTimeSeriesMonthly = (responseData) => {
-  console.log('inside checkTimeSeriesMonthly()')
-  const {TIME_SERIES_MONTHLY} = responseData;
+  console.log('inside checkTimeSeriesMonthly()');
+  const { TIME_SERIES_MONTHLY } = responseData;
 
   try {
     const monthlyTimeSeriesKeys = Object.keys(TIME_SERIES_MONTHLY['Monthly Time Series']);
@@ -119,15 +120,15 @@ const checkTimeSeriesMonthly = (responseData) => {
       mostRecentLow: TIME_SERIES_MONTHLY['Monthly Time Series'][monthlyTimeSeriesKeys[0]]['3. low'],
       mostRecentOpen: TIME_SERIES_MONTHLY['Monthly Time Series'][monthlyTimeSeriesKeys[0]]['1. open'],
       mostRecentClose: TIME_SERIES_MONTHLY['Monthly Time Series'][monthlyTimeSeriesKeys[0]]['4. close'],
-    }
+    };
   } catch (error) {
-    return false;  
+    return false;
   }
 
 };
 
 const buildDataReport = (responseData) => {
-  console.log('building data report')
+  console.log('building data report');
   return {
     profile: checkProfile(responseData),
     overview: checkOverview(responseData),
@@ -155,7 +156,7 @@ const checkApiData = (responseData) => {
   // console.log('BALANCE_SHEET:', BALANCE_SHEET);
   // console.log('CASH_FLOW:', CASH_FLOW.quarterlyReports);
   // console.log('EARNINGS:', EARNINGS);
-  // console.log('TIME_SERIES_MONTHLY:', TIME_SERIES_MONTHLY);
+  console.log('TIME_SERIES_MONTHLY:', TIME_SERIES_MONTHLY);
 
   const dataReport = buildDataReport(responseData);
 
@@ -195,7 +196,7 @@ const checkApiData = (responseData) => {
     isNotStock: false,
     hasIncompleteData: false,
     dataReport,
-  }
+  };
 
 };
 
@@ -241,9 +242,8 @@ const formatHistoricalData = (responseData) => {
   const historicalData = [];
 
   // grab all time series keys in order
-  const timeSeriesDateKeys = Object.keys(TIME_SERIES_MONTHLY['Monthly Time Series']);
+  const timeSeriesDateKeys = Object.keys(TIME_SERIES_MONTHLY['Monthly Time Series']).map(dateKey => new Date(dateKey));
 
-  console.log('Finished Building Stocks and Current_Data Objects');
   //write allStockData.historical_data from responseData
   while (
     BALANCE_SHEET.quarterlyReports.length &&
@@ -255,46 +255,69 @@ const formatHistoricalData = (responseData) => {
     // confirm that the fiscalDateEnding values are the same
     console.log('checking if all report dates match');
 
-    // maybe have cashfow and balance sheet set min date only. 
-    confirmHistoricalDataAlignment(BALANCE_SHEET, CASH_FLOW, EARNINGS); // earnings date must not delete balance_sheet or cash_flow, but can be deleted by balance_sheet or cash_flow
+    // confirm data from different tables are matched by date AND update/return all dates as objects
+    const {
+      balanceSheetDate,
+      earningsDate,
+      minDate,
+    } = confirmHistoricalDataAlignment(BALANCE_SHEET, CASH_FLOW, EARNINGS); // earnings date must not delete balance_sheet or cash_flow, but earnings can be deleted by balance_sheet or cash_flow
+
+    console.log('minDate (after declaration)', minDate);
+
+    const currentQuarter = getQuarterFromDateObject(minDate);
 
     // TRIMMING EXTRA MONTHLY REPORTS (NEW REPORTS = SHOULD ONLY RUN AT BEGINNING)
     // ensures m_1-m_3 data correctly corresponds to each quarter
     console.log('checking for extra Monthly Time Series data (ie. data that belongs to current/unfinished quarter)');
     if (
       timeSeriesDateKeys.length &&
-      BALANCE_SHEET.quarterlyReports[0].fiscalDateEnding.slice(0, -3) !== timeSeriesDateKeys[0].slice(0, -3)
+      timeSeriesDateKeys[0].getFullYear() >= minDate.getFullYear() &&
+      getQuarterFromDateObject(timeSeriesDateKeys[0]) > getQuarterFromDateObject(minDate)
     ) {
-      removeExtraMonthlyEntries(BALANCE_SHEET, timeSeriesDateKeys);
+      removeExtraMonthlyEntries(minDate, timeSeriesDateKeys);
     }
     console.log('finished checking for extra Monthly Time Series data');
 
     console.log('building dataRow');
 
+    let dateKey1 = null;
+    let dateKey2 = null;
+    let dateKey3 = null;
+    if (timeSeriesDateKeys.length >= 3) {
+      dateKey1 = timeSeriesDateKeys[2].toISOString().split('T')[0];
+      dateKey2 = timeSeriesDateKeys[1].toISOString().split('T')[0];
+      dateKey3 = timeSeriesDateKeys[0].toISOString().split('T')[0];
+    }
+
     // collect data for each row
     const dataRow = {
       // remember to grab stockid after insert
       report_date: BALANCE_SHEET.quarterlyReports[0].fiscalDateEnding,
+      report_year: balanceSheetDate.getFullYear(),
+      report_quarter: currentQuarter,
       net_income: parseInt(CASH_FLOW.quarterlyReports[0].netIncome),
       outstanding_shares: parseInt(BALANCE_SHEET.quarterlyReports[0].commonStockSharesOutstanding),
       shareholders_equity: BALANCE_SHEET.quarterlyReports[0].totalShareholderEquity === 'None' ? 0 : parseInt(BALANCE_SHEET.quarterlyReports[0].totalShareholderEquity),
       total_dividend_payout: CASH_FLOW.quarterlyReports[0].dividendPayoutCommonStock === 'None' ? 0 : parseInt(CASH_FLOW.quarterlyReports[0].dividendPayoutCommonStock),
-      reported_eps: parseFloat(EARNINGS.quarterlyEarnings[0].reportedEPS), // check earnings.quarterlyEarnings[index].fiscalDateEnding, and default to 0 if not matching date
-      m1: timeSeriesDateKeys[2] || 0,
-      m1_high: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[timeSeriesDateKeys[2]]?.['2. high']) || 0,
-      m1_low: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[timeSeriesDateKeys[2]]?.['3. low']) || 0,
-      m1_open: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[timeSeriesDateKeys[2]]?.['1. open']) || 0,
-      m1_close: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[timeSeriesDateKeys[2]]?.['4. close']) || 0,
-      m2: timeSeriesDateKeys[1] || 0,
-      m2_high: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[timeSeriesDateKeys[1]]?.['2. high']) || 0,
-      m2_low: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[timeSeriesDateKeys[1]]?.['3. low']) || 0,
-      m2_open: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[timeSeriesDateKeys[1]]?.['1. open']) || 0,
-      m2_close: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[timeSeriesDateKeys[1]]?.['4. close']) || 0,
-      m3: timeSeriesDateKeys[0] || 0,
-      m3_high: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[timeSeriesDateKeys[0]]?.['2. high']) || 0,
-      m3_low: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[timeSeriesDateKeys[0]]?.['3. low']) || 0,
-      m3_open: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[timeSeriesDateKeys[0]]?.['1. open']) || 0,
-      m3_close: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[timeSeriesDateKeys[0]]?.['4. close']) || 0,
+      reported_eps: earningsDate < minDate ? 0 : parseFloat(EARNINGS.quarterlyEarnings[0].reportedEPS),
+
+      m1: dateKey1 || 0,
+      m1_high: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[dateKey1]?.['2. high']) || 0,
+      m1_low: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[dateKey1]?.['3. low']) || 0,
+      m1_open: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[dateKey1]?.['1. open']) || 0,
+      m1_close: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[dateKey1]?.['4. close']) || 0,
+
+      m2: dateKey2 || 0,
+      m2_high: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[dateKey2]?.['2. high']) || 0,
+      m2_low: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[dateKey2]?.['3. low']) || 0,
+      m2_open: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[dateKey2]?.['1. open']) || 0,
+      m2_close: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[dateKey2]?.['4. close']) || 0,
+
+      m3: dateKey3 || 0,
+      m3_high: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[dateKey3]?.['2. high']) || 0,
+      m3_low: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[dateKey3]?.['3. low']) || 0,
+      m3_open: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[dateKey3]?.['1. open']) || 0,
+      m3_close: parseFloat(TIME_SERIES_MONTHLY['Monthly Time Series']?.[dateKey3]?.['4. close']) || 0,
     };
 
     console.log('finished building dataRow');
@@ -303,7 +326,14 @@ const formatHistoricalData = (responseData) => {
     // shift used data row from each array for balance_sheet, cash_flow, and earnings
     BALANCE_SHEET.quarterlyReports.shift();
     CASH_FLOW.quarterlyReports.shift();
-    EARNINGS.quarterlyEarnings.shift();
+
+    if (
+      earningsDate.getFullYear() === minDate.getFullYear() &&
+      getQuarterFromDateObject(earningsDate) === getQuarterFromDateObject(minDate)
+    ) {
+      EARNINGS.quarterlyEarnings.shift(); // if date doesn't match, don't shift
+    }
+
     for (let i = 0; i < 3; i++) {
       timeSeriesDateKeys.shift();
     }
@@ -321,8 +351,10 @@ const formatAllStockData = (responseData) => {
 
   const allStockData = formatStockInfoAndCurrentData(responseData);
 
+  console.log('Finished Building Stocks and Current_Data Objects');
+
   allStockData['historical_data'] = formatHistoricalData(responseData);
-  
+
   // console.log('allStockData.stocks', allStockData.stocks);
   // console.log('allStockData.current_data', allStockData.current_data);
   // console.log('allStockData.historical_data', allStockData.historical_data);
