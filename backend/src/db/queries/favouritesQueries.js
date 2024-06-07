@@ -18,6 +18,19 @@ const getUsersFavouriteStocks = async (userID) => {
   }
 };
 
+const addStocktoUserFavourites = async (userID, stockID) => {
 
+  const queryStr = `
+  INSERT INTO favourite_stocks (user_id, stock_id)
+  VALUES (?, ?)
+  `;
 
-module.exports = { getUsersFavouriteStocks };
+  try {
+    await db.query(queryStr, [userID, stockID])
+  }
+  catch (error) {
+    throw error;
+  }
+}
+
+module.exports = { getUsersFavouriteStocks, addStocktoUserFavourites };
