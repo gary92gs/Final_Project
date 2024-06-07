@@ -143,22 +143,6 @@ const buildDataReport = (responseData) => {
 
 const checkApiData = (responseData) => {
 
-  const {
-    profile,
-    OVERVIEW,
-    BALANCE_SHEET,
-    CASH_FLOW,
-    EARNINGS,
-    TIME_SERIES_MONTHLY,
-  } = responseData;
-
-  // console.log('profile:', profile);
-  console.log('OVERVIEW:', OVERVIEW);
-  // console.log('BALANCE_SHEET:', BALANCE_SHEET);
-  // console.log('CASH_FLOW:', CASH_FLOW.quarterlyReports);
-  // console.log('EARNINGS:', EARNINGS);
-  // console.log('TIME_SERIES_MONTHLY:', TIME_SERIES_MONTHLY);
-
   const dataReport = buildDataReport(responseData);
 
   if (!dataReport.profile) {
@@ -257,13 +241,12 @@ const formatHistoricalData = (responseData) => {
     console.log('checking if all report dates match');
 
     // confirm data from different tables are matched by date AND update/return all dates as objects
+    // earnings date must not delete balance_sheet or cash_flow, but earnings can be deleted by balance_sheet or cash_flow
     const {
       balanceSheetDate,
       earningsDate,
       minDate,
-    } = confirmHistoricalDataAlignment(BALANCE_SHEET, CASH_FLOW, EARNINGS); // earnings date must not delete balance_sheet or cash_flow, but earnings can be deleted by balance_sheet or cash_flow
-
-    console.log('minDate (after declaration)', minDate);
+    } = confirmHistoricalDataAlignment(BALANCE_SHEET, CASH_FLOW, EARNINGS); 
 
     const currentQuarter = getQuarterFromDateObject(minDate);
 
@@ -277,9 +260,8 @@ const formatHistoricalData = (responseData) => {
     ) {
       removeExtraMonthlyEntries(minDate, timeSeriesDateKeys);
     }
-    console.log('finished checking for extra Monthly Time Series data');
 
-    console.log('building dataRow');
+    console.log('finished checking for extra Monthly Time Series data');
 
     let dateKey1 = null;
     let dateKey2 = null;
@@ -349,8 +331,6 @@ const formatHistoricalData = (responseData) => {
 const formatAllStockData = (responseData) => {
 
   const allStockData = formatStockInfoAndCurrentData(responseData);
-
-  console.log('Finished Building Stocks and Current_Data Objects');
 
   allStockData['historical_data'] = formatHistoricalData(responseData);
 

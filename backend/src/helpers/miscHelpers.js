@@ -72,12 +72,6 @@ const confirmHistoricalDataAlignment = (BALANCE_SHEET, CASH_FLOW, EARNINGS) => {
 
   }
 
-  console.log('BALANCE_SHEET & CASH_FLOW YEARS & QUARTERS SHOULD MATCH!!');
-
-  console.log(`BALANCE_SHEET: ${balanceSheetDate.getFullYear()} - Q${getQuarterFromDateObject(balanceSheetDate)}`);
-  console.log(`CASH_FLOW: ${cashFlowDate.getFullYear()} - Q${getQuarterFromDateObject(cashFlowDate)}`);
-  console.log(`EARNINGS: ${earningsDate.getFullYear()} - Q${getQuarterFromDateObject(earningsDate)}`);
-
   return {
     balanceSheetDate,
     cashFlowDate,
@@ -94,14 +88,11 @@ const removeExtraMonthlyEntries = (minDate, timeSeriesDateKeys) => {
     minDate.getFullYear() <= timeSeriesDateKeys[0].getFullYear() &&
     getQuarterFromDateObject(minDate) < getQuarterFromDateObject(timeSeriesDateKeys[0])
   ) {
-    console.log('minDate date-quarter', minDate.toDateString(), getQuarterFromDateObject(minDate));
-    console.log('timeSeriesDateKeys date-quarter', timeSeriesDateKeys[0].toDateString(), getQuarterFromDateObject(timeSeriesDateKeys[0]));
 
-    console.log('timeSeriesDateKeys Length', timeSeriesDateKeys.length);
     timeSeriesDateKeys.shift();
+
   }
-  console.log('Finished Removing Dates from timeSeriesDateKeys');
-  console.log(`Balance Sheet Date vs Time Series Date Key: ${minDate.toLocaleDateString('en-US', { year: 'numeric', month: 'numeric' })} = ${timeSeriesDateKeys[0].toLocaleDateString('en-US', { year: 'numeric', month: 'numeric' })}`);
+
 };
 
 

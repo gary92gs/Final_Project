@@ -74,9 +74,12 @@ router.post('/', async (req, res) => {
   try {
     const rawStockData = await requestAllStockDataByTickerSymbol(tickerSymbol);
     console.log('API calls complete');
+
     // CHECK DATA RESPONSE (anything missing? is it not a stock?)
     const dataReport = checkApiData(rawStockData);
+
     console.log('dataReport:', dataReport);
+
     if (dataReport.isNotPresent) {
       return res.status(204).json({
         isPosted: false,
@@ -95,6 +98,7 @@ router.post('/', async (req, res) => {
         message: `This Ticker Symbol pertains to a Stock, but does not contain the information necessary for analysis.`
       });
     }
+    
     //FORMAT DATA
     const {
       stocks,
@@ -102,7 +106,7 @@ router.post('/', async (req, res) => {
       historical_data,
     } = formatAllStockData(rawStockData);
 
-    console.log('current_data:', current_data);
+    console.log('historical_data:', historical_data);
 
     //QUERY DB THRICE (INSERTS)
     // insert stocks info

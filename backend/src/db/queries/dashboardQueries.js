@@ -119,7 +119,7 @@ const postNewCurrentDataByStockId = async (stockId, newStockCurrentData) => {
 
 // posts to historical_data
 const postNewHistoricalDataByStockId = async (stockId, newHistoricalDataArr) => {
-  console.log('inside postNewHistoricalData Query');
+  
   let queryStr = `INSERT INTO historical_data (
     stock_id,
     report_year,
@@ -180,13 +180,8 @@ const postNewHistoricalDataByStockId = async (stockId, newHistoricalDataArr) => 
 
   queryStr = queryStr.slice(0, -1) + ` RETURNING *;`;
 
-  console.log('queryString:', queryStr);
-
-  console.log('about to send query');
-
   try {
     const result = await db.query(queryStr, parameterizedArgumentsArr);
-    console.log('queryResult:', result);
     if (!result.rows.length) {
       return false;
     }
