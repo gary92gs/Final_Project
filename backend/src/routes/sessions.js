@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const cookieParser = require('cookie-parser');
 
 const { getUserByUsernameOrEmail } = require('./../db/queries/usersQueries');
 const { isHashSame, setUserSessionCookie, deleteUserSessionCookie, } = require('./../helpers/userSessionHelpers');
+
+router.use(cookieParser());
 
 // LOGIN (CREATE SESSION COOKIE)
 router.post('/', async (req, res) => {
@@ -36,9 +39,17 @@ router.post('/', async (req, res) => {
 router.delete('/', (req, res) => {
   console.log('inside delete /api/sessions')
   deleteUserSessionCookie(req);
-
   return res.status(200).json({ message: 'Logged Out Successfully' });
-  
+
+});
+
+// GET REQUEST TO CHECK COOKIE SESSION
+router.get('/check', (req, res) => {
+  if (req.session && req.cookies['PP-session']) {
+    return res.status(200).json({ isLoggedIn: true });
+  } else {
+    return res.status(401).json({ isLoggedIn: false });
+  }
 });
 
 module.exports = router;
