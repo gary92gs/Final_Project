@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import MobileDropdown from './MobileDropdown'
 import MobileSearchBar from './MobileSearchBar'
 
-function TopNavBar ({ setSearchResults, searchValue, setSearchValue, currentItemId, setCurrentItemId, isMobile}) {
+function TopNavBar ({ setSearchResults, searchValue, setSearchValue, currentItemId, setCurrentItemId, isMobile, onLogout}) {
 const handleClick = () => {
   setCurrentItemId(null);
   setSearchResults([]);
@@ -49,7 +49,7 @@ return (
             <SearchBar setSearchResults={setSearchResults} searchValue={searchValue} setSearchValue={setSearchValue} setCurrentItemId={setCurrentItemId} />
           </div>
           <div className="top-nav-bar__icons">
-            <div><Link to='/signup' className="custom-link"> Logout </Link> </div>
+            <div><Link to='/' onClick={onLogout} className="custom-link"> Logout </Link> </div>
             <div><Link to='/aboutus' className="custom-link"> About Us </Link> </div>
           </div>
   
