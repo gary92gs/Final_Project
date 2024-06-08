@@ -4,7 +4,7 @@ import LogoLongDark from './icons/LogoLongDark';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-function SignUp() {
+function SignUp({ onRegister }) {
 
   const [formData, setFormData] = useState({
     username: '',
@@ -28,6 +28,10 @@ function SignUp() {
     try {
       const response = await axios.post('/api/users', formData);
       console.log(response.data);
+      // call function from props
+      onRegister();
+      // redirect to mainpage
+      window.location.href = '/';
     }
     catch (error) {
       console.error('Error sending data:', error)
@@ -85,7 +89,7 @@ function SignUp() {
             onChange={handleChange}
           />
           <button type='submit'>Sign Up</button>
-          <p>Already have an account? <Link to='/login'>Login here!</Link></p>
+          <p>Already have an account? Login <Link to='/login'>Here</Link></p>
           </form>
         </div>
     </div>
