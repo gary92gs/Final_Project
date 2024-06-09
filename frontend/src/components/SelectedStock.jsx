@@ -13,7 +13,7 @@ function SelectedStock({ currentItemId, setCurrentItemId }) {
   }
 
   return(
-    <div>
+
       <article className='stock-article'> 
         <div className='close-button'>
           <div onClick={handleClick}>X</div>
@@ -24,14 +24,13 @@ function SelectedStock({ currentItemId, setCurrentItemId }) {
         </div>
         <ItemFavButton />
         <div className='stock-info'>
-        <DataTable/>
+        {/* <DataTable/>  keep commented for now, we need to swap the rows and colums*/}
           <h2> Stock Description/Summary </h2>
           <p> Apple Inc. stands out for its commitment to innovation, quality, and design. Its diverse product line and ecosystem offer seamless integration and a superior user experience. From revolutionizing personal computing with the Macintosh to redefining the smartphone with the iPhone, Apple continues to shape the future of technology and consumer electronics. </p>
           {/* Chart.js */}
           <Graph />
         </div>
       </article>
-    </div>
 
 
   )

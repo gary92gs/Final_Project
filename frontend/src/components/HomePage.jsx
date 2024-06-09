@@ -5,13 +5,17 @@ import SelectedStock from './SelectedStock';
 import '../styles/HomePage.css'
 
 
-function HomePage({favStocks, searchResults, currentItemId, setCurrentItemId}) {
+function HomePage({favStocks, searchResults, currentItemId, setCurrentItemId, isMobile}) {
   console.log("Current Item Id " , currentItemId)
 
   return (
     <div className='home-page-container'>
       <div className='home-page-container2'>
-          {/* <WatchlistSidebar favStocks={favStocks} setCurrentItemId={setCurrentItemId} currentItemId={currentItemId} />
+          {!isMobile() ? (
+            <WatchlistSidebar favStocks={favStocks} setCurrentItemId={setCurrentItemId} currentItemId={currentItemId} />
+
+          ) : undefined}
+
 
           {searchResults.length > 0 ? (
           <SearchResultList searchResults={searchResults} setCurrentItemId={setCurrentItemId} />
@@ -19,7 +23,7 @@ function HomePage({favStocks, searchResults, currentItemId, setCurrentItemId}) {
           <SelectedStock currentItemId={currentItemId} setCurrentItemId={setCurrentItemId}/>
         ) : (
           <WatchlistMain favStocks={favStocks} setCurrentItemId={setCurrentItemId} />
-        )} */}
+        )}
 
       </div>   
     </div>

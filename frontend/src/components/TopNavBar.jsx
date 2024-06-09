@@ -20,7 +20,7 @@ return (
     <span className="top-nav-bar">
 
         <div className='dropdown-container'>
-          <MobileDropdown/>
+          <MobileDropdown setCurrentItemId={setCurrentItemId} />
         </div>
       
         <div className="top-nav-bar__logo" onClick={handleClick}>

@@ -46,3 +46,26 @@ margin: 4px;
 .stock-data p {
   margin: 4px 0;
 }
+
+@media only screen and (max-width: 800px) {
+  .watchlist-main-item {
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    min-width: 100px;
+  }
+  .stock-image {
+    width: 80px;
+    height: 80px;
+  }
+  .stock-details {
+    font-size: smaller;
+  }
+    
+  .stock-data {
+    font-size: smaller;
+  }
+    
+}
