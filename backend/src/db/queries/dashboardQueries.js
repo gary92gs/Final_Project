@@ -1,12 +1,11 @@
 const db = require('./../index');
 
 // gets from both stocks and current_data 
-const getStockInfoAndCurrentDataByTickerSymbol = async (tickerSymbol) => {
+const getStockInfoByTickerSymbol = async (tickerSymbol) => {
 
   const queryStr = `
     SELECT * 
     FROM stocks
-    JOIN current_data ON stocks.id = stock_id
     WHERE ticker_symbol = $1;
   `;
 
@@ -22,18 +21,38 @@ const getStockInfoAndCurrentDataByTickerSymbol = async (tickerSymbol) => {
 
 };
 
+const getCurrentDataByStockId = async (stockId) => {
+  
+  const queryStr = `
+    SELECT *
+    FROM current_data
+    WHERE stock_id = $1;
+  `;
+
+  try {
+    const result = await db.query(queryStr,[stockId]);
+    if (!result.rows.length) {
+      return false;
+    }
+    return result.rows[0];
+  } catch (error) {
+    throw error;
+  }
+
+};
+
 // gets from historical_data 
-const getHistoricalDataByTickerSymbol = async (tickerSymbol) => {
+const getHistoricalDataByStockId = async (stockId) => {
 
   const queryStr = `
     SELECT *
     FROM historical_data
-    WHERE ticker_symbol = $1
-    ORDER BY report_date DESC;
+    WHERE stock_id = $1
+    ORDER BY report_year DESC, report_quarter DESC;
   `;
 
   try {
-    const result = await db.query(queryStr, [tickerSymbol]);
+    const result = await db.query(queryStr, [stockId]);
     if (!result.rows.length) {
       return false;
     }
@@ -230,8 +249,9 @@ const updateNewCurrentStockDataByStockId = async (stockId, newCurrentData) => {
 };
 
 module.exports = {
-  getStockInfoAndCurrentDataByTickerSymbol,
-  getHistoricalDataByTickerSymbol,
+  getStockInfoByTickerSymbol,
+  getCurrentDataByStockId,
+  getHistoricalDataByStockId,
   postNewStocksInfo,
   postNewCurrentDataByStockId,
   postNewHistoricalDataByStockId,

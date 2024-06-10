@@ -1,14 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const { requestAllStockDataByTickerSymbol } = require('./../helpers/apiRequestHelpers');
+const { 
+  requestAllStockDataByTickerSymbol,
+  requestCurrent10YrTreasuryYield,
+  requestCurrentStockPriceByTickerSymbol,
+} = require('./../helpers/apiRequestHelpers');
 const {
   checkApiData,
   formatAllStockData,
 } = require('./../helpers/apiDataHelpers');
 const {
-  getStockInfoAndCurrentDataByTickerSymbol,
-  getHistoricalDataByTickerSymbol,
+  calculateStockIntrinsicValue,
+} = require('./../helpers/intrinsicValueHelpers');
+const {
+  getStockInfoByTickerSymbol,
+  getCurrentDataByStockId,
+  getHistoricalDataByStockId,
   postNewStocksInfo,
   postNewCurrentDataByStockId,
   postNewHistoricalDataByStockId,
@@ -25,28 +33,49 @@ router.get('/', async (req, res) => {
 
   const { tickerSymbol } = req.query;
 
-  const allStockData = {
-    stockInfoAndCurrentData: '',
-    historicalData: '',
-  };
-
+  const allAnalysisData = {};
+ 
   try {
-    let existingStock = await getStockInfoAndCurrentDataByTickerSymbol(tickerSymbol);
-    console.log('stock in DB?:', existingStock);
+    allAnalysisData['stocks'] = await getStockInfoByTickerSymbol(tickerSymbol);
 
     // NEED TO VERIFY OBJECT IS COMING IN CORRECTLY
-    if (!existingStock) {
-      console.log('Making API Requests');
-      const isPosted = await axios.post(`http://${process.env.HOST}:${process.env.PORT}/api/dashboard-analysis`, { tickerSymbol });
-      console.log('GET: postResponse.message', isPosted.message);
+    if (!allAnalysisData.stocks) {
+      console.log('stock does not exist in db!!')
+      // request new data via post request
+      const response = await axios.post(`http://${process.env.HOST}:${process.env.PORT}/api/dashboard-analysis`, { tickerSymbol });
+      
+      // check if post was unsuccessful and relay post request's message to user/frontend
+      if (!response.data.isPosted) {
+        return res.status(response.status).json({message: response.data.message})
+      }
 
+      allAnalysisData.stocks = await getStockInfoByTickerSymbol(tickerSymbol);
     }
 
-    return res.status(200).json({ message: 'get message' });
+    // grab remaining stock data
+    allAnalysisData['current_data'] = await getCurrentDataByStockId(allAnalysisData.stocks.id);
+    allAnalysisData['historical_data'] = await getHistoricalDataByStockId(allAnalysisData.stocks.id);
+    
+    // grab risk_free_rate (10yr treasury yield)
+    allAnalysisData['risk_free_rate'] = await requestCurrent10YrTreasuryYield();
+    // grab current stock price
+    allAnalysisData['current_stock_price'] = await requestCurrentStockPriceByTickerSymbol(tickerSymbol);
+    
+    // calculate intrinsic value
+    allAnalysisData['intrinsic_value'] = calculateStockIntrinsicValue(allAnalysisData);
 
-    // allStockData.stockInfoAndCurrentData = existingStock;
-    // allStockData.historicalData = await getHistoricalDataByTickerSymbol(tickerSymbol);
-    // res.status(200).json({allStockData});
+    const {
+      current_stock_price,
+      intrinsic_value,
+      risk_free_rate,
+      stocks,
+      current_data,
+    } = allAnalysisData;
+
+    console.log('current_stock_price:', current_stock_price);
+    console.log('intrinsic_value:', intrinsic_value);
+
+    return res.status(200)//.json({ message: 'get message', allAnalysisData });
 
   } catch (error) {
     console.log(`Error: ${error}`);
@@ -75,11 +104,10 @@ router.post('/', async (req, res) => {
     const rawStockData = await requestAllStockDataByTickerSymbol(tickerSymbol);
     console.log('API calls complete');
 
-    // CHECK DATA RESPONSE (anything missing? is it not a stock?)
+    // Log dataReport for 'birds-eye-view' for data received from api requests
     const dataReport = checkApiData(rawStockData);
 
-    console.log('dataReport:', dataReport);
-
+    // if data is unsuitable, return corresponding message
     if (dataReport.isNotPresent) {
       return res.status(204).json({
         isPosted: false,
@@ -99,33 +127,27 @@ router.post('/', async (req, res) => {
       });
     }
     
-    //FORMAT DATA
+    // if data response is suitable format data into 3 objects for inserting into corresponding tables
     const {
-      stocks,
-      current_data,
-      historical_data,
+      stocks, // for stocks table
+      current_data, // for current_data table
+      historical_data, // for historical data table
     } = formatAllStockData(rawStockData);
 
-    console.log('historical_data:', historical_data);
-
-    //QUERY DB THRICE (INSERTS)
-    // insert stocks info
+    //QUERY DB THRICE (stocks, current_data, and historical_data)
+    // log these variables to see newly inserted data
     const postedStockInfo = await postNewStocksInfo(stocks);
-    console.log('postedStockInfo:', postedStockInfo);
-    // insert current_data
     const postedCurrentData = await postNewCurrentDataByStockId(postedStockInfo.id, current_data);
-    console.log('postedCurrentData:', postedCurrentData);
-    // insert historical_data
     const postedHistoricalData = await postNewHistoricalDataByStockId(postedStockInfo.id, historical_data);
-    console.log('postedHistoricalData:', postedHistoricalData);
 
+    // return isPosted status + corresponding message
     return res.status(200).json({
       isPosted: true,
       message: `Stock Data, Current Data, and Historical Data Have Been Inserted Into The Database Successfully.`
     });
-    // res.status(200).json({allStockData});
+
   } catch (error) {
-    console.log(`Error: ${error}`);
+    console.log(`Error Requesting, Formating, or Inserting Data: ${error}`);
     res.status(500).json({ message: "Internal Server Error" });
   }
 
@@ -147,3 +169,4 @@ router.put('/', async (req, res) => {
 });
 
 module.exports = router;
+
