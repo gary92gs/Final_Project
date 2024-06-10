@@ -14,7 +14,6 @@ function SearchBar({ setSearchResults, setSearchValue, searchValue, setCurrentIt
 
     try {
       const response = await axios.get('/api/search', { params: { searchTerm: searchValue } });
-      console.log('Raw search results', response.data.data)
       const response1 = response.data.data
       setCurrentItemId(null);
       const searchResult = response1.map(element => {
