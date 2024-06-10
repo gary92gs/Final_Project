@@ -30,8 +30,6 @@ return (
         <div>
           <MobileSearchBar setSearchResults={setSearchResults} searchValue={searchValue} setSearchValue={setSearchValue} setCurrentItemId={setCurrentItemId} />
         </div>
-
-
     </span>
   </div>
 );

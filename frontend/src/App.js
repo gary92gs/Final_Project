@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,} from 'react';
 import SignUp from './components/SignUp';
 import TopNavBar from './components/TopNavBar';
 import Login from './components/Login';
 import HomePage from './components/HomePage';
 import SelectedStock from './components/SelectedStock';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import AboutUs from './components/AboutUs';
 
 const favStocks = [
@@ -46,24 +46,23 @@ function App() {
   const [currentItemId, setCurrentItemId] = useState(null); // FOR SETTING SELECTED STOCK ONLY WORKING FOR WATCHLISTMAINITEM CURRENTLY
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    fetch('/api/sessions/check')
-      .then(response => response.json())
-      .then(data => setIsLoggedIn(data.isLoggedIn))
-      .catch(error => console.error('Error:', error));
-  }, []);
 
   function isMobile() {
     const regex = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
     return regex.test(navigator.userAgent);
   }
+
+  const navigate = useNavigate();
+
  // function to set state to true after sign up
   const handleRegister = () => {
     setIsLoggedIn(true);
+    navigate('/');
   };
 // function to set state to true after login
   const handleLogin = () => {
     setIsLoggedIn(true);
+    navigate('/');
   };
 // function to set state to false when logout is clicked
   const handleLogout = () => {
@@ -78,13 +77,10 @@ function App() {
   };
 
   return (
-    <Router>
       <Routes>
-        {/* Pass function to component */}
         <Route path="/signup" element={<SignUp onRegister={handleRegister}/>} />
-        {/* Pass function to component */}
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
-        <Route path='/aboutus' element={<AboutUs />} />
+        <Route path='/aboutus' element={<AboutUs isMobile={isMobile} />} />
         <Route path='/selectedstock' element={<SelectedStock />} />
         {isLoggedIn ? (
           <Route path="/" element={
@@ -113,7 +109,7 @@ function App() {
           <Route path="/" element={<Login onLogin={handleLogin} />} />
         )}
       </Routes>
-    </Router>
+
   );
 }
 
