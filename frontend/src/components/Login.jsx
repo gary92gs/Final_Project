@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {Link} from 'react-router-dom'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import LogoLongDark from './icons/LogoLongDark';
 import "../styles/Login.css";
 import axios from 'axios';
 
-function Login() {
+function Login({ onLogin }) {
 
   const [formData, setFormData] = useState({
     usernameOrEmail: '',
@@ -19,13 +19,16 @@ function Login() {
     });
   };
 
-  const handleSubmit =  async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post('/api/sessions', formData);
       console.log(response.data);
-    }
-    catch (error) {
+      if (response.status === 201) {
+        // call function passed from props
+        onLogin(); 
+      }
+    } catch (error) {
       console.error('Error sending data:', error)
     }
   };
@@ -34,33 +37,33 @@ function Login() {
     <div className="login">
       <div className='login-container'>
         <h1 className='title'>
-        <LogoLongDark/>
+          <LogoLongDark />
         </h1>
-          <h2>Login now!</h2>
-          <form className='login-container__form' onSubmit={handleSubmit}>
-            <label htmlFor='usernameOrEmail'>Username/Email:</label>
-            <input
+        <h2>Login now!</h2>
+        <form className='login-container__form' onSubmit={handleSubmit}>
+          <label htmlFor='usernameOrEmail'>Username/Email:</label>
+          <input
             type="text"
             id="usernameOrEmail"
             name='usernameOrEmail'
-            value={formData.usernameOrEmail || formData.email}
+            value={formData.usernameOrEmail}
             onChange={handleChange}
-            />
+          />
 
-            <label htmlFor='password'>Password:</label>
-            <input
+          <label htmlFor='password'>Password:</label>
+          <input
             type="password"
             id="password"
             name='password'
             value={formData.password}
             onChange={handleChange}
-            />
+          />
 
           <button type='submit'>Login</button>
           <p>
             Don't have an account? <Link to='/signup'>Sign up here!</Link>
           </p>
-          </form>
+        </form>
       </div>
     </div>
   );

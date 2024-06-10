@@ -1,7 +1,7 @@
 import TopNavBar from './TopNavBar'
 import '../styles/global.css'
 import '../styles/AboutUs.css'
-function AboutUs() {
+function AboutUs({isMobile}) {
 
   const admin = {
     Liam: {
@@ -24,7 +24,7 @@ function AboutUs() {
 
   return (
     <>
-      <TopNavBar/>
+      <TopNavBar isMobile={isMobile}/>
       <div className='about-us-container'>
         <h1>About Us</h1>
         {Object.entries(admin).map(([name, details]) => (
