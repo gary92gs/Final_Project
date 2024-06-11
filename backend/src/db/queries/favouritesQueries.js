@@ -1,6 +1,6 @@
 const db = require('./../index');
 
-const getUsersFavouriteStocks = async (userID) => {
+const getUsersFavouriteStocks = async (userId) => {
 
   const queryStr = `
   SELECT *
@@ -10,7 +10,7 @@ const getUsersFavouriteStocks = async (userID) => {
   `;
 
   try {
-    const result = await db.query(queryStr, [userID]);
+    const result = await db.query(queryStr, [userId]);
     if (!result.rows.length) {
       return false;
     }
@@ -21,16 +21,16 @@ const getUsersFavouriteStocks = async (userID) => {
   }
 };
 
-const addStocktoUserFavourites = async (userID, stockID) => {
+const addStocktoUserFavourites = async (userId, stockId) => {
 
   const queryStr = `
-  INSERT INTO favourite_stocks (user_id, stock_id)
+  INSERT INTO favourite_stocks (owner_id, stock_id)
   VALUES ($1, $2)
   RETURNING *;
   `;
 
   try {
-    await db.query(queryStr, [userID, stockID]);
+    const result = await db.query(queryStr, [userId, stockId]);
     if (!result.rows.length) {
       return false;
     }
@@ -41,15 +41,15 @@ const addStocktoUserFavourites = async (userID, stockID) => {
   }
 }
 
-const deleteStockFromUsersFavourites = async (userID, stockID) => {
+const deleteStockFromUsersFavourites = async (userId, stockId) => {
 
   const queryStr = `
     DELETE FROM favourite_stocks
-    WHERE user_id = $1 AND stock_id = $2;
+    WHERE owner_id = $1 AND stock_id = $2;
   `;
 
   try {
-    await db.query(queryStr, [userID, StockID]);
+    await db.query(queryStr, [userId, stockId]);
   }
   catch (error) {
     throw error;

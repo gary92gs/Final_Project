@@ -6,33 +6,34 @@ const { getUserSessionCookie } = require('../helpers/userSessionHelpers')
 router.get('/', async (req, res) => {
   // get user ID from session
   try {
-    const userID = getUserSessionCookie(req);
-    if (!userID) {
+    const userId = getUserSessionCookie(req);
+    if (!userId) {
       return res.status(401).json({ message: 'Unauthorized' });
     }
     // find users favourited stocks
     // extract users favourited stocks
-    const favouriteStocks = await getUsersFavouriteStocks(userID);
+    const favouriteStocks = await getUsersFavouriteStocks(userId);
+    // console.log("Favourite stocks", favouriteStocks)
     // send the favourites object as a response to component
-    res.json({ userFavourites: favouriteStocks })
+    res.status(200).json({ userFavourites: favouriteStocks })
   } catch (error) {
     console.log(`Error: ${error}`);
     res.status(500).json({ message: 'Internal Server Error' })
   }
-
 });
 
 router.post('/', async (req, res) => {
-    // get user ID from session
+  // get user ID from session
   try {
-    const userID = getUserSessionCookie(req);
-    if (!userID) {
+    const userId = getUserSessionCookie(req);
+    if (!userId) {
       return res.status(401).json({ message: 'Unauthorized' });
     }
     // stock ID extraction from request body, frontend reference
-    const stockID = req.body.stockID;
-    // query db to remove stock from favourite
-    const stockAddedtoFavourites = await addStocktoUserFavourites(userID, stockID);
+    const stockId = req.body.stock_id;
+
+    // query db to add stock from favourite
+    const stockAddedtoFavourites = await addStocktoUserFavourites(userId, stockId);
 
     if (!stockAddedtoFavourites) {
       return res.status(500).json({ message: 'Adding stocks to favourites was unsuccessful' })
@@ -46,19 +47,19 @@ router.post('/', async (req, res) => {
   }
 })
 
-router.delete('/', async () => {
+router.delete('/', async (req, res) => {
   // get user ID from session
   try {
-    const userID = getUserSessionCookie(req);
-    if (!userID) {
+    const userId = getUserSessionCookie(req);
+    if (!userId) {
       return res.status(401).json({ message: 'Unauthorized' });
     }
     // stock ID extraction from request body, frontend reference
-    const stockID = req.body.stockID;
+    const stockId = req.body.stock_id;
     // query db to remove stock from favourite
-    await deleteStockFromUsersFavourites(userID, stockID);
+    await deleteStockFromUsersFavourites(userId, stockId);
     // send server success message
-    res.json({ message: 'Stonk has been deleted from your favourites' })
+    res.json({ message: 'Stock has been deleted from your favourites' })
   }
   catch (error) {
     console.log(`Error: ${error}`);
