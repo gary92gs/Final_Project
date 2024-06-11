@@ -13,7 +13,7 @@ const growthRateBV = (allAnalyisisData) => {
 
   const iFBV = new Decimal(presentBV).minus(pastBV).div(pastBV).div(numYears);
 
-  console.log('------------ growthRateBV ------------')
+  console.log('------------ growthRateBV (i) ------------')
   console.log('numYears:', numYears);
   console.log('presentBV:', presentBV);
   console.log('pastBV:', pastBV);
@@ -37,8 +37,15 @@ const futureBV = (allAnalyisisData) => {
   const iFBV = growthRateBV(allAnalyisisData); // returns a decimal
   const FBV = iFBV.plus('1').pow(futureYears).times(presentBV);
 
-  console.log('------------ futureBV ------------')
-  console.log('', );
+  console.log('------------ futureBV (FBV) ------------')
+  console.log('presentBV:', presentBV);
+  console.log('futureYears:', futureYears);
+  console.log('iFBV:', iFBV);
+
+  console.log('(i + 1)^n x BV');
+  console.log(`(${iFBV} + 1)^${futureYears} x ${presentBV}`)
+
+  console.log('FBV:', FBV);
 
   return FBV;
 
@@ -49,13 +56,22 @@ const discountRateForIV = (allAnalyisisData) => {
   const { current_data, risk_free_rate } = allAnalyisisData;
 
   const beta = current_data.investment_beta;
-  const marketRiskPremium = '0.06';
-  const riskFreeRate = new Decimal(risk_free_rate).dividedBy('100').toString();
+  const marketRiskPremium = '0.05';
+  const riskFreeRate = new Decimal(risk_free_rate).dividedBy('100');
 
-  const iIV = new Decimal(beta).times(marketRiskPremium).plus(riskFreeRate);
+  const secondTerm = new Decimal(beta).times(marketRiskPremium).toString();
 
-  console.log('------------ growthRateBV ------------')
+  const iIV = riskFreeRate.minus(secondTerm);
+
+  console.log('------------ discountRateForIV (i) [👍] ------------')
+  console.log('beta:', beta);
+  console.log('marketRiskPremium:', marketRiskPremium);
+  console.log('riskFreeRate:', riskFreeRate);
+
+  console.log('riskFreeRate - (beta x marketRiskPremium)');
+  console.log(`${riskFreeRate} - (${beta} x ${marketRiskPremium})`)
   
+  console.log('iIV:', iIV);
 
   return iIV;
 };
@@ -68,8 +84,17 @@ const discountedFBVForIV = (allAnalyisisData) => {
   
   const FBV = futureBV(allAnalyisisData); // receives decimal object
   const denominator = iIV.plus('1').pow(futureYears).toString();
-  
+
   const discountedFBV = FBV.dividedBy(denominator);
+
+  console.log('------------ discountFBVforIV (FBV/(1 + i)^n) ------------')
+  console.log('FBV:', FBV);
+  console.log('iIV:', iIV);
+
+  console.log('FBV / (iIV + 1)^futureYears');
+  console.log(`${FBV} / (${iIV} + 1)^${futureYears}`)
+  
+  console.log('discountedFBV:', discountedFBV);
 
   return discountedFBV; 
 };
@@ -92,6 +117,19 @@ const discountedDivForIV = (allAnalyisisData) => {
 
   const discountedDiv = outerNumerator.div(iIV).times(div);
 
+  console.log('------------ discountDivforIV ( Div x [ 1 - [1/(1+i^n)] ] / i ) ------------')
+  console.log('div:', div);
+  console.log('futureYears:', futureYears);
+  console.log('iIV:', iIV);
+
+  console.log('innerDenominator (i + 1)^n:', innerDenominator);
+  console.log('inner2ndTerm [1/(1+i^n)]:', inner2ndTerm);
+  console.log('outerNumerator [ 1 - [1/(1+i^n)] ]:', outerNumerator);
+
+  console.log('outerNumerator / iIV x div')
+  console.log(`${outerNumerator} / ${iIV} x ${div}`)
+  console.log('discountedDiv:', discountedDiv);
+
   return discountedDiv;
 
 };
@@ -102,6 +140,16 @@ const calculateStockIntrinsicValue = (allAnalyisisData) => {
   const discountedDiv = discountedDivForIV(allAnalyisisData);
 
   const IV = discountedDiv.plus(discountedFBV).toString()
+
+  console.log('------------ intrinsic value ------------')
+  console.log('discountedDiv:', discountedDiv);
+  console.log('discountedFBV:', discountedFBV);
+
+  console.log(`discountedDiv + discountedFBV`)
+  console.log(`${discountedDiv} + ${discountedFBV}`)
+
+  console.log('IV:', IV);
+  
 
   return IV;
   
