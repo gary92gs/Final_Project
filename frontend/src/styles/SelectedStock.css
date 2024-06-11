@@ -16,7 +16,7 @@
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
-  width: 90%;
+  width: 100%;
 }
 
 .stock-info{
@@ -50,4 +50,27 @@
   font-size: 24px;
   font-weight: 600;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 800px) {
+  .stock-article{
+    height:min-content;
+    width:95%;
+    min-width: 20px !important;
+    height: overflow;
+  }
+  .stock-article h2{
+    font-size: 20px;
+  }
+  .stock-article h1{
+    font-size: 24px;
+  }
+  .close-button{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+  }
 }

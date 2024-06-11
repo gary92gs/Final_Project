@@ -13,4 +13,6 @@ html, body, p {
 
   html {
     background-color: #FAF7F2;
+    width: 100%;
+    height: 100%;
   }

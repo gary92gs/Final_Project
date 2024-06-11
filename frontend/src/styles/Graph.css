@@ -7,3 +7,9 @@
     margin-left: 0px;
     margin-top: 30px;
 }
+
+@media only screen and (max-width: 800px) {
+    .graph-container canvas {
+      min-height: 200px;
+    }
+  }
