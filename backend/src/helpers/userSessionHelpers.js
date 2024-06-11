@@ -36,9 +36,16 @@ const deleteUserSessionCookie = (req) => {
 
 };
 
+const getUserSessionCookie = (req) => {
+
+  return req.session.userId;
+
+}
+
 module.exports = {
   hashString,
   isHashSame,
   setUserSessionCookie,
   deleteUserSessionCookie,
+  getUserSessionCookie
 };
