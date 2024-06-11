@@ -75,7 +75,7 @@ router.get('/', async (req, res) => {
     console.log('current_stock_price:', current_stock_price);
     console.log('intrinsic_value:', intrinsic_value);
 
-    return res.status(200)//.json({ message: 'get message', allAnalysisData });
+    return res.status(200).json({ message: 'get message', allAnalysisData });
 
   } catch (error) {
     console.log(`Error: ${error}`);
