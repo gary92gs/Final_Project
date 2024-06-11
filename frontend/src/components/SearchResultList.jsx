@@ -15,6 +15,7 @@ const SearchResultList = ({ searchResults = [], setCurrentItemId, currentItemId 
             symbol={stock.symbol}
             name={stock.name}
             onClick={() => handleClick(stock.id)}
+            setCurrentItemId={setCurrentItemId}
           />
         ))}
     </div>
