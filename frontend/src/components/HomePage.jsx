@@ -5,7 +5,7 @@ import SelectedStock from './SelectedStock';
 import '../styles/HomePage.css'
 
 
-function HomePage({favStocks, searchResults, currentItemId, setCurrentItemId, isMobile}) {
+function HomePage({favStocks, searchResults, currentItemId, setCurrentItemId, isMobile, setStockData}) {
   console.log("Current Item Id " , currentItemId)
 
   return (
