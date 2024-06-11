@@ -1,5 +1,4 @@
-
-import React from "react";
+import {React, } from "react";
 import "../styles/WatchlistMainItem.css";
 
 const WatchlistMainItem = ({
@@ -18,11 +17,6 @@ const WatchlistMainItem = ({
   profit,
   id
 }) => {
-
-  // const handleClick = (id) => {
-  //   setCurrentItemId(id);
-  //   console.log(id)
-  // }
 
   return (
     <div className="watchlist-main-item" onClick={onClick}>
@@ -45,5 +39,6 @@ const WatchlistMainItem = ({
     </div>
   );
 };
+
 
 export default WatchlistMainItem;

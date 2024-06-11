@@ -30,8 +30,6 @@ function SignUp({ onRegister }) {
       console.log(response.data);
       // call function from props
       onRegister();
-      // redirect to mainpage
-      window.location.href = '/';
     }
     catch (error) {
       console.error('Error sending data:', error)
