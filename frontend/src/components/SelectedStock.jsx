@@ -6,7 +6,7 @@ import { useState } from 'react'
 import WatchlistSidebar from './WatchlistSidebar'
 import { Graph } from './Graph'
 
-function SelectedStock({ currentItemId, setCurrentItemId }) {
+function SelectedStock({ currentItemId, setCurrentItemId, isMobile }) {
 
   const handleClick = () => {
     setCurrentItemId(null)
@@ -24,7 +24,10 @@ function SelectedStock({ currentItemId, setCurrentItemId }) {
         </div>
         <ItemFavButton />
         <div className='stock-info'>
-        {/* <DataTable/>  keep commented for now, we need to swap the rows and colums*/}
+          {/* Datatable only rendered on desktop */}
+        {!isMobile() ? (
+            <DataTable/> 
+          ) : undefined}
           <h2> Stock Description/Summary </h2>
           <p> Apple Inc. stands out for its commitment to innovation, quality, and design. Its diverse product line and ecosystem offer seamless integration and a superior user experience. From revolutionizing personal computing with the Macintosh to redefining the smartphone with the iPhone, Apple continues to shape the future of technology and consumer electronics. </p>
           {/* Chart.js */}

@@ -20,7 +20,7 @@ function HomePage({favStocks, searchResults, currentItemId, setCurrentItemId, is
           {searchResults.length > 0 ? (
           <SearchResultList searchResults={searchResults} setCurrentItemId={setCurrentItemId} />
         ) : currentItemId !== null ? (
-          <SelectedStock currentItemId={currentItemId} setCurrentItemId={setCurrentItemId}/>
+          <SelectedStock currentItemId={currentItemId} setCurrentItemId={setCurrentItemId} isMobile={isMobile}/>
         ) : (
           <WatchlistMain favStocks={favStocks} setCurrentItemId={setCurrentItemId} />
         )}
