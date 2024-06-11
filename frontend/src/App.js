@@ -45,7 +45,7 @@ function App() {
   const [searchValue, setSearchValue] = useState('');
   const [currentItemId, setCurrentItemId] = useState(null); // FOR SETTING SELECTED STOCK ONLY WORKING FOR WATCHLISTMAINITEM CURRENTLY
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const [stockData, setStockData] = useState([])
 
   function isMobile() {
     const regex = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
@@ -81,7 +81,7 @@ function App() {
         <Route path="/signup" element={<SignUp onRegister={handleRegister}/>} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
         <Route path='/aboutus' element={<AboutUs isMobile={isMobile} />} />
-        <Route path='/selectedstock' element={<SelectedStock />} />
+        <Route path='/selectedstock' element={<SelectedStock stockData={stockData}/>} />
         {isLoggedIn ? (
           <Route path="/" element={
             <div className="App">
@@ -101,6 +101,7 @@ function App() {
                 currentItemId={currentItemId}
                 setCurrentItemId={setCurrentItemId}
                 isMobile={isMobile}
+                setStockData={setStockData}
               />
               {/* Add other components you want in the home page layout here */}
             </div>

@@ -1,14 +1,18 @@
+import { React, useState } from 'react';
 import '../styles/SearchResultList.css'
 import axios from 'axios';
 
-function SearchResultItem ({symbol, name, setCurrentItemId, }) {
+function SearchResultItem ({symbol, name, setCurrentItemId, setStockData}) {
+
+  
 
   const fetchData = async () => { //fetch's datat
     try {
       const response = await axios.get('/api/dashboard-analysis', {params: { tickerSymbol: symbol}});
       setCurrentItemId(response.data.allAnalysisData.current_data.stock_id)
-      console.log(response);
-      console.log('Current Item Id', setCurrentItemId)
+      setStockData(response.data.allAnalysisData)
+      console.log('Stock Data', response.data.allAnalysisData);
+      console.log('Current Item Id', response.data.allAnalysisData.current_data.stock_id)
     } catch (error) {
       console.error(`Error fetching data: ${error.message}`);
     }

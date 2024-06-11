@@ -11,7 +11,8 @@ function SearchBar({ setSearchResults, setSearchValue, searchValue, setCurrentIt
   const submitStockSearch = async (e, searchValue) => {
 
     e.preventDefault();
-
+    setCurrentItemId(null);
+    
     try {
       const response = await axios.get('/api/search', { params: { searchTerm: searchValue } });
       const response1 = response.data.data
