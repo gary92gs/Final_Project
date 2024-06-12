@@ -12,6 +12,7 @@ const {
 } = require('./../helpers/apiDataHelpers');
 const {
   calculateStockIntrinsicValue,
+  calculateIVToCurrentStockPricePercentage,
 } = require('./../helpers/intrinsicValueHelpers');
 const {
   getStockInfoByTickerSymbol,
@@ -55,18 +56,17 @@ router.get('/', async (req, res) => {
     // grab remaining stock data
     allAnalysisData['current_data'] = await getCurrentDataByStockId(allAnalysisData.stocks.id);
     allAnalysisData['historical_data'] = await getHistoricalDataByStockId(allAnalysisData.stocks.id);
-    
-    // grab risk_free_rate (10yr treasury yield)
     allAnalysisData['risk_free_rate'] = await requestCurrent10YrTreasuryYield();
-    // grab current stock price
     allAnalysisData['current_stock_price'] = await requestCurrentStockPriceByTickerSymbol(tickerSymbol);
     
-    // calculate intrinsic value
+    // calculate important values
     allAnalysisData['intrinsic_value'] = calculateStockIntrinsicValue(allAnalysisData);
+    allAnalysisData['iv_to_price_ratio'] = calculateIVToCurrentStockPricePercentage(allAnalysisData);
 
     const {
       current_stock_price,
       intrinsic_value,
+      iv_to_price_ratio,
       risk_free_rate,
       stocks,
       current_data,
@@ -74,6 +74,7 @@ router.get('/', async (req, res) => {
 
     console.log('current_stock_price:', current_stock_price);
     console.log('intrinsic_value:', intrinsic_value);
+    console.log('iv_to_price_ratio:', iv_to_price_ratio);
 
     return res.status(200).json({ message: 'get message', allAnalysisData });
 

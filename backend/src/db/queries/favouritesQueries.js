@@ -34,12 +34,12 @@ const addStocktoUserFavourites = async (userId, stockId) => {
     if (!result.rows.length) {
       return false;
     }
-    return result.rows[0]
+    return result.rows[0];
   }
   catch (error) {
     throw error;
   }
-}
+};
 
 const deleteStockFromUsersFavourites = async (userId, stockId) => {
 
@@ -54,7 +54,34 @@ const deleteStockFromUsersFavourites = async (userId, stockId) => {
   catch (error) {
     throw error;
   }
-}
+};
+
+const getMostFavouritedStocks = () => {
+
+  const queryStr = `
+    SELECT stocks.*, count(favourite_stocks.stock_id) FROM favourited_count
+    FROM favourite_stocks
+    JOIN stocks ON stocks.id = stock_id
+    GROUP BY stocks.id
+    ORDER BY favourited_count DESC
+    LIMIT 10;
+  `;
+
+  try {
+    const result = db.query(queryStr);
+    if (!result.rows.length) {
+      return false;
+    }
+    return result.rows;
+  } catch (error) {
+    throw error;
+  }
+};
 
 
-module.exports = { getUsersFavouriteStocks, addStocktoUserFavourites, deleteStockFromUsersFavourites };
+module.exports = {
+  getUsersFavouriteStocks,
+  addStocktoUserFavourites,
+  deleteStockFromUsersFavourites,
+  getMostFavouritedStocks,
+};
