@@ -13,7 +13,7 @@ function ItemFavButton({setFavStocks, favStocks, currentItemId, setCurrentItemId
 
   const toggleFavorite = (stock_id) => {
     if (favStocksIds.includes(currentItemId)) {
-      axios.delete('/api/favourites', {stock_id})
+      axios.delete('/api/favourites', { data: {stock_id} })
 
       .then(response => {
           fetchFavData();
