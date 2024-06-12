@@ -1,4 +1,4 @@
-import React from 'react';
+import {React, useState} from 'react';
 import '../styles/Graph.css'
 
 import {
@@ -58,8 +58,37 @@ export const data = {
   ],
 };
 
-export function Graph() {
+
+export function Graph({ stockData }) {
+  const [lineData, setLineData] = useState({
+    labels: [],
+    datasets: []
+  });
+
+  if (stockData.stockData.historical_data && stockData.stockData.historical_data.length > 0) {
+    // Access the historical_data array
+    const historicalData = stockData.stockData.historical_data;
+
+    // Get the values of the object
+    const values = Object.values(historicalData);
+    const reportQuarter = values.map(item => item.report_quarter);
+    const reportYear = values.map(item => item.report_year);
+    const bookValues = values.map(item => item.book_value);
+    console.log("BV" , bookValues);
+    console.log("RY", reportYear)
+    console.log("RQ", reportQuarter)
+
+    // Log the values to the console
+    console.log("values", values);
+    console.log("historical data", historicalData )
+    
+} else {
+    console.log('historical_data is undefined or empty');
+}
+
+
   return (
+
   <div className='graph-container'>
     <Line 
     options={options} 

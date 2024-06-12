@@ -5,6 +5,7 @@ import '../styles/SelectedStock.css'
 import { useState } from 'react'
 import WatchlistSidebar from './WatchlistSidebar'
 import { Graph } from './Graph'
+import { Line } from 'react-chartjs-2'
 
 function SelectedStock({ currentItemId, setCurrentItemId, isMobile, stockData, setFavStocks, favStocks, fetchFavData }) {
   console.log("in Selected stock, current Item id:", currentItemId)
@@ -21,7 +22,8 @@ function SelectedStock({ currentItemId, setCurrentItemId, isMobile, stockData, s
     firstReportYear = Math.min(...years);
     lastReportYear = Math.max(...years);
   }
-
+ 
+  console.log(stockData)
   return(
 
       <article className='stock-article'> 
@@ -44,7 +46,18 @@ function SelectedStock({ currentItemId, setCurrentItemId, isMobile, stockData, s
           <h2> Stock Description/Summary </h2>
           <p> {stockData.stocks.description} </p>
           {/* Chart.js */}
-          <Graph stockData={stockData}/>
+          {/* <Graph stockData={stockData}/> */}
+          <Line 
+            data={{
+              labels: stockData.historical_data.map(item => item.report_year),
+              datasets: [
+                {
+                  label: "Book Value",
+                  data: stockData.historical_data.map(item => item.book_value),
+                  },
+                ],
+            }}
+              />
         {!isMobile() ? (
             <DataTable stockData={stockData}/> 
           ) : undefined}
