@@ -32,6 +32,7 @@ function WatchlistMain({ setCurrentItemId, currentItemId }) {
     <div className="watchlist-container">
 
         <WatchlistMainItem
+
           onClick={() => handleClick(stockData.id)}
           // setCurrentItemId={setCurrentItemId}
           // id={stockData.id}

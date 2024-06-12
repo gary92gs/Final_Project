@@ -9,8 +9,10 @@ import MobileSearchBar from './MobileSearchBar'
 
 function TopNavBar ({ setSearchResults, searchValue, setSearchValue, currentItemId, setCurrentItemId, isMobile, onLogout}) {
 const handleClick = () => {
+  if (!(currentItemId === null)) {
   setCurrentItemId(null);
   setSearchResults([]);
+  }
 }
 
 if (isMobile()){

@@ -6,10 +6,21 @@ import { useState } from 'react'
 import WatchlistSidebar from './WatchlistSidebar'
 import { Graph } from './Graph'
 
-function SelectedStock({ currentItemId, setCurrentItemId, isMobile }) {
+function SelectedStock({ currentItemId, setCurrentItemId, isMobile, stockData, setFavStocks, favStocks, fetchFavData }) {
+  console.log("in Selected stock, current Item id:", currentItemId)
+  console.log('FavStocks.data.userFavourites: ', favStocks.data.userFavourites)
 
   const handleClick = () => {
     setCurrentItemId(null)
+  }
+
+  let firstReportYear = null;
+  let lastReportYear = null;
+
+  if (stockData.historical_data && stockData.historical_data.length > 0) {
+    const years = stockData.historical_data.map(data => data.report_year);
+    firstReportYear = Math.min(...years);
+    lastReportYear = Math.max(...years);
   }
 
   return(
@@ -19,19 +30,19 @@ function SelectedStock({ currentItemId, setCurrentItemId, isMobile }) {
           <div onClick={handleClick}>X</div>
           </div>
         <div className='stock-title-card'>
-          <h1> Stock Title </h1>
-          <span>2009 - 2024 </span>
+          <h1> {stockData.stocks.company_name} </h1>
+          <span> {firstReportYear} - {lastReportYear} </span>
         </div>
-        <ItemFavButton />
+        <ItemFavButton setFavStocks={setFavStocks} favStocks={favStocks} currentItemId={currentItemId} setCurrentItemId={setCurrentItemId} fetchFavData={fetchFavData}/>
         <div className='stock-info'>
           {/* Datatable only rendered on desktop */}
+          <h2> Stock Description/Summary </h2>
+          <p> {stockData.stocks.description} </p>
+          {/* Chart.js */}
+          <Graph />
         {!isMobile() ? (
             <DataTable/> 
           ) : undefined}
-          <h2> Stock Description/Summary </h2>
-          <p> Apple Inc. stands out for its commitment to innovation, quality, and design. Its diverse product line and ecosystem offer seamless integration and a superior user experience. From revolutionizing personal computing with the Macintosh to redefining the smartphone with the iPhone, Apple continues to shape the future of technology and consumer electronics. </p>
-          {/* Chart.js */}
-          <Graph />
         </div>
       </article>
 

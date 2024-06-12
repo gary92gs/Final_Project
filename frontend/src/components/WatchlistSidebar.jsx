@@ -6,7 +6,7 @@ return (
   <div className="watchlist-sidebar">
     <h1>Your Watchlist</h1>
     <ul>
-      {favStocks.map((favStock) => (
+      {favStocks.length > 0 && favStocks.map((favStock) => (
         <WatchlistSidebarItem
         key={favStock.id}
         favStock={favStock}
