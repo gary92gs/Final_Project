@@ -8,7 +8,6 @@ import { Graph } from './Graph'
 
 function SelectedStock({ currentItemId, setCurrentItemId, isMobile, stockData, setFavStocks, favStocks, fetchFavData }) {
   console.log("in Selected stock, current Item id:", currentItemId)
-  console.log('FavStocks.data.userFavourites: ', favStocks.data.userFavourites)
 
   const handleClick = () => {
     setCurrentItemId(null)
@@ -30,14 +29,14 @@ function SelectedStock({ currentItemId, setCurrentItemId, isMobile, stockData, s
           <div onClick={handleClick}>X</div>
           </div>
         <div className='stock-title-card'>
-          <h1> {stockData.stocks.company_name} </h1>
+          <h1> {stockData.company_name} </h1>
           <span> {firstReportYear} - {lastReportYear} </span>
         </div>
         <ItemFavButton setFavStocks={setFavStocks} favStocks={favStocks} currentItemId={currentItemId} setCurrentItemId={setCurrentItemId} fetchFavData={fetchFavData}/>
         <div className='stock-info'>
           {/* Datatable only rendered on desktop */}
           <h2> Stock Description/Summary </h2>
-          <p> {stockData.stocks.description} </p>
+          <p> {stockData.description} </p>
           {/* Chart.js */}
           <Graph />
         {!isMobile() ? (

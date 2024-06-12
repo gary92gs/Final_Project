@@ -1,52 +1,62 @@
-import WatchlistSidebar from './WatchlistSidebar';
-import WatchlistMain from './WatchlistMain'
 import SearchResultList from './SearchResultList';
 import SelectedStock from './SelectedStock';
-import '../styles/HomePage.css'
+import WatchlistSidebar from './WatchlistSidebar';
+import WatchlistMain from './WatchlistMain';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 
-function HomePage({favStocks, setFavStocks, searchResults, currentItemId, setCurrentItemId, isMobile, setStockData, stockData }) {
-  console.log("In Home Page, Current Item Id " , currentItemId)
-  console.log("FavStocks:", favStocks)
-  console.log('FavStocks.data: ', favStocks.data)
- 
+function HomePage({
+  fetchFavData,
+  favStocks,
+  setFavStocks,
+  searchResults,
+  currentItemId,
+  setCurrentItemId,
+  isMobile,
+  setStockData,
+  stockData
+}) {
 
-  
-  const fetchFavData = async () => { //fetch's data
-    try {
-      const response = await axios.get('/api/favourites');
-      setFavStocks(response)
-
-    } catch (error) {
-      console.error(`Error fetching data: ${error.message}`);
-    }
-  };
-
-  useEffect(() => {
-    fetchFavData();
-  }, []);
+  console.log("In Home Page, Current Item Id:", currentItemId);
+  console.log("FavStocks:", favStocks);
+  console.log("FavStocks.data:", favStocks.data);
 
   return (
     <div className='home-page-container'>
       <div className='home-page-container2'>
-          {!isMobile() ? (
-            <WatchlistSidebar favStocks={favStocks} setCurrentItemId={setCurrentItemId} currentItemId={currentItemId} />
+        {!isMobile() ? (
+          <WatchlistSidebar
+            favStocks={favStocks}
+            setCurrentItemId={setCurrentItemId}
+            fetchFavData={fetchFavData} // Pass fetchFavData function to the WatchlistSidebar
+          />
+        ) : undefined}
 
-          ) : undefined}
-
-
-          {searchResults.length > 0 && currentItemId === null ? (
-          <SearchResultList searchResults={searchResults} setCurrentItemId={setCurrentItemId} setStockData={setStockData} />
+        {searchResults.length > 0 && currentItemId === null ? (
+          <SearchResultList
+            searchResults={searchResults}
+            setCurrentItemId={setCurrentItemId}
+            setStockData={setStockData}
+          />
         ) : currentItemId !== null ? (
-          <SelectedStock currentItemId={currentItemId} setCurrentItemId={setCurrentItemId} isMobile={isMobile} stockData={stockData} setfavStocks={setFavStocks} favStocks={favStocks} fetchFavData={fetchFavData}/>
+          <SelectedStock
+            currentItemId={currentItemId}
+            setCurrentItemId={setCurrentItemId}
+            isMobile={isMobile}
+            stockData={stockData}
+            setFavStocks={setFavStocks} // changed to setFavStocks
+            favStocks={favStocks}
+            fetchFavData={fetchFavData} // Pass fetchFavData function to the SelectedStock
+          />
         ) : (
-          <WatchlistMain favStocks={favStocks} setCurrentItemId={setCurrentItemId} />
+          <WatchlistMain
+            favStocks={favStocks}
+            setCurrentItemId={setCurrentItemId}
+          />
         )}
-
-      </div>   
+      </div>
     </div>
   )
 }
 
-export default HomePage
+export default HomePage;

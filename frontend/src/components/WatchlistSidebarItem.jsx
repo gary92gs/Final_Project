@@ -1,10 +1,15 @@
 import '../styles/WatchlistSidebarItem.css'
 
-const WatchlistSidebarItem = ({ favStock, currentItemId, setCurrentItemId, }) => {
-  
+const WatchlistSidebarItem = ({ 
+  favStock, 
+  currentItemId, 
+  setCurrentItemId, 
+}) => {
+
+// Function to handle click event on sidebar item
 const handleClick = (id) => {
-    setCurrentItemId(id);
-    console.log(id)
+    setCurrentItemId(id); // Set the current item ID when clicked
+    console.log('inside WatchlistSidebarItem id:', id)
   }
   
   return (

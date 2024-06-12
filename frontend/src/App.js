@@ -1,4 +1,4 @@
-import React, { useState,} from 'react';
+import React, { useState, useEffect } from 'react';
 import SignUp from './components/SignUp';
 import TopNavBar from './components/TopNavBar';
 import Login from './components/Login';
@@ -6,6 +6,7 @@ import HomePage from './components/HomePage';
 import SelectedStock from './components/SelectedStock';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import AboutUs from './components/AboutUs';
+import axios from 'axios'
 
 
 function App() {
@@ -46,6 +47,25 @@ function App() {
     .catch(error => console.error('Error during logout:', error));
   };
 
+  // Bring in fetchFaveData up to App level
+  const fetchFavData = async () => {
+    try {
+      // Send a GET request to retrieve favorite stocks data from the server
+      const response = await axios.get('/api/favourites');
+      // Update the favorite stocks state with the fetched data, or set it to an empty array if no data is returned
+      setFavStocks(response.data.userFavourites || []);
+    } catch (error) {
+      console.error(`Error fetching data: ${error.message}`);
+    }
+  };
+  
+  // If the user is logged in, fetch their favorite stocks data
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetchFavData();
+    }
+  }, [isLoggedIn]);
+
   return (
       <Routes>
         <Route path="/signup" element={<SignUp onRegister={handleRegister}/>} />
@@ -64,6 +84,7 @@ function App() {
                 isMobile={isMobile}
                 /* Pass function to component */
                 onLogout={handleLogout}
+                fetchFavData={fetchFavData}
               />
               <HomePage
                 searchResults={searchResults}
@@ -74,6 +95,7 @@ function App() {
                 stockData={stockData}
                 favStocks={favStocks}
                 setFavStocks={setFavStocks}
+                fetchFavData={fetchFavData}
               />
               {/* Add other components you want in the home page layout here */}
             </div>
