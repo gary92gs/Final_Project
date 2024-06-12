@@ -1,14 +1,15 @@
 import '../styles/WatchlistSidebarItem.css'
 
-const WatchlistSidebarItem = ({ favStock, currentItemId, setCurrentItemId, }) => {
-  
-const handleClick = (id) => {
-    setCurrentItemId(id);
-    console.log(id)
-  }
-  
+const WatchlistSidebarItem = ({ 
+  favStock, 
+  currentItemId, 
+  setCurrentItemId, 
+  fetchSelectedStockData
+}) => {
+
+let tickerSymbol = { tickerSymbol: favStock.ticker_symbol}
   return (
-    <div className="watchlist-sidebar-item" onClick={() => handleClick(favStock.id)}>
+    <div className="watchlist-sidebar-item" onClick={() => fetchSelectedStockData(tickerSymbol)}>
       <div className="watchlist-sidebar-item__name">{favStock.company_name}</div>
       <div className="watchlist-sidebar-item__sector">{favStock.industry_sector}</div>
     </div>
