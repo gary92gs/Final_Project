@@ -40,7 +40,7 @@ function SelectedStock({ currentItemId, setCurrentItemId, isMobile, stockData, s
           {/* Chart.js */}
           <Graph stockData={stockData}/>
         {!isMobile() ? (
-            <DataTable/> 
+            <DataTable stockData={stockData}/> 
           ) : undefined}
         </div>
       </article>

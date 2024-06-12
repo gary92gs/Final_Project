@@ -4,16 +4,12 @@ const WatchlistSidebarItem = ({
   favStock, 
   currentItemId, 
   setCurrentItemId, 
+  fetchSelectedStockData
 }) => {
 
-// Function to handle click event on sidebar item
-const handleClick = (id) => {
-    setCurrentItemId(id); // Set the current item ID when clicked
-    console.log('inside WatchlistSidebarItem id:', id)
-  }
-  
+let tickerSymbol = { tickerSymbol: favStock.ticker_symbol}
   return (
-    <div className="watchlist-sidebar-item" onClick={() => handleClick(favStock.id)}>
+    <div className="watchlist-sidebar-item" onClick={() => fetchSelectedStockData(tickerSymbol)}>
       <div className="watchlist-sidebar-item__name">{favStock.company_name}</div>
       <div className="watchlist-sidebar-item__sector">{favStock.industry_sector}</div>
     </div>

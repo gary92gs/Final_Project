@@ -2,7 +2,7 @@ import React from 'react';
 import WatchlistSidebarItem from './WatchlistSidebarItem';
 import '../styles/WatchlistSidebar.css';
 
-const WatchlistSidebar = ({ favStocks, setCurrentItemId, currentItemId }) => {
+const WatchlistSidebar = ({ favStocks, setCurrentItemId, currentItemId, fetchSelectedStockData }) => {
 
   return (
     <div className="watchlist-sidebar">
@@ -15,6 +15,7 @@ const WatchlistSidebar = ({ favStocks, setCurrentItemId, currentItemId }) => {
               favStock={favStock}
               setCurrentItemId={setCurrentItemId}
               currentItemId={currentItemId}
+              fetchSelectedStockData={fetchSelectedStockData}
             />
           ))
         ) : (

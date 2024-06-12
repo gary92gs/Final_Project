@@ -3,12 +3,8 @@ import React from "react";
 import "../styles/WatchlistMain.css";
 import WatchlistMainItem from "../components/WatchlistMainItem";
 
-function WatchlistMain({ setCurrentItemId, currentItemId, favStocks }) {
-  const handleClick = (id) => { //WORKING HANDLER FOR SETTING STATE FOR GETTIGN SELECTED STOCK
-    setCurrentItemId(id);
-    console.log("Current Item Id " , currentItemId)
-  }
-  
+function WatchlistMain({ setCurrentItemId, currentItemId, favStocks, fetchSelectedStockData }) {
+
   return (
     <div className="watchlist-container">
 
@@ -18,7 +14,7 @@ function WatchlistMain({ setCurrentItemId, currentItemId, favStocks }) {
               favStock={favStock}
               setCurrentItemId={setCurrentItemId}
               currentItemId={currentItemId}
-              onClick={() => handleClick(favStock.id)}
+              fetchSelectedStockData={fetchSelectedStockData}
             />
          ))
       }

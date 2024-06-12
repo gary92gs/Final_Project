@@ -2,6 +2,7 @@ import SearchResultList from './SearchResultList';
 import SelectedStock from './SelectedStock';
 import WatchlistSidebar from './WatchlistSidebar';
 import WatchlistMain from './WatchlistMain';
+import '../styles/HomePage.css'
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 
@@ -14,7 +15,8 @@ function HomePage({
   setCurrentItemId,
   isMobile,
   setStockData,
-  stockData
+  stockData,
+  fetchSelectedStockData
 }) {
 
   console.log("In Home Page, Current Item Id:", currentItemId);
@@ -29,6 +31,7 @@ function HomePage({
             favStocks={favStocks}
             setCurrentItemId={setCurrentItemId}
             fetchFavData={fetchFavData} // Pass fetchFavData function to the WatchlistSidebar
+            fetchSelectedStockData={fetchSelectedStockData}
           />
         ) : undefined}
 
@@ -37,6 +40,7 @@ function HomePage({
             searchResults={searchResults}
             setCurrentItemId={setCurrentItemId}
             setStockData={setStockData}
+            fetchSelectedStockData={fetchSelectedStockData}
           />
         ) : currentItemId !== null ? (
           <SelectedStock
@@ -52,6 +56,7 @@ function HomePage({
           <WatchlistMain
             favStocks={favStocks}
             setCurrentItemId={setCurrentItemId}
+            fetchSelectedStockData={fetchSelectedStockData}
           />
         )}
       </div>

@@ -4,10 +4,13 @@ import "../styles/WatchlistMainItem.css";
 const WatchlistMainItem = ({
   onClick, //PASSED DOWN HANDLER
   favStock,
+  fetchSelectedStockData,
 }) => {
-
+  
+  let tickerSymbol = { tickerSymbol: favStock.ticker_symbol}
+  
   return (
-    <div className="watchlist-main-item" onClick={onClick}>
+    <div className="watchlist-main-item" onClick={() => fetchSelectedStockData(tickerSymbol)}>
       <img src={favStock.image_url} alt={`${favStock.company_name} logo`} className="stock-image" />
       <div className="stock-details">
         <h2> {favStock.ticker_symbol} </h2>
