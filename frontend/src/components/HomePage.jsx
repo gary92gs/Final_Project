@@ -40,7 +40,7 @@ function HomePage({
           />
         ) : currentItemId !== null ? (
           <SelectedStock
-            currentItemId={currentItemId}
+            currentItemId={currentItemId} 
             setCurrentItemId={setCurrentItemId}
             isMobile={isMobile}
             stockData={stockData}

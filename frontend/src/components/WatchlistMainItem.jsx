@@ -3,38 +3,19 @@ import "../styles/WatchlistMainItem.css";
 
 const WatchlistMainItem = ({
   onClick, //PASSED DOWN HANDLER
-  tickerSymbol,
-  companyName,
-  stockImage,
-  description,
-  industrySector,
-  country,
-  intrinsicValue,
-  marketValue,
-  returnOnEquity,
-  peRatio,
-  historicalPerformance,
-  profit,
-  id
+  favStock,
 }) => {
 
   return (
     <div className="watchlist-main-item" onClick={onClick}>
-      <img src={stockImage} alt={`${companyName} logo`} className="stock-image" />
+      <img src={favStock.image_url} alt={`${favStock.company_name} logo`} className="stock-image" />
       <div className="stock-details">
-        <h2> {tickerSymbol} </h2>
-        <h3> {companyName} </h3>
-        <p> {description} </p>
-        <p><strong>Sector:</strong> {industrySector}</p>
-        <p><strong>Country:</strong> {country}</p>
-      </div>
-      <div className="stock-data">
-        <p> <strong>Intrinsic Value:</strong> ${intrinsicValue}</p>
-        <p> <strong>Market Value:</strong> ${marketValue}</p>
-        <p> <strong>Return on Equity:</strong> {returnOnEquity}%</p>
-        <p> <strong>P/E Ratio:</strong> {peRatio}</p>
-        <p ><strong>Historical Performance:</strong> {historicalPerformance.join(', ')}</p>
-        <p> <strong>Profit:</strong> ${profit}M</p>
+        <h2> {favStock.ticker_symbol} </h2>
+        <h3> {favStock.company_name} </h3>
+        <p> {favStock.description} </p>
+        <p><strong>Sector:</strong> {favStock.sector}</p>
+        <p><strong>Country:</strong> {favStock.country}</p>
+        <p><strong>Currency:</strong> {favStock.currency}</p>
       </div>
     </div>
   );
