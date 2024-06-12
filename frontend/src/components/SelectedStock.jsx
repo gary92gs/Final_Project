@@ -32,7 +32,13 @@ function SelectedStock({ currentItemId, setCurrentItemId, isMobile, stockData, s
           <h1> {stockData.stocks.company_name} </h1>
           <span> {firstReportYear} - {lastReportYear} </span>
         </div>
-        <ItemFavButton setFavStocks={setFavStocks} favStocks={favStocks} currentItemId={currentItemId} setCurrentItemId={setCurrentItemId} fetchFavData={fetchFavData}/>
+        <ItemFavButton 
+          setFavStocks={setFavStocks} 
+          favStocks={favStocks} 
+          currentItemId={currentItemId} 
+          setCurrentItemId={setCurrentItemId} 
+          fetchFavData={fetchFavData} 
+          />
         <div className='stock-info'>
           {/* Datatable only rendered on desktop */}
           <h2> Stock Description/Summary </h2>

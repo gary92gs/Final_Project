@@ -5,6 +5,7 @@ import '../styles/WatchlistSidebar.css';
 const WatchlistSidebar = ({ favStocks, setCurrentItemId, currentItemId, fetchSelectedStockData }) => {
 
   return (
+
     <div className="watchlist-sidebar">
       <h1>Your Watchlist</h1>
       <ul>

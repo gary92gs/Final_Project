@@ -10,16 +10,19 @@ const WatchlistMainItem = ({
   let tickerSymbol = { tickerSymbol: favStock.ticker_symbol}
   
   return (
-    <div className="watchlist-main-item" onClick={() => fetchSelectedStockData(tickerSymbol)}>
-      <img src={favStock.image_url} alt={`${favStock.company_name} logo`} className="stock-image" />
       <div className="stock-details">
+    <div className="watchlist-main-item" onClick={() => fetchSelectedStockData(tickerSymbol)}>
+          <h2> {favStock.company_name} </h2>
+          <div className='watchlist-main-body'>
         <div className='watchlist-main-item-headers'>    
-          <h2> {favStock.ticker_symbol} </h2>
-          <h3> {favStock.company_name} </h3>
+      <img src={favStock.image_url} alt={`${favStock.company_name} logo`} className="stock-image" />
+          <h3> {favStock.ticker_symbol} </h3>
           <h4>Country: {favStock.country}</h4> 
         </div>
+        {/* <h3> Company Description </h3> */}
         <div className="stock-description">
         <p> {favStock.description} </p>
+        </div>
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@
   flex-direction: row;
   justify-content: center;
 
+
 }
 
 .home-page-container2 {
@@ -13,4 +14,5 @@
   width: 100%;
   max-width: 1700px;
   justify-content: center;
+
 }

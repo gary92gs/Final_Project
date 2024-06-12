@@ -88,7 +88,7 @@ function App() {
     <Routes>
       <Route path="/signup" element={<SignUp onRegister={handleRegister} />} />
       <Route path="/login" element={<Login onLogin={handleLogin} />} />
-      <Route path="/aboutus" element={<AboutUs isMobile={isMobile} />} />
+      <Route path="/aboutus" element={<AboutUs isMobile={isMobile} setCurrentItemId={setCurrentItemId} setSearchResults={setSearchResults} />} />
       <Route path="/selectedstock" element={<SelectedStock />} />
       {isLoggedIn ? (
         <Route

@@ -16,6 +16,8 @@
   min-width: 700px;
   box-sizing: border-box;
   margin-bottom: 0px;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .watchlist-main-item:hover {
@@ -30,7 +32,7 @@
   background-color: #748D92;
   padding: 10px;
   border-radius: 8px;
-  margin-right: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .stock-details {
@@ -39,6 +41,7 @@
 }
 .stock-details p {
 margin: 4px;
+margin-top: 0;
 }
 
 .stock-data {
@@ -50,25 +53,66 @@ margin: 4px;
   margin: 4px 0;
 }
 
-.watchlist-main-item-headers{
+.watchlist-main-item-headers {
 display: flex;
-flex-direction: row;
-justify-content: space-between;
+flex-direction: column;
+margin-bottom: 20px;
+align-items: flex-start;
+margin: 2px;
+margin-right: 16px;
 }
 
-.watchlist-main-item-headers h3{
-text-align: end;
-text-justify: end;
+.watchlist-main-item-headers h3, h4, h2 {
+margin-block: 6px;
+margin-left: 4px;
+}
 
-  }
+.watchlist-main-item h2 {
+  margin-block: 15px;
+  margin-left: 4px;
+  font-size: 26px;
+}
+    
 
+
+.description-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0px;
+  align-items: center;
+}
+
+.description-container h3 {
+  margin: 5px;
+}
+
+.watchlist-main-body {
+  display:flex;
+ 
+}
 .stock-description {
-  height: 150px;
+  max-height: 185px;
   overflow-y: scroll;
-  padding: 10px;
   padding-left: 0px;
-  border: 1px;
   box-sizing: border-box;
+  border-radius: 8px;
+  margin-top: 0px;
+
+}
+
+.stock-description::-webkit-scrollbar {
+  width: 12px;
+}
+
+.stock-description::-webkit-scrollbar-track {
+  background: #D3D9D4; 
+  border-radius: 10px; 
+}
+
+.stock-description::-webkit-scrollbar-thumb {
+  background-color: #748D92;
+  border-radius: 10px; 
+  border: 3px solid #D3D9D4; 
 }
 
 @media only screen and (max-width: 800px) {
