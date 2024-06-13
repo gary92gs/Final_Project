@@ -46,25 +46,12 @@ function SelectedStock({ currentItemId, setCurrentItemId, isMobile, stockData, s
           <h2> Stock Description/Summary </h2>
           <p> {stockData.stocks.description} </p>
           {/* Chart.js */}
-          {/* <Graph stockData={stockData}/> */}
-          <Line 
-            data={{
-              labels: stockData.historical_data.map(item => item.report_year),
-              datasets: [
-                {
-                  label: "Book Value",
-                  data: stockData.historical_data.map(item => item.book_value),
-                  },
-                ],
-            }}
-              />
+          <Graph stockData={stockData}/>
         {!isMobile() ? (
             <DataTable stockData={stockData}/> 
           ) : undefined}
         </div>
       </article>
-
-
   )
 }
 
