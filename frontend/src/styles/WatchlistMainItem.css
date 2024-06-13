@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   margin: 20px;
-  background-color: #fff;
+  background-color: #FAF7F2;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
   width: 95%;
@@ -14,7 +14,10 @@
   min-height: 200px;
   cursor: pointer;
   min-width: 700px;
-  flex-grow: 1;
+  box-sizing: border-box;
+  margin-bottom: 0px;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .watchlist-main-item:hover {
@@ -26,8 +29,10 @@
   width: 100px;
   height: 100px;
   object-fit: cover;
+  background-color: #748D92;
+  padding: 10px;
   border-radius: 8px;
-  margin-right: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .stock-details {
@@ -36,6 +41,7 @@
 }
 .stock-details p {
 margin: 4px;
+margin-top: 0;
 }
 
 .stock-data {
@@ -45,6 +51,68 @@ margin: 4px;
 
 .stock-data p {
   margin: 4px 0;
+}
+
+.watchlist-main-item-headers {
+display: flex;
+flex-direction: column;
+margin-bottom: 20px;
+align-items: flex-start;
+margin: 2px;
+margin-right: 16px;
+}
+
+.watchlist-main-item-headers h3, h4, h2 {
+margin-block: 6px;
+margin-left: 4px;
+}
+
+.watchlist-main-item h2 {
+  margin-block: 15px;
+  margin-left: 4px;
+  font-size: 26px;
+}
+    
+
+
+.description-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0px;
+  align-items: center;
+}
+
+.description-container h3 {
+  margin: 5px;
+}
+
+.watchlist-main-body {
+  display:flex;
+ 
+}
+.stock-description {
+  max-height: 185px;
+  overflow-y: scroll;
+  padding-left: 0px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  margin-top: 0px;
+
+}
+
+.stock-description::-webkit-scrollbar {
+  width: 12px;
+}
+
+.stock-description::-webkit-scrollbar-track {
+  background: #D3D9D4; 
+  border-radius: 10px; 
+}
+
+.stock-description::-webkit-scrollbar-thumb {
+  background-color: #748D92;
+  border-radius: 10px; 
+  border: 3px solid #D3D9D4; 
 }
 
 @media only screen and (max-width: 800px) {

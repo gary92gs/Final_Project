@@ -1,89 +1,99 @@
-import React, { useState,} from 'react';
-import SignUp from './components/SignUp';
-import TopNavBar from './components/TopNavBar';
-import Login from './components/Login';
-import HomePage from './components/HomePage';
-import SelectedStock from './components/SelectedStock';
-import { Route, Routes, useNavigate } from 'react-router-dom';
-import AboutUs from './components/AboutUs';
-
-const favStocks = [
-  {
-    id: 1,
-    company_name: 'Samsung',
-    industry_sector: 'Digital Technologies'
-  },
-  {
-    id: 2,
-    company_name: 'Sketchers',
-    industry_sector: 'Apparel'
-  },
-  {
-    id: 3,
-    company_name: 'Bitcoin',
-    industry_sector: 'Finance'
-  },
-  {
-    id: 4,
-    company_name: 'Litecoin',
-    industry_sector: 'Finance'
-  },
-  {
-    id: 5,
-    company_name: 'Apple',
-    industry_sector: 'Technology'
-  },
-  {
-    id: 6,
-    company_name: 'Google',
-    industry_sector: 'Technology'
-  }
-];
+import React, { useState, useEffect } from "react";
+import SignUp from "./components/SignUp";
+import TopNavBar from "./components/TopNavBar";
+import Login from "./components/Login";
+import HomePage from "./components/HomePage";
+import SelectedStock from "./components/SelectedStock";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import AboutUs from "./components/AboutUs";
+import axios from "axios";
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
   const [currentItemId, setCurrentItemId] = useState(null); // FOR SETTING SELECTED STOCK ONLY WORKING FOR WATCHLISTMAINITEM CURRENTLY
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [stockData, setStockData] = useState([])
+  const [stockData, setStockData] = useState([]);
+  const [favStocks, setFavStocks] = useState([]);
 
   function isMobile() {
-    const regex = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+    const regex =
+      /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
     return regex.test(navigator.userAgent);
   }
 
+  console.log("App lvl currentitemid", currentItemId);
   const navigate = useNavigate();
 
- // function to set state to true after sign up
+  // function to set state to true after sign up
   const handleRegister = () => {
     setIsLoggedIn(true);
-    navigate('/');
+    navigate("/");
   };
-// function to set state to true after login
+  // function to set state to true after login
   const handleLogin = () => {
     setIsLoggedIn(true);
-    navigate('/');
+    navigate("/");
   };
-// function to set state to false when logout is clicked
+  // function to set state to false when logout is clicked
   const handleLogout = () => {
     setIsLoggedIn(false);
-    fetch('/api/sessions', {
-      method: 'DELETE',
-      credentials: 'include'
+    fetch("/api/sessions", {
+      method: "DELETE",
+      credentials: "include",
     })
-    .then(() => {
-    })
-    .catch(error => console.error('Error during logout:', error));
+      .then(() => {})
+      .catch((error) => console.error("Error during logout:", error));
+  };
+
+  // Bring in fetchFavData up to App level
+  const fetchFavData = async () => {
+    try {
+      // Send a GET request to retrieve favorite stocks data from the server
+      const response = await axios.get("/api/favourites");
+      // Update the favorite stocks state with the fetched data, or set it to an empty array if no data is returned
+      setFavStocks(response.data.userFavourites || []);
+    } catch (error) {
+      console.error(`Error fetching data: ${error.message}`);
+    }
+  };
+
+  // If the user is logged in, fetch their favorite stocks data
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetchFavData();
+    }
+  }, [isLoggedIn]);
+
+  // gets data for current selected stock
+  const fetchSelectedStockData = async (tickerSymbol) => {
+    //fetch's data
+    try {
+      const response = await axios.get("/api/dashboard-analysis", {
+        params: tickerSymbol,
+      });
+      setCurrentItemId(response.data.allAnalysisData.current_data.stock_id);
+      setStockData(response.data.allAnalysisData);
+      console.log("Stock Data", response.data.allAnalysisData);
+      console.log(
+        "Current Item Id",
+        response.data.allAnalysisData.current_data.stock_id
+      );
+    } catch (error) {
+      console.error(`Error fetching data: ${error.message}`);
+    }
   };
 
   return (
-      <Routes>
-        <Route path="/signup" element={<SignUp onRegister={handleRegister}/>} />
-        <Route path="/login" element={<Login onLogin={handleLogin} />} />
-        <Route path='/aboutus' element={<AboutUs isMobile={isMobile} />} />
-        <Route path='/selectedstock' element={<SelectedStock stockData={stockData}/>} />
-        {isLoggedIn ? (
-          <Route path="/" element={
+    <Routes>
+      <Route path="/signup" element={<SignUp onRegister={handleRegister} />} />
+      <Route path="/login" element={<Login onLogin={handleLogin} />} />
+      <Route path="/aboutus" element={<AboutUs isMobile={isMobile} setCurrentItemId={setCurrentItemId} setSearchResults={setSearchResults} />} />
+      <Route path="/selectedstock" element={<SelectedStock />} />
+      {isLoggedIn ? (
+        <Route
+          path="/"
+          element={
             <div className="App">
               <TopNavBar
                 setSearchResults={setSearchResults}
@@ -94,23 +104,29 @@ function App() {
                 isMobile={isMobile}
                 /* Pass function to component */
                 onLogout={handleLogout}
+                fetchFavData={fetchFavData}
+                fetchSelectedStockData={fetchSelectedStockData}
               />
               <HomePage
-                favStocks={favStocks}
                 searchResults={searchResults}
                 currentItemId={currentItemId}
                 setCurrentItemId={setCurrentItemId}
                 isMobile={isMobile}
                 setStockData={setStockData}
+                stockData={stockData}
+                favStocks={favStocks}
+                setFavStocks={setFavStocks}
+                fetchFavData={fetchFavData}
+                fetchSelectedStockData={fetchSelectedStockData}
               />
               {/* Add other components you want in the home page layout here */}
             </div>
-          } />
-        ) : (
-          <Route path="/" element={<Login onLogin={handleLogin} />} />
-        )}
-      </Routes>
-
+          }
+        />
+      ) : (
+        <Route path="/" element={<Login onLogin={handleLogin} />} />
+      )}
+    </Routes>
   );
 }
 

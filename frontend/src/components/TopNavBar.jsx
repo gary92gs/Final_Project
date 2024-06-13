@@ -6,12 +6,27 @@ import LogoBrickLight from './icons/LogoBrickLight';
 import { Link } from 'react-router-dom';
 import MobileDropdown from './MobileDropdown'
 import MobileSearchBar from './MobileSearchBar'
+import { useNavigate } from "react-router-dom";
 
-function TopNavBar ({ setSearchResults, searchValue, setSearchValue, currentItemId, setCurrentItemId, isMobile, onLogout}) {
+function TopNavBar ({ 
+  setSearchResults, 
+  searchValue, 
+  setSearchValue, 
+  currentItemId, 
+  setCurrentItemId, 
+  isMobile, 
+  onLogout
+}) {
+
 const handleClick = () => {
-  setCurrentItemId(null);
   setSearchResults([]);
+  if (!(currentItemId === null)) {
+  setCurrentItemId(null);
+  }
 }
+
+const navigate = useNavigate();
+
 
 if (isMobile()){
 
@@ -28,7 +43,11 @@ return (
         </div>
       
         
-          <MobileSearchBar setSearchResults={setSearchResults} searchValue={searchValue} setSearchValue={setSearchValue} setCurrentItemId={setCurrentItemId} />
+          <MobileSearchBar 
+            setSearchResults={setSearchResults} 
+            searchValue={searchValue} 
+            setSearchValue={setSearchValue} 
+            setCurrentItemId={setCurrentItemId} />
         
     </span>
   </div>
@@ -44,11 +63,21 @@ return (
           </div>
         
           <div>
-            <SearchBar setSearchResults={setSearchResults} searchValue={searchValue} setSearchValue={setSearchValue} setCurrentItemId={setCurrentItemId} />
+            <SearchBar 
+              setSearchResults={setSearchResults} 
+              searchValue={searchValue} 
+              setSearchValue={setSearchValue} 
+              setCurrentItemId={setCurrentItemId} />
           </div>
           <div className="top-nav-bar__icons">
-            <div><Link to='/' onClick={onLogout} className="custom-link"> Logout </Link> </div>
-            <div><Link to='/aboutus' className="custom-link"> About Us </Link> </div>
+            <div><Link to='/' onClick={onLogout} className="custom-link"> 
+              Logout </Link> 
+            </div>
+            <div><Link to='/aboutus' className="custom-link" 
+              
+              > 
+              About Us </Link> 
+              </div>
           </div>
   
       </span>

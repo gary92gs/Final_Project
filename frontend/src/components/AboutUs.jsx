@@ -1,7 +1,11 @@
 import TopNavBar from './TopNavBar'
 import '../styles/global.css'
 import '../styles/AboutUs.css'
-function AboutUs({isMobile}) {
+function AboutUs({
+  isMobile, 
+  setCurrentItemId,
+  setSearchResults
+}) {
 
   const admin = {
     Liam: {
@@ -24,7 +28,11 @@ function AboutUs({isMobile}) {
 
   return (
     <>
-      <TopNavBar isMobile={isMobile}/>
+      <TopNavBar 
+        isMobile={isMobile}
+        setCurrentItemId={setCurrentItemId}
+        setSearchResults={setSearchResults}
+        />
       <div className='about-us-container'>
         <h1>About Us</h1>
         {Object.entries(admin).map(([name, details]) => (
