@@ -139,7 +139,7 @@ const calculateStockIntrinsicValue = (allAnalyisisData) => {
   const discountedFBV = discountedFBVForIV(allAnalyisisData).toString();
   const discountedDiv = discountedDivForIV(allAnalyisisData);
 
-  const IV = discountedDiv.plus(discountedFBV).toString()
+  const IV = discountedDiv.plus(discountedFBV).toFixed(2).toString()
 
   console.log('------------ intrinsic value ------------')
   console.log('discountedDiv:', discountedDiv);
