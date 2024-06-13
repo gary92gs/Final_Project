@@ -3,7 +3,7 @@ import TopNavBar from './TopNavBar'
 import ItemFavButton from './ItemFavButton'
 import StatBadgeContainer from './StatBadgeContainer'
 import '../styles/SelectedStock.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import WatchlistSidebar from './WatchlistSidebar'
 import { Graph } from './Graph'
 import { Line } from 'react-chartjs-2'
@@ -12,6 +12,16 @@ import '../styles/BackgroundImage.css'
 function SelectedStock({ currentItemId, setCurrentItemId, isMobile, stockData, setFavStocks, favStocks, fetchFavData }) {
   console.log("in Selected stock, current Item id:", currentItemId)
 
+  const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+
+    setAnimate(true);
+
+    const timer = setTimeout(() => setAnimate(false), 2000);
+    return () => clearTimeout(timer);
+  }, [stockData]);
+  
   const handleClick = () => {
     setCurrentItemId(null)
   }
@@ -28,51 +38,50 @@ function SelectedStock({ currentItemId, setCurrentItemId, isMobile, stockData, s
   return (
 
     <article className='stock-article'>
-      <div className='selected-stock-header'
-        style={{ backgroundImage: `url(${stockData.stocks.image_url})` }}
-        aria-label="Company Logo"
-      >
-      <div className='stock-title-card'>
-        <div className='stock-title-card-left'>
-          <h1> {stockData.stocks.company_name} </h1>
+    <div
+      className={`selected-stock-header ${animate ? 'animate' : ''}`}
+      style={{ backgroundImage: `url(${stockData.stocks.image_url})` }}
+      aria-label="Company Logo"
+    >
+    <div className='stock-title-card'>
+      <div className='stock-title-card-left'>
+        <h1> {stockData.stocks.company_name} </h1>
+    </div>
       </div>
+      <div className='stock-title-card-right'>
+        <div className='close-button'>
+          <div onClick={handleClick}>X</div>
         </div>
-        <div className='stock-title-card-right'>
-          <div className='close-button'>
-            <div onClick={handleClick}>X</div>
-          </div>
-          <ItemFavButton
-            setFavStocks={setFavStocks}
-            favStocks={favStocks}
-            currentItemId={currentItemId}
-            setCurrentItemId={setCurrentItemId}
-            fetchFavData={fetchFavData}
-          />
-        </div>
+        <ItemFavButton
+          setFavStocks={setFavStocks}
+          favStocks={favStocks}
+          currentItemId={currentItemId}
+          setCurrentItemId={setCurrentItemId}
+          fetchFavData={fetchFavData}
+        />
       </div>
-      <div className='market-details-container'>
-        <h2>Market Details</h2>
+    </div>
+    <div className='market-details-container'>
+      <h2>Market Details</h2>
 
-        <StatBadgeContainer stockData={stockData} />
+      <StatBadgeContainer stockData={stockData} />
+    </div>
+
+    <div className='selected-stock-summary-container'>
+      {/* Datatable only rendered on desktop */}
+    </div>
+    <div className='stock-info'>
+      {/* Chart.js */}
+      <Graph stockData={stockData} />
+      {!isMobile() ? (
+        <DataTable stockData={stockData} />
+      ) : undefined}
+      <div className="selected-stock-description">
+        <h2> Company Summary </h2>
+        <p> {stockData.stocks.description} </p>
       </div>
-
-      <div className='selected-stock-summary-container'>
-        {/* Datatable only rendered on desktop */}
-      </div>
-      <div className='stock-info'>
-        {/* Chart.js */}
-        <Graph stockData={stockData} />
-        {!isMobile() ? (
-          <DataTable stockData={stockData} />
-        ) : undefined}
-        <div className="selected-stock-description">
-          <h2> Company Summary </h2>
-          <p> {stockData.stocks.description} </p>
-        </div>
-      </div>
-    </article>
-
-
+    </div>
+  </article>
   )
 }
 

@@ -5,18 +5,21 @@
   width: 100%;
   /* grid-template-columns: repeat(10, minmax(0, 100%)) ;  */
   grid-template-columns: 1fr 1fr repeat(5, 3fr) 1fr repeat(2, 3fr) ; 
- 
   grid-auto-rows: minmax(fit-content, 100%); 
-
   font-size: 12px;
   border: 1px solid rgb(218, 218, 218);
   border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
 }
 
 .data-row-value {
   display: flex;
   width: 100%;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
   padding: 3px;
   box-sizing: border-box;
 }
@@ -33,11 +36,11 @@
 }
 
 .even-row {
-  background-color: #f9f9f9;
+  background-color: #FFFFFF;
 }
 
 .odd-row {
-  background-color: #D3D9D4;
+  background-color: #e2e7e7;
 }
 
 .data-row {

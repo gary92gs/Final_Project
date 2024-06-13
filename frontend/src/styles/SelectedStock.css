@@ -26,14 +26,15 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
-  width: 100%;
+  height: fit-content;
+  width: fit-content;
 }
 
 .stock-title-card-left h1 {
   width: 100%;
   background-color: #faf7f2e3;
   border-radius: 8px;
+  padding: 10px;
 }
 
 .stock-title-card-right {
@@ -95,7 +96,20 @@
   background-position: top 10px left -60px;
   background-repeat: no-repeat;
   background-color: #748D92;
-
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.selected-stock-header.animate {
+  animation: backgroundGrow 1s ease-in;
+}
+@keyframes backgroundGrow {
+  0% {
+    background-size: 0%;
+  }
+  100% {
+    background-size: 55%;
+  }
 
 }
 
