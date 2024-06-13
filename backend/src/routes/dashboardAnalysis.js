@@ -14,6 +14,7 @@ const {
   calculateStockIntrinsicValue,
   calculateIVToCurrentStockPricePercentage,
 } = require('./../helpers/intrinsicValueHelpers');
+const { formatAllAnalyisData } = require('./../helpers/dataPresentationHelpers');
 const {
   getStockInfoByTickerSymbol,
   getCurrentDataByStockId,
@@ -62,6 +63,9 @@ router.get('/', async (req, res) => {
     // calculate important values
     allAnalysisData['intrinsic_value'] = calculateStockIntrinsicValue(allAnalysisData);
     allAnalysisData['iv_to_price_ratio'] = calculateIVToCurrentStockPricePercentage(allAnalysisData);
+
+    // format market details values before sending to client
+    formatAllAnalyisData(allAnalysisData);
 
     const {
       current_stock_price,

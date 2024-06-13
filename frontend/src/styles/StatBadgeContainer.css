@@ -1,0 +1,41 @@
+.stat-badge-grid {
+  display: grid;
+  width: 95%;
+
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, fit-content);
+  gap: 15px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+
+}
+
+.stat-badge {
+  display: flex;
+  flex-direction: column;
+  max-height: fit-content;
+  border: 1px solid #b8c1c5;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 5px;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+}
+
+.stat-badge:hover {
+
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+}
+
+.stat-badge p{
+  font-size: 12px;
+}
+
+.stat-badge h3{
+  font-size: 20px;
+}
