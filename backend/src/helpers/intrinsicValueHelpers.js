@@ -8,8 +8,8 @@ const growthRateBV = (allAnalyisisData) => {
   const numQuarters = historical_data.length;
   const numYears = new Decimal(numQuarters).dividedBy('4');
 
-  const presentBV = historical_data[0].book_value;
-  const pastBV = historical_data[numQuarters - 1].book_value;
+  const presentBV = historical_data[numQuarters - 1].book_value;
+  const pastBV = historical_data[0].book_value;
 
   const iFBV = new Decimal(presentBV).minus(pastBV).div(pastBV).div(numYears);
 
@@ -31,7 +31,8 @@ const futureBV = (allAnalyisisData) => {
 
   const { historical_data } = allAnalyisisData;
 
-  const presentBV = historical_data[0].book_value;
+  const numQuarters = historical_data.length;
+  const presentBV = historical_data[numQuarters - 1].book_value;
   const futureYears = '5'; // THIS VALUE WILL NEED TO BE ADJUSTED BY USER SETTINGS TO IMPROVE USER EXPERIENCE
 
   const iFBV = growthRateBV(allAnalyisisData); // returns a decimal
@@ -139,7 +140,7 @@ const calculateStockIntrinsicValue = (allAnalyisisData) => {
   const discountedFBV = discountedFBVForIV(allAnalyisisData).toString();
   const discountedDiv = discountedDivForIV(allAnalyisisData);
 
-  const IV = discountedDiv.plus(discountedFBV).toFixed(2).toString()
+  const IV = discountedDiv.plus(discountedFBV).toFixed(2).toString();
 
   console.log('------------ intrinsic value ------------');
   console.log('discountedDiv:', discountedDiv);
