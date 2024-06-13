@@ -17,8 +17,8 @@ const StatBadgeContainer = (props) => {
           <h3>${stockData.intrinsic_value}</h3>
       </div>
       <div className='stat-badge'>
-          <p>IV Percent</p>
-          <h3>{stockData.iv_to_price_ratio}X</h3>
+          <p>IV/Price Ratio</p>
+          <h3>{stockData.iv_to_price_ratio}</h3>
       </div>
       <div className='stat-badge'>
           <p>Beta</p>
@@ -29,7 +29,7 @@ const StatBadgeContainer = (props) => {
           <h3>${stockData.current_data.eps}</h3>
       </div>
       <div className='stat-badge'>
-          <p>PE Ratio</p>
+          <p>P/E Ratio</p>
           <h3>{stockData.current_data.pe_ratio}</h3>
       </div>
       <div className='stat-badge'>

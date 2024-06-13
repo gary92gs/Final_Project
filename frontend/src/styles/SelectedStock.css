@@ -1,11 +1,12 @@
-.stock-article h1{
+.stock-article h1 {
   font-size: 36px;
   text-transform: uppercase;
   font-weight: 700;
   margin-bottom: 10px;
   margin-top: 10px;
 }
-.stock-article h2{
+
+.stock-article h2 {
   font-size: 28px;
   text-transform: uppercase;
   font-weight: 500;
@@ -20,7 +21,7 @@
   width: 100%;
   height: fit-content;
 }
-/* Garrett Added This */
+
 .stock-title-card-left {
   display: flex;
   flex-direction: column;
@@ -34,7 +35,7 @@
   background-color: #faf7f2e3;
   border-radius: 8px;
 }
-/* Garrett Added This */
+
 .stock-title-card-right {
   display: flex;
   flex-direction: column;
@@ -44,13 +45,13 @@
   width: min-content;
 }
 
-.stock-info{
+.stock-info {
   display: flex;
   flex-direction: column;
   max-width: 1400px;
 }
 
-.stock-article{
+.stock-article {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 25px;
@@ -62,9 +63,9 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
   width: min-content;
-  height:min-content;
+  height: min-content;
   min-height: 200px;
-  width:95%;
+  width: 95%;
   flex-grow: 1;
   box-sizing: border-box
 }
@@ -94,14 +95,14 @@
   background-repeat: no-repeat;
   background-color: #748D92;
 
-  
+
 }
 
 
 
 .selected-stock-description {
   /* max-height: 185px;
-  overflow-y: scroll; FOR SCROLLBAR */ 
+  overflow-y: scroll; FOR SCROLLBAR */
   padding-left: 0px;
   box-sizing: border-box;
   border-radius: 8px;
@@ -113,14 +114,14 @@
 }
 
 .selected-stock-description::-webkit-scrollbar-track {
-  background: #D3D9D4; 
-  border-radius: 10px; 
+  background: #D3D9D4;
+  border-radius: 10px;
 }
 
 .selected-stock-description::-webkit-scrollbar-thumb {
   background-color: #748D92;
-  border-radius: 10px; 
-  border: 3px solid #D3D9D4; 
+  border-radius: 10px;
+  border: 3px solid #D3D9D4;
 }
 
 .market-details-container {
@@ -135,19 +136,22 @@
 }
 
 @media only screen and (max-width: 800px) {
-  .stock-article{
-    height:min-content;
-    width:95%;
+  .stock-article {
+    height: min-content;
+    width: 95%;
     min-width: 20px !important;
     height: overflow;
   }
-  .stock-article h2{
+
+  .stock-article h2 {
     font-size: 20px;
   }
-  .stock-article h1{
+
+  .stock-article h1 {
     font-size: 24px;
   }
-  .close-button{
+
+  .close-button {
     display: flex;
     width: 100%;
     justify-content: flex-end;
