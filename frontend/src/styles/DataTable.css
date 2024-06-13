@@ -7,15 +7,18 @@
   grid-template-columns: 1fr 1fr repeat(5, 3fr) 1fr repeat(2, 3fr) ; 
  
   grid-auto-rows: minmax(fit-content, 100%); 
-  gap: 5px; 
+
   font-size: 12px;
-  border: 1px solid black;
+  border: 1px solid rgb(218, 218, 218);
+  border-radius: 5px;
 }
 
 .data-row-value {
   display: flex;
   width: 100%;
   flex-direction: row;
+  padding: 3px;
+  box-sizing: border-box;
 }
 
 .net-income,
@@ -23,14 +26,20 @@
 .outstanding-shares{
   font-size: 11px;
 }
-.report-quarter {
-  width: min-content !important;
+
+.data-row-value.header{
+  background-color: #748D92 ;
+  color: #faf7f2;
 }
 
-.data-row-valuee:nth-of-type(even) {
-  background-color: #f3f3f3;
+.even-row {
+  background-color: #f9f9f9;
 }
 
-.data-row-value:nth-of-type(odd) {
-  background-color: #d3d9d4;
+.odd-row {
+  background-color: #D3D9D4;
+}
+
+.data-row {
+  display: contents; /* This makes sure each row div only affects its children and not the grid layout */
 }
