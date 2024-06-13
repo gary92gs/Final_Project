@@ -47,6 +47,15 @@ align-items: center;
 .admin-article img{
   border-radius: 10px;
   max-width: 400px;
+  height: 400px;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: all 0.2s;
+}
+
+.admin-article img:hover{
+
+  filter: none;
 }
 
 .admin-article p{

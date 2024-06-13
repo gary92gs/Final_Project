@@ -21,7 +21,7 @@ function AboutUs({
       description: null,
     },
     Shad:{
-      dog: null,
+      dog: 'https://cdn.discordapp.com/attachments/1232481063415320576/1250866950050156604/Shad.jpg?ex=666c8020&is=666b2ea0&hm=9a83fd88a003b52c9cc7b7599d91d83d04682e99a1b470da9c03d09803550eaf&',
       description: null,
     }
   };
