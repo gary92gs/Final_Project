@@ -66,6 +66,7 @@
   height: min-content;
   min-height: 200px;
   width: 95%;
+  max-width: 95%;
   flex-grow: 1;
   box-sizing: border-box
 }
