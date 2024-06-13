@@ -139,7 +139,7 @@ const calculateStockIntrinsicValue = (allAnalyisisData) => {
   const discountedFBV = discountedFBVForIV(allAnalyisisData).toString();
   const discountedDiv = discountedDivForIV(allAnalyisisData);
 
-  const IV = discountedDiv.plus(discountedFBV).toString();
+  const IV = discountedDiv.plus(discountedFBV).toFixed(2).toString()
 
   console.log('------------ intrinsic value ------------');
   console.log('discountedDiv:', discountedDiv);
@@ -158,9 +158,9 @@ const calculateStockIntrinsicValue = (allAnalyisisData) => {
 const calculateIVToCurrentStockPricePercentage = (allAnalyisisData) => {
 
   const { intrinsic_value, current_stock_price } = allAnalyisisData;
-  const IVToPriceRatio = new Decimal(intrinsic_value).div(current_stock_price).times('100').toString();
+  const IVToPriceRatio = new Decimal(intrinsic_value).div(current_stock_price).toString();
 
-  return IVToPriceRatio + '%';
+  return IVToPriceRatio;
 };
 
 module.exports = {
