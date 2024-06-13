@@ -52,7 +52,7 @@ export function Graph({ stockData }) {
     const reportQuarters = values.map(item => item.report_quarter);
 
     let years = values.map(item => item.report_year);
-    const reportYears = years.reverse();
+    const reportYears = years;
 
     const bookValues = values.map(item => item.book_value);
 

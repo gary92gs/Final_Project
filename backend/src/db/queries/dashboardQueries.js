@@ -48,7 +48,7 @@ const getHistoricalDataByStockId = async (stockId) => {
     SELECT *
     FROM historical_data
     WHERE stock_id = $1
-    ORDER BY report_year DESC, report_quarter DESC;
+    ORDER BY report_year ASC, report_quarter ASC;
   `;
 
   try {
