@@ -1,15 +1,36 @@
-.sc-feUYzb.Nfhbm {
-max-width: 10000px;
+.data-table {
+  display: grid;
+  flex-direction: row;
+  height: fit-content;
+  width: 100%;
+  /* grid-template-columns: repeat(10, minmax(0, 100%)) ;  */
+  grid-template-columns: 1fr 1fr repeat(5, 3fr) 1fr repeat(2, 3fr) ; 
+ 
+  grid-auto-rows: minmax(fit-content, 100%); 
+  gap: 5px; 
+  font-size: 12px;
+  border: 1px solid black;
 }
 
-.data-table-container {
-  width: 90%;
+.data-row-value {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
 }
 
-.Nfhbm {
-  width: 95% !important;
-  border-radius: inherit;
-  overflow-x: none !important;
-  overflow-y: none !important;
-  min-height: 0;
+.net-income,
+.shareholders-equity,
+.outstanding-shares{
+  font-size: 11px;
+}
+.report-quarter {
+  width: min-content !important;
+}
+
+.data-row-valuee:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.data-row-value:nth-of-type(odd) {
+  background-color: #d3d9d4;
 }
