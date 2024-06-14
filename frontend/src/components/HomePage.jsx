@@ -2,6 +2,7 @@ import SearchResultList from './SearchResultList';
 import SelectedStock from './SelectedStock';
 import WatchlistSidebar from './WatchlistSidebar';
 import WatchlistMain from './WatchlistMain';
+import Carousel from './Carousel'
 import '../styles/HomePage.css'
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
@@ -53,11 +54,14 @@ function HomePage({
             fetchFavData={fetchFavData} // Pass fetchFavData function to the SelectedStock
           />
         ) : (
+          <div className='homepage-sub-container'>
+          <Carousel/>
           <WatchlistMain
             favStocks={favStocks}
             setCurrentItemId={setCurrentItemId}
             fetchSelectedStockData={fetchSelectedStockData}
           />
+          </div>
         )}
       </div>
     </div>

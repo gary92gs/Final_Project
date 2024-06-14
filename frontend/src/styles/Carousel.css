@@ -1,0 +1,54 @@
+.featured-item {
+  width:200px;
+  height:60px;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(0)
+  }
+  to{
+    transform: translateX(-100%)
+  }
+}
+
+.carousel {
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+
+  margin: 20px;
+  margin-bottom: 0px;
+  background-color: #FAF7F2;
+  position: relative;
+  border-radius: 5px;
+}
+
+.carousel:before,
+.carousel:after {
+  position: absolute;
+  top: 0;
+  width: 150px;
+  height: 100%;
+  content: "";
+  z-index: 2;
+}
+
+.carousel:after {
+  right: 0;
+  background: linear-gradient(to right, rgba(255,255,255, 0), #FAF7F2);
+}
+
+.carousel:before {
+  left: 0;
+  background: linear-gradient(to left, rgba(255,255,255, 0), #FAF7F2);
+}
+
+.carousel:hover .carousel-slide{
+  animation-play-state: paused;
+}
+
+.carousel-slide {
+  display: flex;
+  animation: 35s slide infinite linear;
+}

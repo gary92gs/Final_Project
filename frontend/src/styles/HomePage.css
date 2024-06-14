@@ -16,3 +16,9 @@
   justify-content: center;
 
 }
+
+.homepage-sub-container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}

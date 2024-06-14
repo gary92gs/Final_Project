@@ -9,15 +9,15 @@
   background-color: #FAF7F2;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
-  width: 95%;
   height:min-content;
   min-height: 200px;
   cursor: pointer;
-  min-width: 700px;
+  min-width: 600px;
   box-sizing: border-box;
   margin-bottom: 0px;
   flex-direction: column;
   align-items: flex-start;
+  overflow: hidden;
 }
 
 .watchlist-main-item:hover {
@@ -37,8 +37,8 @@
 
 .stock-details {
   flex: 1;
-  padding-right: 20px;
 }
+
 .stock-details p {
 margin: 4px;
 margin-top: 0;
@@ -120,8 +120,9 @@ margin-left: 4px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 100%;
+    width: 95%;
     min-width: 100px;
+    box-sizing: border-box;
   }
   .stock-image {
     width: 80px;
