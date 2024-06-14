@@ -15,6 +15,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [stockData, setStockData] = useState([]);
   const [favStocks, setFavStocks] = useState([]);
+  const [trendingStocks, setTrendingStocks] = useState([]);
 
   function isMobile() {
     const regex =
@@ -42,7 +43,7 @@ function App() {
       method: "DELETE",
       credentials: "include",
     })
-      .then(() => {})
+      .then(() => { })
       .catch((error) => console.error("Error during logout:", error));
   };
 
@@ -58,10 +59,21 @@ function App() {
     }
   };
 
-  // If the user is logged in, fetch their favorite stocks data
+  // bring in trending stocks to app level
+  const fetchTrendingStocks = async () => {
+    try {
+      const response = await axios.get("/api/favourites/trending");
+      setTrendingStocks(response.data.trendingStocks || []);
+    } catch (error) {
+      console.error(`Error fetching data: ${error.message}`);
+    }
+  };
+
+  // If the user is logged in, fetch their favorite stocks data and top trending stocks
   useEffect(() => {
     if (isLoggedIn) {
       fetchFavData();
+      fetchTrendingStocks();
     }
   }, [isLoggedIn]);
 
@@ -118,6 +130,7 @@ function App() {
                 setFavStocks={setFavStocks}
                 fetchFavData={fetchFavData}
                 fetchSelectedStockData={fetchSelectedStockData}
+                trendingStocks={trendingStocks}
               />
               {/* Add other components you want in the home page layout here */}
             </div>

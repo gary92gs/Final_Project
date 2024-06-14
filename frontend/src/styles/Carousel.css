@@ -1,12 +1,44 @@
 .featured-item {
-  width:200px;
-  height:60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 200px;
+  height: 75px;
   background-color: #FFFFFF;
   border: 1px solid #ccc;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
   margin-inline: 10px;
   border-radius: 5px;
+  padding: 5px 15px;
+}
+
+.featured-item img {
+  height: 60%;
+  object-fit: cover;
+  background-color: #748D92;
+  padding: 5px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.featured-item div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  padding-inline: 5px;
+}
+
+.featured-item div :first-child {
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.featured-item div p {
+  text-wrap: wrap;
+  text-align: center;
+  line-height: 0.9;
 }
 
 .featured-item:hover {
@@ -19,13 +51,15 @@
   from {
     transform: translateX(0)
   }
-  to{
+
+  to {
     transform: translateX(-100%)
   }
 }
 
 .carousel {
   display: flex;
+  width: 100%;
   overflow: hidden;
   white-space: nowrap;
   background-color: #FAF7F2;
@@ -34,6 +68,7 @@
   border-radius: 5px;
   padding-block: 20px
 }
+
 .carousel-container {
   display: flex;
   flex-direction: column;
@@ -64,7 +99,7 @@
   z-index: 2;
 }
 
-.carousel:hover .carousel-slide{
+.carousel:hover .carousel-slide {
   animation-play-state: paused;
 }
 

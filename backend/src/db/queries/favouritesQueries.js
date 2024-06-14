@@ -56,10 +56,10 @@ const deleteStockFromUsersFavourites = async (userId, stockId) => {
   }
 };
 
-const getMostFavouritedStocks = () => {
+const getMostFavouritedStocks = async () => {
 
   const queryStr = `
-    SELECT stocks.*, count(favourite_stocks.stock_id) FROM favourited_count
+    SELECT stocks.*, count(favourite_stocks.stock_id) AS favourited_count
     FROM favourite_stocks
     JOIN stocks ON stocks.id = stock_id
     GROUP BY stocks.id
@@ -68,7 +68,7 @@ const getMostFavouritedStocks = () => {
   `;
 
   try {
-    const result = db.query(queryStr);
+    const result = await db.query(queryStr);
     if (!result.rows.length) {
       return false;
     }

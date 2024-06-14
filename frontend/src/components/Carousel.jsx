@@ -1,39 +1,33 @@
 import React, { useState } from 'react';
 import "../styles/Carousel.css";
 
-function Carousel() {
+function Carousel({ trendingStocks, setCurrentItemId }) {
 
-  return (
-    <div className="carousel-container">
-      <h2>Portfolio Prophets Top Picks</h2>
+  const carouselSlides = trendingStocks.map((element, index) => {
+    return (
+      <article key={index} className='featured-item'>
+        <img src={element.image_url} alt={`${element.company_name} logo`} />
+        <div>
+          <p>{element.ticker_symbol}</p>
+          <p>{element.company_name}</p>
+        </div>
+      </article >
+    );
+  });
+
+return (
+  <div className="carousel-container">
+    <h2>Portfolio Prophets Top Picks</h2>
     <div className="carousel">
       <div className='carousel-slide'>
-        <div className='featured-item'> Item 1</div>
-        <div className='featured-item'> Item 2</div>
-        <div className='featured-item'> Item 3</div>
-        <div className='featured-item'> Item 4</div>
-        <div className='featured-item'> Item 5</div>
-        <div className='featured-item'> Item 6</div>
-        <div className='featured-item'> Item 7</div>
-        <div className='featured-item'> Item 8</div>
-        <div className='featured-item'> Item 9</div>
-        <div className='featured-item'> Item 10</div>
+        {carouselSlides}
       </div>
-     <div className='carousel-slide'>   {/*Duplicate div is for seamless slide */}
-        <div className='featured-item'> Item 1</div>
-        <div className='featured-item'> Item 2</div>
-        <div className='featured-item'> Item 3</div>
-        <div className='featured-item'> Item 4</div>
-        <div className='featured-item'> Item 5</div>
-        <div className='featured-item'> Item 6</div>
-        <div className='featured-item'> Item 7</div>
-        <div className='featured-item'> Item 8</div>
-        <div className='featured-item'> Item 9</div>
-        <div className='featured-item'> Item 10</div>
+      <div className='carousel-slide'>   {/*Duplicate div is for seamless slide */}
+        {carouselSlides}
       </div>
     </div>
-    </div>
-  );
+  </div>
+);
 }
 
 export default Carousel;

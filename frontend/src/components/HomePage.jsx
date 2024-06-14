@@ -2,8 +2,8 @@ import SearchResultList from './SearchResultList';
 import SelectedStock from './SelectedStock';
 import WatchlistSidebar from './WatchlistSidebar';
 import WatchlistMain from './WatchlistMain';
-import Carousel from './Carousel'
-import '../styles/HomePage.css'
+import Carousel from './Carousel';
+import '../styles/HomePage.css';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 
@@ -17,7 +17,8 @@ function HomePage({
   isMobile,
   setStockData,
   stockData,
-  fetchSelectedStockData
+  fetchSelectedStockData,
+  trendingStocks,
 }) {
 
   console.log("In Home Page, Current Item Id:", currentItemId);
@@ -26,7 +27,11 @@ function HomePage({
 
   return (
     <div className='home-page-container'>
-            <Carousel/>
+      <Carousel 
+        trendingStocks={trendingStocks} 
+        currentItemId={currentItemId} 
+        setCurrentItemId={setCurrentItemId}
+        />
       <div className='home-page-container2'>
 
         {!isMobile() ? (
@@ -47,7 +52,7 @@ function HomePage({
           />
         ) : currentItemId !== null ? (
           <SelectedStock
-            currentItemId={currentItemId} 
+            currentItemId={currentItemId}
             setCurrentItemId={setCurrentItemId}
             isMobile={isMobile}
             stockData={stockData}
@@ -58,16 +63,16 @@ function HomePage({
         ) : (
           <div className='homepage-sub-container'>
 
-          <WatchlistMain
-            favStocks={favStocks}
-            setCurrentItemId={setCurrentItemId}
-            fetchSelectedStockData={fetchSelectedStockData}
-          />
+            <WatchlistMain
+              favStocks={favStocks}
+              setCurrentItemId={setCurrentItemId}
+              fetchSelectedStockData={fetchSelectedStockData}
+            />
           </div>
         )}
       </div>
     </div>
-  )
+  );
 }
 
 export default HomePage;
