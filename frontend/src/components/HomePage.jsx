@@ -31,6 +31,7 @@ function HomePage({
         trendingStocks={trendingStocks} 
         currentItemId={currentItemId} 
         setCurrentItemId={setCurrentItemId}
+        fetchSelectedStockData={fetchSelectedStockData}
         />
       <div className='home-page-container2'>
 
@@ -62,12 +63,15 @@ function HomePage({
           />
         ) : (
           <div className='homepage-sub-container'>
-
-            <WatchlistMain
-              favStocks={favStocks}
-              setCurrentItemId={setCurrentItemId}
-              fetchSelectedStockData={fetchSelectedStockData}
-            />
+            { favStocks.length > 0 ? (
+              <WatchlistMain
+                favStocks={favStocks}
+                setCurrentItemId={setCurrentItemId}
+                fetchSelectedStockData={fetchSelectedStockData}
+              />
+            ) : (
+              <div className='no-favourites'> No Favourite Stocks Added</div>
+            )}
           </div>
         )}
       </div>

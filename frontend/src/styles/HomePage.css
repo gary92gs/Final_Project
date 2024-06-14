@@ -19,7 +19,21 @@
 }
 
 .homepage-sub-container {
+  width:100%;
+  overflow: hidden;
+}
+
+.no-favourites{
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  background-color: #FAF7F2;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height:min-content;
+  min-width: 600px;
+  box-sizing: border-box;
   overflow: hidden;
 }

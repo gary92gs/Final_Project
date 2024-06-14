@@ -11,6 +11,7 @@
   margin-inline: 10px;
   border-radius: 5px;
   padding: 5px 15px;
+  cursor: pointer;
 }
 
 .featured-item img {
@@ -66,7 +67,8 @@
   margin-bottom: 0px;
   position: relative;
   border-radius: 5px;
-  padding-block: 20px
+  padding-bottom: 20px;
+  padding-top: 10px
 }
 
 .carousel-container {
@@ -83,10 +85,11 @@
 }
 
 .carousel-container h2 {
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   text-transform: uppercase;
   font-weight: 800;
   font-size: 30px;
+  padding-top: 10px;
 }
 
 .carousel:before,

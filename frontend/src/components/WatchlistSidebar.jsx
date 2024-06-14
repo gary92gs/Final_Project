@@ -7,7 +7,7 @@ const WatchlistSidebar = ({ favStocks, setCurrentItemId, currentItemId, fetchSel
   return (
 
     <div className="watchlist-sidebar">
-      <h1>Your Watchlist</h1>
+      <h1>Watchlist</h1>
       <ul>
         {favStocks && favStocks.length > 0 ? ( /* Check if favStocks is not null and has items */
           favStocks.map((favStock, index) => ( /* Map through the favStocks array */
@@ -20,7 +20,7 @@ const WatchlistSidebar = ({ favStocks, setCurrentItemId, currentItemId, fetchSel
             />
           ))
         ) : (
-          <li>No favorite stocks added.</li> /* Display message when no favorite stocks are available */
+          <div>No favorite stocks added.</div> /* Display message when no favorite stocks are available */
         )}
       </ul>
     </div>

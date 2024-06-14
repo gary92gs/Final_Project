@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import "../styles/Carousel.css";
 
-function Carousel({ trendingStocks, setCurrentItemId }) {
+function Carousel({ trendingStocks, setCurrentItemId, fetchSelectedStockData }) {
 
   const carouselSlides = trendingStocks.map((element, index) => {
+    let tickerSymbol = { tickerSymbol: element.ticker_symbol}
+
     return (
-      <article key={index} className='featured-item'>
+      <article key={index} className='featured-item' onClick={() => fetchSelectedStockData(tickerSymbol)}>
         <img src={element.image_url} alt={`${element.company_name} logo`} />
         <div>
           <p>{element.ticker_symbol}</p>
