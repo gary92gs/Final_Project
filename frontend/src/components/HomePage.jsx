@@ -26,7 +26,9 @@ function HomePage({
 
   return (
     <div className='home-page-container'>
+            <Carousel/>
       <div className='home-page-container2'>
+
         {!isMobile() ? (
           <WatchlistSidebar
             favStocks={favStocks}
@@ -55,7 +57,7 @@ function HomePage({
           />
         ) : (
           <div className='homepage-sub-container'>
-          <Carousel/>
+
           <WatchlistMain
             favStocks={favStocks}
             setCurrentItemId={setCurrentItemId}

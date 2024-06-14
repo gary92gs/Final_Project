@@ -1,7 +1,19 @@
 .featured-item {
   width:200px;
   height:60px;
+  background-color: #FFFFFF;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-inline: 10px;
+  border-radius: 5px;
 }
+
+.featured-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
 
 @keyframes slide {
   from {
@@ -16,12 +28,30 @@
   display: flex;
   overflow: hidden;
   white-space: nowrap;
-
-  margin: 20px;
-  margin-bottom: 0px;
   background-color: #FAF7F2;
+  margin-bottom: 0px;
   position: relative;
   border-radius: 5px;
+  padding-block: 20px
+}
+.carousel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  background-color: #FAF7F2;
+  margin: 20px;
+  margin-bottom: 0px;
+  position: relative;
+  border-radius: 5px;
+}
+
+.carousel-container h2 {
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 30px;
 }
 
 .carousel:before,
@@ -34,21 +64,11 @@
   z-index: 2;
 }
 
-.carousel:after {
-  right: 0;
-  background: linear-gradient(to right, rgba(255,255,255, 0), #FAF7F2);
-}
-
-.carousel:before {
-  left: 0;
-  background: linear-gradient(to left, rgba(255,255,255, 0), #FAF7F2);
-}
-
 .carousel:hover .carousel-slide{
   animation-play-state: paused;
 }
 
 .carousel-slide {
   display: flex;
-  animation: 35s slide infinite linear;
+  animation: 50s slide infinite linear;
 }

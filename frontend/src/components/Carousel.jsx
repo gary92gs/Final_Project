@@ -4,6 +4,8 @@ import "../styles/Carousel.css";
 function Carousel() {
 
   return (
+    <div className="carousel-container">
+      <h2>Portfolio Prophets Top Picks</h2>
     <div className="carousel">
       <div className='carousel-slide'>
         <div className='featured-item'> Item 1</div>
@@ -29,6 +31,7 @@ function Carousel() {
         <div className='featured-item'> Item 9</div>
         <div className='featured-item'> Item 10</div>
       </div>
+    </div>
     </div>
   );
 }
