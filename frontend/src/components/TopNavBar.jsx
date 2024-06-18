@@ -6,7 +6,6 @@ import LogoBrickLight from './icons/LogoBrickLight';
 import { Link } from 'react-router-dom';
 import MobileDropdown from './MobileDropdown'
 import MobileSearchBar from './MobileSearchBar'
-import { useNavigate } from "react-router-dom";
 
 function TopNavBar ({ 
   setSearchResults, 
@@ -24,8 +23,6 @@ const handleClick = () => {
   setCurrentItemId(null);
   }
 }
-
-const navigate = useNavigate();
 
 
 if (isMobile()){

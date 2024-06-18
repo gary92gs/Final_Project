@@ -1,16 +1,12 @@
 import DataTable from './DataTable'
-import TopNavBar from './TopNavBar'
 import ItemFavButton from './ItemFavButton'
 import StatBadgeContainer from './StatBadgeContainer'
 import '../styles/SelectedStock.css'
 import { useState, useEffect } from 'react'
-import WatchlistSidebar from './WatchlistSidebar'
 import { Graph } from './Graph'
-import { Line } from 'react-chartjs-2'
 import '../styles/BackgroundImage.css'
 
 function SelectedStock({ currentItemId, setCurrentItemId, isMobile, stockData, setFavStocks, favStocks, fetchFavData }) {
-  console.log("in Selected stock, current Item id:", currentItemId)
 
   const [animate, setAnimate] = useState(false);
 

@@ -23,7 +23,6 @@ function App() {
     return regex.test(navigator.userAgent);
   }
 
-  console.log("App lvl currentitemid", currentItemId);
   const navigate = useNavigate();
 
   // function to set state to true after sign up
@@ -86,11 +85,6 @@ function App() {
       });
       setCurrentItemId(response.data.allAnalysisData.current_data.stock_id);
       setStockData(response.data.allAnalysisData);
-      console.log("Stock Data", response.data.allAnalysisData);
-      console.log(
-        "Current Item Id",
-        response.data.allAnalysisData.current_data.stock_id
-      );
     } catch (error) {
       console.error(`Error fetching data: ${error.message}`);
     }

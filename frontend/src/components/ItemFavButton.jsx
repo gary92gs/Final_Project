@@ -24,7 +24,6 @@ const [favouriteStockIds, setFavouriteStockIds] = useState([]);
       axios.delete('/api/favourites', { data: { stock_id } })
         .then(response => {
           fetchFavData(); // Fetch favorite data after removing from favorites
-          console.log('Delete Response:', response.data);
         })
         .catch(error => {
           console.error('There was an error!', error);
@@ -34,7 +33,6 @@ const [favouriteStockIds, setFavouriteStockIds] = useState([]);
 
         .then(response => {
           fetchFavData(); // Fetch favorite data after adding to favorites
-          console.log('Post Response:', response.data);
         })
         .catch(error => {
           console.error('There was an error!', error);

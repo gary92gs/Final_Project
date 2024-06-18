@@ -1,15 +1,14 @@
 import SearchResultItem from '../components/SearchResultItem'
 import '../styles/SearchResultList.css'
+
 const SearchResultList = ({ 
   searchResults = [], 
   setCurrentItemId, 
-  currentItemId, 
   setStockData, 
   fetchSelectedStockData}) => {
 
   const handleClick = (id) => {
     setCurrentItemId(id);
-    console.log("Current Item Id " , currentItemId)
   }
 
   return (

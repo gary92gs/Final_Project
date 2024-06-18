@@ -23,7 +23,6 @@ function Login({ onLogin }) {
     e.preventDefault();
     try {
       const response = await axios.post('/api/sessions', formData);
-      console.log(response.data);
       if (response.status === 201) {
         // call function passed from props
         onLogin(); 

@@ -23,10 +23,6 @@ function SearchBar({ setSearchResults, setSearchValue, searchValue, setCurrentIt
           name: values[1],
         }
       })
-
-      console.log('searchResult',searchResult)
-     
-
           
       // console.log('searchResults:', searchResult);
       setSearchResults(searchResult)
