@@ -16,7 +16,8 @@
 
 .featured-item img {
   height: 60%;
-  object-fit: cover;
+  width: 35%;
+  object-fit: contain;
   background-color: #748D92;
   padding: 5px;
   border-radius: 8px;
