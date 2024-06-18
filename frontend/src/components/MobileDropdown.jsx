@@ -10,8 +10,8 @@ function MobileDropdown ({ setCurrentItemId }) {
 
 return (
 <div>
-<div class="dropdown">
-  <button class="dropbtn"><i class="fa-solid fa-bars fa-lg"></i></button>
+<div className="dropdown">
+  <button className="dropbtn"><i className="fa-solid fa-bars fa-lg"></i></button>
   <div class="dropdown-content">
   <div><Link to='/signup' className="custom-link"> Logout </Link> </div>
   <div><Link to='/aboutus' className="custom-link"> About Us </Link> </div>
