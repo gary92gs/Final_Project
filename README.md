@@ -16,12 +16,16 @@ Portfolio Prophet offers the following features:
 
 ## Installation
 
-To run this program, follow these steps:
+## Forking the Project
 
-1. Clone this repository into your own GitHub account:
+To contribute to this project or use it as a base for your own development, follow these steps to fork the repository:
+
+1. Fork this repository by clicking the "Fork" button at the top right of this page. This will create a copy of the repository in your GitHub account.
+
+2. Clone your forked repository to your local machine using the following command (replace `<your-username>` with your GitHub username):
 
 ```sh
-git clone git@github.com:gary92gs/Final_Project.git
+   git clone git@github.com:<your-username>/Final_Project.git
 ```
 
 2. Navigate to the backend directory by following the path: `Final_Project/backend`. Refer to the README file for backend setup instructions. 

@@ -64,6 +64,35 @@ Install the required dependencies by running the following command:
 npm install
 ```
 
+### 3. API Keys & Environment Variables Setup
+
+To configure API keys and environment varibales:
+
+Create a free user for Financial Modeling Prep and Alpha Vantage (alt + click the links below)
+https://site.financialmodelingprep.com/register
+https://www.alphavantage.co/support/#api-key
+
+Copy the .evn.example into a new file named '.env' and add your API key other environment variables:
+
+```sh
+HOST=localhost
+PORT=3001
+
+PGHOST=localhost
+PGUSER=your-username-and-password
+PGPASSWORD=your-username-and-password
+PGDATABASE=portfolio_prophet
+PGPORT=5432
+
+SESSION_KEY=my_backend
+
+AV_API_KEY=<your-alpha-vantage-api-key>
+AV_BASE_URL=https://www.alphavantage.co/query?function=
+
+FMP_API_KEY=<your-financial-modeling-prep-api-key>
+FMP_BASE_URL=https://financialmodelingprep.com/api/v3/
+```
+
 ### 3. Start the Server
 
 Once the dependencies are installed, start the server by executing:
