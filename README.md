@@ -38,8 +38,8 @@ Once the setup is complete, you can start using the Portfolio Prophet Applicatio
 
 ## Repository Structure
 
-- `backend/`: Contains the backend code and setup instructions.
-- `frontend/`: Contains the frontend code and setup instructions.
+- `/backend`: Contains the backend code and setup instructions.
+- `/frontend`: Contains the frontend code and setup instructions.
 
 ## License
 
