@@ -9,8 +9,8 @@ function AboutUs({
 
   const admin = {
     Liam: {
-      dog: 'https://th.bing.com/th/id/OIP.MeIvdF9Z8JVkWCPkuOrKPAHaFS?rs=1&pid=ImgDetMain',
-      description: 'Learning to code',
+      dog: 'https://media.discordapp.net/attachments/1232481063415320576/1251222963961987204/IMG_6361.jpg?ex=667268f1&is=66711771&hm=2b52ad01a9a783773db8bda75fef72212c50de3618b9f4a23067624f6a31b22d&=&format=webp&width=677&height=903',
+      description: null,
     },
     Kai: {
       dog: 'https://cdn.discordapp.com/attachments/1232481063415320576/1250586864717402162/Reuben.jpg?ex=666b7b47&is=666a29c7&hm=f9ed073159c91e9b9b53dd51c18fa02c931c15e4b2276e426076ff59889cf5b4&',
