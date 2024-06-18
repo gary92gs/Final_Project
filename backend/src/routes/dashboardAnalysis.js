@@ -67,18 +67,6 @@ router.get('/', async (req, res) => {
     // format market details values before sending to client
     formatAllAnalyisData(allAnalysisData);
 
-    const {
-      current_stock_price,
-      intrinsic_value,
-      iv_to_price_ratio,
-      risk_free_rate,
-      stocks,
-      current_data,
-    } = allAnalysisData;
-
-    console.log('current_stock_price:', current_stock_price);
-    console.log('intrinsic_value:', intrinsic_value);
-    console.log('iv_to_price_ratio:', iv_to_price_ratio);
 
     return res.status(200).json({ message: 'get message', allAnalysisData });
 
