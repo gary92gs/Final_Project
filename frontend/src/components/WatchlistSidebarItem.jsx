@@ -2,8 +2,6 @@ import '../styles/WatchlistSidebarItem.css'
 
 const WatchlistSidebarItem = ({ 
   favStock, 
-  currentItemId, 
-  setCurrentItemId, 
   fetchSelectedStockData
 }) => {
 

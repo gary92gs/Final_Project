@@ -27,7 +27,6 @@ function SignUp({ onRegister }) {
     // CHECK IF PASSWORD === PASSWORD-CONFIRMATION HERE
     try {
       const response = await axios.post('/api/users', formData);
-      console.log(response.data);
       // call function from props
       onRegister();
     }

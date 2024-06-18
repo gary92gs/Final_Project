@@ -4,8 +4,7 @@ import WatchlistSidebar from './WatchlistSidebar';
 import WatchlistMain from './WatchlistMain';
 import Carousel from './Carousel';
 import '../styles/HomePage.css';
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 function HomePage({
   fetchFavData,
@@ -20,10 +19,6 @@ function HomePage({
   fetchSelectedStockData,
   trendingStocks,
 }) {
-
-  console.log("In Home Page, Current Item Id:", currentItemId);
-  console.log("FavStocks:", favStocks);
-  console.log("FavStocks.data:", favStocks.data);
 
   return (
     <div className='home-page-container'>

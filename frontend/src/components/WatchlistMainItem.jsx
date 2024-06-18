@@ -2,7 +2,6 @@ import {React, } from "react";
 import "../styles/WatchlistMainItem.css";
 
 const WatchlistMainItem = ({
-  onClick, //PASSED DOWN HANDLER
   favStock,
   fetchSelectedStockData,
 }) => {
