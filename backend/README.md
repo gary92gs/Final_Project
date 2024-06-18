@@ -70,6 +70,7 @@ To configure API keys and environment varibales:
 
 Create a free user for Financial Modeling Prep and Alpha Vantage (alt + click the links below)
 https://site.financialmodelingprep.com/register
+
 https://www.alphavantage.co/support/#api-key
 
 Copy the .evn.example into a new file named '.env' and add your API key other environment variables:
