@@ -1,3 +1,5 @@
+
+
 # Portfolio Prophet Application
 
 Welcome to the Portfolio Prophet Application, a project created as a conclusion to the Lighthouse Labs web development bootcamp course.
@@ -11,8 +13,13 @@ Portfolio Prophet assists investors in making informed decisions within the stoc
 Portfolio Prophet offers the following features:
 
 - **Stock Search:** Easily search for stocks and access pertinent data such as current market price, intrinsic value, P/E ratio, dividend yields, and more.
+
+![Alt text](/planning/README-Photos/search-function.JPG?raw=true "Searchbar")
+![Alt text](/planning/README-Photos/search-result.JPG.JPG?raw=true "Search result")
   
 - **Historical Data Visualization:** View historical data for each company through interactive graphs and comprehensive tables. The graphical representation helps in understanding the performance trends of different companies, aiding in targeted research and analysis.
+
+![Alt text](/planning/README-Photos/stock-analysis.png?raw=true "Stock Card")
 
 ## Installation
 
@@ -34,7 +41,10 @@ To contribute to this project or use it as a base for your own development, foll
 
 ## How to Use
 
-Once the setup is complete, you can start using the Portfolio Prophet Application to explore stock data, analyze historical trends, and make informed investment decisions.
+Once the setup is complete, you can start using the Portfolio Prophet Application to explore stock data, analyze historical trends, and make informed investment decisions. You must create a new account.
+
+![Alt text](/planning/README-Photos/login-ss.png?raw=true "Login screen")
+![Alt text](/planning/README-Photos/register.JPG?raw=true "Register")
 
 ## Repository Structure
 

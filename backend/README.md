@@ -102,6 +102,8 @@ Once the dependencies are installed, start the server by executing:
 npm start
 ```
 
+![Alt text](/planning/README-Photos/server%20connection.JPG?raw=true "Server connection")
+
 ---
 
 Your Portfolio Prophet server is now set up and running smoothly. 
