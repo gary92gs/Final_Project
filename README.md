@@ -15,7 +15,7 @@ Portfolio Prophet offers the following features:
 - **Stock Search:** Easily search for stocks and access pertinent data such as current market price, intrinsic value, P/E ratio, dividend yields, and more.
 
 ![Alt text](/planning/README-Photos/search-function.JPG?raw=true "Searchbar")
-![Alt text](/planning/README-Photos/search-result.JPG.JPG?raw=true "Search result")
+![Alt text](/planning/README-Photos/search-result.JPG?raw=true "Search result")
   
 - **Historical Data Visualization:** View historical data for each company through interactive graphs and comprehensive tables. The graphical representation helps in understanding the performance trends of different companies, aiding in targeted research and analysis.
 
